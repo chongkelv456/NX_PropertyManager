@@ -26,5 +26,7 @@ namespace PropertiesManager.Model
             plates.Add("LOWER PAD");
             plates.Add("LOWER PAD SPACER");
         }
+
+        public List<string> GetPlates { get => plates; }
     }
 }
