@@ -8,9 +8,9 @@ namespace PropertiesManager.Model
 {
     public class Designer
     {
-        private List<string> designers = new List<string>();        
+        private List<string> designers = new List<string>();
 
-        public Designer ()
+        public Designer()
         {
             designers.Add("Kelvin");
             designers.Add("Ong TK");

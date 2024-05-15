@@ -13,11 +13,13 @@ namespace PropertiesManager.Control
         private UserForm uf;
         private NxDrawing drawing;
         private Designer designer;
+        private PartType partType;
 
         public Controller()
         {
             //System.Diagnostics.Debugger.Launch();
             designer = new Designer();
+            partType = new PartType();
             uf = new UserForm(this);
             drawing = new NxDrawing(this);                        
             uf.ShowDialog();
@@ -40,6 +42,11 @@ namespace PropertiesManager.Control
         public List<string> GetDesigners()
         {
             return designer.GetDesingers;
+        }
+
+        public List<string> GetPartTypes()
+        {
+            return partType.GetPartTypes;
         }
 
         public void ValidateApplyButton()

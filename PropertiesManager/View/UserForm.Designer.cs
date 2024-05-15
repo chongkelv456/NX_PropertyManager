@@ -41,30 +41,30 @@ namespace PropertiesManager.View
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLengthPick = new System.Windows.Forms.Button();
+            this.btnWidthPick = new System.Windows.Forms.Button();
             this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.btnThkPick = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtLength = new System.Windows.Forms.TextBox();
             this.cboPartType = new System.Windows.Forms.ComboBox();
+            this.txtWidth = new System.Windows.Forms.TextBox();
             this.cboItemName = new System.Windows.Forms.ComboBox();
+            this.txtThk = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtStnNo = new System.Windows.Forms.TextBox();
             this.txtDwgCode = new System.Windows.Forms.TextBox();
-            this.txtMaterial = new System.Windows.Forms.TextBox();
-            this.txtHRC = new System.Windows.Forms.TextBox();
-            this.txtThk = new System.Windows.Forms.TextBox();
-            this.txtWidth = new System.Windows.Forms.TextBox();
-            this.txtLength = new System.Windows.Forms.TextBox();
-            this.btnThkPick = new System.Windows.Forms.Button();
-            this.btnWidthPick = new System.Windows.Forms.Button();
-            this.btnLengthPick = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtStnNo = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cboMaterial = new System.Windows.Forms.ComboBox();
+            this.cboHRC = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -203,6 +203,77 @@ namespace PropertiesManager.View
             this.panel1.Size = new System.Drawing.Size(715, 490);
             this.panel1.TabIndex = 3;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.btnLengthPick);
+            this.groupBox2.Controls.Add(this.btnWidthPick);
+            this.groupBox2.Controls.Add(this.txtQuantity);
+            this.groupBox2.Controls.Add(this.btnThkPick);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.txtLength);
+            this.groupBox2.Controls.Add(this.cboPartType);
+            this.groupBox2.Controls.Add(this.txtWidth);
+            this.groupBox2.Controls.Add(this.cboHRC);
+            this.groupBox2.Controls.Add(this.cboMaterial);
+            this.groupBox2.Controls.Add(this.cboItemName);
+            this.groupBox2.Controls.Add(this.txtThk);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtDwgCode);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.txtStnNo);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Location = new System.Drawing.Point(6, 119);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(709, 364);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Drawing Information:";
+            // 
+            // btnLengthPick
+            // 
+            this.btnLengthPick.Location = new System.Drawing.Point(348, 275);
+            this.btnLengthPick.Name = "btnLengthPick";
+            this.btnLengthPick.Size = new System.Drawing.Size(72, 25);
+            this.btnLengthPick.TabIndex = 18;
+            this.btnLengthPick.Text = "Pick...";
+            this.btnLengthPick.UseVisualStyleBackColor = true;
+            // 
+            // btnWidthPick
+            // 
+            this.btnWidthPick.Location = new System.Drawing.Point(349, 244);
+            this.btnWidthPick.Name = "btnWidthPick";
+            this.btnWidthPick.Size = new System.Drawing.Size(72, 25);
+            this.btnWidthPick.TabIndex = 16;
+            this.btnWidthPick.Text = "Pick...";
+            this.btnWidthPick.UseVisualStyleBackColor = true;
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Location = new System.Drawing.Point(136, 307);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(200, 22);
+            this.txtQuantity.TabIndex = 19;
+            this.txtQuantity.Text = "1";
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
+            // 
+            // btnThkPick
+            // 
+            this.btnThkPick.Location = new System.Drawing.Point(348, 213);
+            this.btnThkPick.Name = "btnThkPick";
+            this.btnThkPick.Size = new System.Drawing.Size(72, 25);
+            this.btnThkPick.TabIndex = 14;
+            this.btnThkPick.Text = "Pick...";
+            this.btnThkPick.UseVisualStyleBackColor = true;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -213,12 +284,13 @@ namespace PropertiesManager.View
             this.label8.TabIndex = 6;
             this.label8.Text = "QUANTITY:";
             // 
-            // txtQuantity
+            // txtLength
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(136, 307);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(200, 22);
-            this.txtQuantity.TabIndex = 19;
+            this.txtLength.Location = new System.Drawing.Point(136, 276);
+            this.txtLength.Name = "txtLength";
+            this.txtLength.Size = new System.Drawing.Size(200, 22);
+            this.txtLength.TabIndex = 17;
+            this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
             // 
             // cboPartType
             // 
@@ -227,6 +299,15 @@ namespace PropertiesManager.View
             this.cboPartType.Name = "cboPartType";
             this.cboPartType.Size = new System.Drawing.Size(200, 24);
             this.cboPartType.TabIndex = 7;
+            this.cboPartType.TextChanged += new System.EventHandler(this.cboPartType_TextChanged);
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(136, 245);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(200, 22);
+            this.txtWidth.TabIndex = 15;
+            this.txtWidth.TextChanged += new System.EventHandler(this.txtWidth_TextChanged);
             // 
             // cboItemName
             // 
@@ -235,6 +316,15 @@ namespace PropertiesManager.View
             this.cboItemName.Name = "cboItemName";
             this.cboItemName.Size = new System.Drawing.Size(200, 24);
             this.cboItemName.TabIndex = 9;
+            this.cboItemName.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
+            // 
+            // txtThk
+            // 
+            this.txtThk.Location = new System.Drawing.Point(136, 214);
+            this.txtThk.Name = "txtThk";
+            this.txtThk.Size = new System.Drawing.Size(200, 22);
+            this.txtThk.TabIndex = 13;
+            this.txtThk.TextChanged += new System.EventHandler(this.txtThk_TextChanged);
             // 
             // label5
             // 
@@ -266,6 +356,14 @@ namespace PropertiesManager.View
             this.label7.TabIndex = 6;
             this.label7.Text = "ITEM NAME:";
             // 
+            // txtDwgCode
+            // 
+            this.txtDwgCode.Location = new System.Drawing.Point(136, 121);
+            this.txtDwgCode.Name = "txtDwgCode";
+            this.txtDwgCode.Size = new System.Drawing.Size(200, 22);
+            this.txtDwgCode.TabIndex = 10;
+            this.txtDwgCode.TextChanged += new System.EventHandler(this.txtDwgCode_TextChanged);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -275,6 +373,15 @@ namespace PropertiesManager.View
             this.label9.Size = new System.Drawing.Size(131, 17);
             this.label9.TabIndex = 6;
             this.label9.Text = "DRAWING CODE:";
+            // 
+            // txtStnNo
+            // 
+            this.txtStnNo.Location = new System.Drawing.Point(136, 57);
+            this.txtStnNo.Name = "txtStnNo";
+            this.txtStnNo.Size = new System.Drawing.Size(200, 22);
+            this.txtStnNo.TabIndex = 8;
+            this.txtStnNo.Text = "0";
+            this.txtStnNo.TextChanged += new System.EventHandler(this.txtStnNo_TextChanged);
             // 
             // label10
             // 
@@ -286,6 +393,16 @@ namespace PropertiesManager.View
             this.label10.TabIndex = 6;
             this.label10.Text = "MATERIAL:";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 285);
+            this.label14.Name = "label14";
+            this.label14.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label14.Size = new System.Drawing.Size(79, 17);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "LENGTH:";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -295,16 +412,6 @@ namespace PropertiesManager.View
             this.label11.Size = new System.Drawing.Size(51, 17);
             this.label11.TabIndex = 6;
             this.label11.Text = "HRC:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 221);
-            this.label12.Name = "label12";
-            this.label12.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label12.Size = new System.Drawing.Size(99, 17);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "THICKNESS:";
             // 
             // label13
             // 
@@ -316,126 +423,33 @@ namespace PropertiesManager.View
             this.label13.TabIndex = 6;
             this.label13.Text = "WIDTH:";
             // 
-            // label14
+            // label12
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 285);
-            this.label14.Name = "label14";
-            this.label14.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Size = new System.Drawing.Size(79, 17);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "LENGTH:";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 221);
+            this.label12.Name = "label12";
+            this.label12.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label12.Size = new System.Drawing.Size(99, 17);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "THICKNESS:";
             // 
-            // txtStnNo
+            // cboMaterial
             // 
-            this.txtStnNo.Location = new System.Drawing.Point(136, 57);
-            this.txtStnNo.Name = "txtStnNo";
-            this.txtStnNo.Size = new System.Drawing.Size(200, 22);
-            this.txtStnNo.TabIndex = 8;
+            this.cboMaterial.FormattingEnabled = true;
+            this.cboMaterial.Location = new System.Drawing.Point(136, 153);
+            this.cboMaterial.Name = "cboMaterial";
+            this.cboMaterial.Size = new System.Drawing.Size(200, 24);
+            this.cboMaterial.TabIndex = 11;
+            this.cboMaterial.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
             // 
-            // txtDwgCode
+            // cboHRC
             // 
-            this.txtDwgCode.Location = new System.Drawing.Point(136, 121);
-            this.txtDwgCode.Name = "txtDwgCode";
-            this.txtDwgCode.Size = new System.Drawing.Size(200, 22);
-            this.txtDwgCode.TabIndex = 10;
-            // 
-            // txtMaterial
-            // 
-            this.txtMaterial.Location = new System.Drawing.Point(136, 152);
-            this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.Size = new System.Drawing.Size(200, 22);
-            this.txtMaterial.TabIndex = 11;
-            // 
-            // txtHRC
-            // 
-            this.txtHRC.Location = new System.Drawing.Point(136, 183);
-            this.txtHRC.Name = "txtHRC";
-            this.txtHRC.Size = new System.Drawing.Size(200, 22);
-            this.txtHRC.TabIndex = 12;
-            // 
-            // txtThk
-            // 
-            this.txtThk.Location = new System.Drawing.Point(136, 214);
-            this.txtThk.Name = "txtThk";
-            this.txtThk.Size = new System.Drawing.Size(200, 22);
-            this.txtThk.TabIndex = 13;
-            // 
-            // txtWidth
-            // 
-            this.txtWidth.Location = new System.Drawing.Point(136, 245);
-            this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(200, 22);
-            this.txtWidth.TabIndex = 15;
-            // 
-            // txtLength
-            // 
-            this.txtLength.Location = new System.Drawing.Point(136, 276);
-            this.txtLength.Name = "txtLength";
-            this.txtLength.Size = new System.Drawing.Size(200, 22);
-            this.txtLength.TabIndex = 17;
-            // 
-            // btnThkPick
-            // 
-            this.btnThkPick.Location = new System.Drawing.Point(348, 213);
-            this.btnThkPick.Name = "btnThkPick";
-            this.btnThkPick.Size = new System.Drawing.Size(72, 25);
-            this.btnThkPick.TabIndex = 14;
-            this.btnThkPick.Text = "Pick...";
-            this.btnThkPick.UseVisualStyleBackColor = true;
-            // 
-            // btnWidthPick
-            // 
-            this.btnWidthPick.Location = new System.Drawing.Point(349, 244);
-            this.btnWidthPick.Name = "btnWidthPick";
-            this.btnWidthPick.Size = new System.Drawing.Size(72, 25);
-            this.btnWidthPick.TabIndex = 16;
-            this.btnWidthPick.Text = "Pick...";
-            this.btnWidthPick.UseVisualStyleBackColor = true;
-            // 
-            // btnLengthPick
-            // 
-            this.btnLengthPick.Location = new System.Drawing.Point(348, 275);
-            this.btnLengthPick.Name = "btnLengthPick";
-            this.btnLengthPick.Size = new System.Drawing.Size(72, 25);
-            this.btnLengthPick.TabIndex = 18;
-            this.btnLengthPick.Text = "Pick...";
-            this.btnLengthPick.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox2.Controls.Add(this.btnLengthPick);
-            this.groupBox2.Controls.Add(this.btnWidthPick);
-            this.groupBox2.Controls.Add(this.txtQuantity);
-            this.groupBox2.Controls.Add(this.btnThkPick);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.txtLength);
-            this.groupBox2.Controls.Add(this.cboPartType);
-            this.groupBox2.Controls.Add(this.txtWidth);
-            this.groupBox2.Controls.Add(this.cboItemName);
-            this.groupBox2.Controls.Add(this.txtThk);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.txtHRC);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.txtMaterial);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtDwgCode);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.txtStnNo);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(6, 119);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(709, 364);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Drawing Information:";
+            this.cboHRC.FormattingEnabled = true;
+            this.cboHRC.Location = new System.Drawing.Point(136, 183);
+            this.cboHRC.Name = "cboHRC";
+            this.cboHRC.Size = new System.Drawing.Size(200, 24);
+            this.cboHRC.TabIndex = 12;
+            this.cboHRC.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
             // 
             // UserForm
             // 
@@ -484,9 +498,7 @@ namespace PropertiesManager.View
         private System.Windows.Forms.ComboBox cboItemName;
         private System.Windows.Forms.TextBox txtThk;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtHRC;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtMaterial;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDwgCode;
         private System.Windows.Forms.Label label9;
@@ -496,5 +508,7 @@ namespace PropertiesManager.View
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cboHRC;
+        private System.Windows.Forms.ComboBox cboMaterial;
     }
 }

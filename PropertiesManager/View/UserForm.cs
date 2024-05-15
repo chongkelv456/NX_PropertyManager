@@ -22,6 +22,16 @@ namespace PropertiesManager.View
         public bool IsFilledTextPart { get => !String.IsNullOrEmpty(textPart.Text); }
         public bool IsFilledCodePrefix { get => !String.IsNullOrEmpty(textCodePrefix.Text); }
         public bool IsFilledDesigner { get => !String.IsNullOrEmpty(cboDesign.SelectedItem.ToString()); }
+        public bool IsFilledPartType { get => !String.IsNullOrEmpty(cboPartType.SelectedItem.ToString()); }
+        public bool IsFilledStnNo { get => !String.IsNullOrEmpty(txtStnNo.Text); }
+        public bool IsFilledItemName { get => !String.IsNullOrEmpty(cboItemName.SelectedItem.ToString()); }
+        public bool IsFilledDwgCode { get => !String.IsNullOrEmpty(txtDwgCode.Text); }
+        public bool IsFilledMaaterial { get => !String.IsNullOrEmpty(txtMaterial.Text); }
+        public bool IsFilledHRC { get => !String.IsNullOrEmpty(txtHRC.Text); }
+        public bool IsFilledThk { get => !String.IsNullOrEmpty(txtThk.Text); }
+        public bool IsFilledWidth { get => !String.IsNullOrEmpty(txtWidth.Text); }
+        public bool IsFilledLength { get => !String.IsNullOrEmpty(txtLength.Text); }
+        public bool IsFilledQtty { get => !String.IsNullOrEmpty(txtQuantity.Text); }
         public void SetApplyButtonEnable(bool isEnable)
         {
             btnApply.Enabled = isEnable;
@@ -31,6 +41,7 @@ namespace PropertiesManager.View
             InitializeComponent();
             this.control = control;
             cboDesign.DataSource = control.GetDesigners();
+            cboPartType.DataSource = control.GetPartTypes();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -60,6 +71,66 @@ namespace PropertiesManager.View
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void cboPartType_TextChanged(object sender, EventArgs e)
+        {
+            const string SHOE = "Shoe";
+            control.ValidateApplyButton();
+
+            if (cboPartType.SelectedItem.ToString().Equals(SHOE, StringComparison.OrdinalIgnoreCase))
+            {
+                txtStnNo.Text = "0";
+            }
+            else
+            {
+                txtStnNo.Text = "1";
+            }
+        }
+
+        private void txtStnNo_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void cboItemName_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtDwgCode_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtMaterial_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtHRC_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtThk_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtWidth_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtLength_TextChanged(object sender, EventArgs e)
+        {
+            control.ValidateApplyButton();
+        }
+
+        private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
             control.ValidateApplyButton();
         }
