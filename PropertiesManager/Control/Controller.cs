@@ -14,12 +14,20 @@ namespace PropertiesManager.Control
         private NxDrawing drawing;
         private Designer designer;
         private PartType partType;
+        private Plate plate;
+        private Shoe shoe;
+        private Material material;
+        private Hardness hardness;
 
         public Controller()
         {
             //System.Diagnostics.Debugger.Launch();
             designer = new Designer();
             partType = new PartType();
+            plate = new Plate();
+            shoe = new Shoe();
+            material = new Material();
+            hardness = new Hardness();
             uf = new UserForm(this);
             drawing = new NxDrawing(this);                        
             uf.ShowDialog();
@@ -47,6 +55,24 @@ namespace PropertiesManager.Control
         public List<string> GetPartTypes()
         {
             return partType.GetPartTypes;
+        }
+
+        public List<string> GetPlates()
+        {
+            return plate.GetPlates;
+        }
+
+        public List<string> GetShoes()
+        {
+            return shoe.GetShoes;
+        }
+        public List<string> GetMaterials()
+        {
+            return material.GetMaterials;
+        }
+        public List<string> GetHardness()
+        {
+            return hardness.GetHardnesses;
         }
 
         public void ValidateApplyButton()

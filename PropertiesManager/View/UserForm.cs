@@ -26,8 +26,8 @@ namespace PropertiesManager.View
         public bool IsFilledStnNo { get => !String.IsNullOrEmpty(txtStnNo.Text); }
         public bool IsFilledItemName { get => !String.IsNullOrEmpty(cboItemName.SelectedItem.ToString()); }
         public bool IsFilledDwgCode { get => !String.IsNullOrEmpty(txtDwgCode.Text); }
-        public bool IsFilledMaaterial { get => !String.IsNullOrEmpty(txtMaterial.Text); }
-        public bool IsFilledHRC { get => !String.IsNullOrEmpty(txtHRC.Text); }
+        public bool IsFilledMaaterial { get => !String.IsNullOrEmpty(cboMaterial.SelectedItem.ToString()); }
+        public bool IsFilledHRC { get => !String.IsNullOrEmpty(cboHRC.SelectedItem.ToString()); }
         public bool IsFilledThk { get => !String.IsNullOrEmpty(txtThk.Text); }
         public bool IsFilledWidth { get => !String.IsNullOrEmpty(txtWidth.Text); }
         public bool IsFilledLength { get => !String.IsNullOrEmpty(txtLength.Text); }
@@ -42,6 +42,9 @@ namespace PropertiesManager.View
             this.control = control;
             cboDesign.DataSource = control.GetDesigners();
             cboPartType.DataSource = control.GetPartTypes();
+            cboItemName.DataSource = control.GetShoes();
+            cboMaterial.DataSource = control.GetMaterials();
+            cboHRC.DataSource = control.GetHardness();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

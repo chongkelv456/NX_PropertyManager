@@ -11,9 +11,9 @@ namespace PropertiesManager.Model
         private List<string> materials = new List<string>();
         public Material()
         {
-            materials.Add("DC53");
-            materials.Add("GOA");
             materials.Add("S50C");
+            materials.Add("DC53");
+            materials.Add("GOA");            
             materials.Add("Mild Steel");
             materials.Add("NAK80");
             materials.Add("SKD11");
