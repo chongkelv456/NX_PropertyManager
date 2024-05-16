@@ -19,6 +19,6 @@ namespace PropertiesManager.Model
             partTypes.Add("OTHERS");            
         }
 
-        public List<string> GetPartTypes { get => partTypes; }
+        public List<string> Get { get => partTypes; }
     }
 }

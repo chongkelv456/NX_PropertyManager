@@ -19,7 +19,7 @@ namespace PropertiesManager.Model
             designers.Add("Lim KC");
         }
 
-        public List<string> GetDesingers { get => designers; }
+        public List<string> Get { get => designers; }
 
         // Todo: Append the name list by external data
     }

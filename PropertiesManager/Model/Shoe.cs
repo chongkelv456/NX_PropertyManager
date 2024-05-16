@@ -18,6 +18,6 @@ namespace PropertiesManager.Model
             shoes.Add("LOWER COMMON PLATE");
         }
 
-        public List<string> GetShoes { get => shoes;}
+        public List<string> Get { get => shoes;}
     }
 }

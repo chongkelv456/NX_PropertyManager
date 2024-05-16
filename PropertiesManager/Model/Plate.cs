@@ -16,10 +16,7 @@ namespace PropertiesManager.Model
             plates.Add("UPPER PAD");
             plates.Add("PUNCH HOLDER");
             plates.Add("BOTTOMING PLATE");
-            plates.Add("STRIPPER PLATE");
-            plates.Add("MATERIAL GUIDE-F/R");
-            plates.Add("MATERIAL GUIDE-F");
-            plates.Add("MATERIAL GUIDE-R");
+            plates.Add("STRIPPER PLATE");           
             plates.Add("DIE PLATE");
             plates.Add("DIE PLATE-R");
             plates.Add("DIE PLATE-F");
@@ -27,6 +24,6 @@ namespace PropertiesManager.Model
             plates.Add("LOWER PAD SPACER");
         }
 
-        public List<string> GetPlates { get => plates; }
+        public List<string> Get { get => plates; }
     }
 }

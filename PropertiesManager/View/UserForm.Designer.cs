@@ -31,8 +31,8 @@ namespace PropertiesManager.View
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cboDesign = new System.Windows.Forms.ComboBox();
-            this.textCodePrefix = new System.Windows.Forms.TextBox();
-            this.textPart = new System.Windows.Forms.TextBox();
+            this.txtCodePrefix = new System.Windows.Forms.TextBox();
+            this.txtPart = new System.Windows.Forms.TextBox();
             this.txtModel = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,6 +42,7 @@ namespace PropertiesManager.View
             this.btnApply = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numericStnNo = new System.Windows.Forms.NumericUpDown();
             this.btnLengthPick = new System.Windows.Forms.Button();
             this.btnWidthPick = new System.Windows.Forms.Button();
             this.txtQuantity = new System.Windows.Forms.TextBox();
@@ -50,6 +51,8 @@ namespace PropertiesManager.View
             this.txtLength = new System.Windows.Forms.TextBox();
             this.cboPartType = new System.Windows.Forms.ComboBox();
             this.txtWidth = new System.Windows.Forms.TextBox();
+            this.cboHRC = new System.Windows.Forms.ComboBox();
+            this.cboMaterial = new System.Windows.Forms.ComboBox();
             this.cboItemName = new System.Windows.Forms.ComboBox();
             this.txtThk = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,17 +60,15 @@ namespace PropertiesManager.View
             this.label7 = new System.Windows.Forms.Label();
             this.txtDwgCode = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtStnNo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.cboMaterial = new System.Windows.Forms.ComboBox();
-            this.cboHRC = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -76,8 +77,8 @@ namespace PropertiesManager.View
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.cboDesign);
-            this.groupBox1.Controls.Add(this.textCodePrefix);
-            this.groupBox1.Controls.Add(this.textPart);
+            this.groupBox1.Controls.Add(this.txtCodePrefix);
+            this.groupBox1.Controls.Add(this.txtPart);
             this.groupBox1.Controls.Add(this.txtModel);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -99,21 +100,21 @@ namespace PropertiesManager.View
             this.cboDesign.TabIndex = 4;
             this.cboDesign.TextChanged += new System.EventHandler(this.cboDesign_TextChanged);
             // 
-            // textCodePrefix
+            // txtCodePrefix
             // 
-            this.textCodePrefix.Location = new System.Drawing.Point(442, 26);
-            this.textCodePrefix.Name = "textCodePrefix";
-            this.textCodePrefix.Size = new System.Drawing.Size(200, 22);
-            this.textCodePrefix.TabIndex = 3;
-            this.textCodePrefix.TextChanged += new System.EventHandler(this.textCodePrefix_TextChanged);
+            this.txtCodePrefix.Location = new System.Drawing.Point(442, 26);
+            this.txtCodePrefix.Name = "txtCodePrefix";
+            this.txtCodePrefix.Size = new System.Drawing.Size(200, 22);
+            this.txtCodePrefix.TabIndex = 3;
+            this.txtCodePrefix.TextChanged += new System.EventHandler(this.textCodePrefix_TextChanged);
             // 
-            // textPart
+            // txtPart
             // 
-            this.textPart.Location = new System.Drawing.Point(73, 59);
-            this.textPart.Name = "textPart";
-            this.textPart.Size = new System.Drawing.Size(200, 22);
-            this.textPart.TabIndex = 2;
-            this.textPart.TextChanged += new System.EventHandler(this.textPart_TextChanged);
+            this.txtPart.Location = new System.Drawing.Point(73, 59);
+            this.txtPart.Name = "txtPart";
+            this.txtPart.Size = new System.Drawing.Size(200, 22);
+            this.txtPart.TabIndex = 2;
+            this.txtPart.TextChanged += new System.EventHandler(this.textPart_TextChanged);
             // 
             // txtModel
             // 
@@ -208,6 +209,7 @@ namespace PropertiesManager.View
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.numericStnNo);
             this.groupBox2.Controls.Add(this.btnLengthPick);
             this.groupBox2.Controls.Add(this.btnWidthPick);
             this.groupBox2.Controls.Add(this.txtQuantity);
@@ -225,7 +227,6 @@ namespace PropertiesManager.View
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtDwgCode);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.txtStnNo);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label11);
@@ -237,6 +238,13 @@ namespace PropertiesManager.View
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Drawing Information:";
+            // 
+            // numericStnNo
+            // 
+            this.numericStnNo.Location = new System.Drawing.Point(136, 57);
+            this.numericStnNo.Name = "numericStnNo";
+            this.numericStnNo.Size = new System.Drawing.Size(200, 22);
+            this.numericStnNo.TabIndex = 8;
             // 
             // btnLengthPick
             // 
@@ -309,6 +317,24 @@ namespace PropertiesManager.View
             this.txtWidth.TabIndex = 15;
             this.txtWidth.TextChanged += new System.EventHandler(this.txtWidth_TextChanged);
             // 
+            // cboHRC
+            // 
+            this.cboHRC.FormattingEnabled = true;
+            this.cboHRC.Location = new System.Drawing.Point(136, 183);
+            this.cboHRC.Name = "cboHRC";
+            this.cboHRC.Size = new System.Drawing.Size(200, 24);
+            this.cboHRC.TabIndex = 12;
+            this.cboHRC.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
+            // 
+            // cboMaterial
+            // 
+            this.cboMaterial.FormattingEnabled = true;
+            this.cboMaterial.Location = new System.Drawing.Point(136, 153);
+            this.cboMaterial.Name = "cboMaterial";
+            this.cboMaterial.Size = new System.Drawing.Size(200, 24);
+            this.cboMaterial.TabIndex = 11;
+            this.cboMaterial.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
+            // 
             // cboItemName
             // 
             this.cboItemName.FormattingEnabled = true;
@@ -374,15 +400,6 @@ namespace PropertiesManager.View
             this.label9.TabIndex = 6;
             this.label9.Text = "DRAWING CODE:";
             // 
-            // txtStnNo
-            // 
-            this.txtStnNo.Location = new System.Drawing.Point(136, 57);
-            this.txtStnNo.Name = "txtStnNo";
-            this.txtStnNo.Size = new System.Drawing.Size(200, 22);
-            this.txtStnNo.TabIndex = 8;
-            this.txtStnNo.Text = "0";
-            this.txtStnNo.TextChanged += new System.EventHandler(this.txtStnNo_TextChanged);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -433,24 +450,6 @@ namespace PropertiesManager.View
             this.label12.TabIndex = 6;
             this.label12.Text = "THICKNESS:";
             // 
-            // cboMaterial
-            // 
-            this.cboMaterial.FormattingEnabled = true;
-            this.cboMaterial.Location = new System.Drawing.Point(136, 153);
-            this.cboMaterial.Name = "cboMaterial";
-            this.cboMaterial.Size = new System.Drawing.Size(200, 24);
-            this.cboMaterial.TabIndex = 11;
-            this.cboMaterial.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
-            // 
-            // cboHRC
-            // 
-            this.cboHRC.FormattingEnabled = true;
-            this.cboHRC.Location = new System.Drawing.Point(136, 183);
-            this.cboHRC.Name = "cboHRC";
-            this.cboHRC.Size = new System.Drawing.Size(200, 24);
-            this.cboHRC.TabIndex = 12;
-            this.cboHRC.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -468,6 +467,7 @@ namespace PropertiesManager.View
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -481,11 +481,11 @@ namespace PropertiesManager.View
         private System.Windows.Forms.TextBox txtModel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textPart;
+        private System.Windows.Forms.TextBox txtPart;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboDesign;
-        private System.Windows.Forms.TextBox textCodePrefix;
+        private System.Windows.Forms.TextBox txtCodePrefix;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnLengthPick;
         private System.Windows.Forms.Button btnWidthPick;
@@ -502,7 +502,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDwgCode;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtStnNo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
@@ -510,5 +509,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboHRC;
         private System.Windows.Forms.ComboBox cboMaterial;
+        private System.Windows.Forms.NumericUpDown numericStnNo;
     }
 }

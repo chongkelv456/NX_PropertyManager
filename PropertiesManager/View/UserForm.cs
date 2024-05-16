@@ -14,24 +14,24 @@ namespace PropertiesManager.View
     public partial class UserForm : Form
     {
         private Controller control;
-        public string TextModel { get => txtModel.Text; }
-        public string TextPart { get => textPart.Text; }
-        public string TextCodePrefix { get => textCodePrefix.Text; }
-        public string TextDesginer { get => cboDesign.SelectedItem.ToString(); }
+        public string TextModel { get => txtModel.Text; set => txtModel.Text = value; }
+        public string TextPart { get => txtPart.Text; set => txtPart.Text = value; }
+        public string TextCodePrefix { get => txtCodePrefix.Text; set => txtCodePrefix.Text = value; }
+        public string TextDesginer { get => cboDesign.SelectedItem.ToString(); set => cboDesign.SelectedItem = value; }
         public bool IsFilledTxtModel { get => !String.IsNullOrEmpty(txtModel.Text); }
-        public bool IsFilledTextPart { get => !String.IsNullOrEmpty(textPart.Text); }
-        public bool IsFilledCodePrefix { get => !String.IsNullOrEmpty(textCodePrefix.Text); }
+        public bool IsFilledTextPart { get => !String.IsNullOrEmpty(txtPart.Text); }
+        public bool IsFilledCodePrefix { get => !String.IsNullOrEmpty(txtCodePrefix.Text); }
         public bool IsFilledDesigner { get => !String.IsNullOrEmpty(cboDesign.SelectedItem.ToString()); }
         public bool IsFilledPartType { get => !String.IsNullOrEmpty(cboPartType.SelectedItem.ToString()); }
-        public bool IsFilledStnNo { get => !String.IsNullOrEmpty(txtStnNo.Text); }
+        public bool IsFilledStnNo { get => !String.IsNullOrEmpty(numericStnNo.Text); }
         public bool IsFilledItemName { get => !String.IsNullOrEmpty(cboItemName.SelectedItem.ToString()); }
         public bool IsFilledDwgCode { get => !String.IsNullOrEmpty(txtDwgCode.Text); }
-        public bool IsFilledMaaterial { get => !String.IsNullOrEmpty(cboMaterial.SelectedItem.ToString()); }
+        public bool IsFilledMaterial { get => !String.IsNullOrEmpty(cboMaterial.SelectedItem.ToString()); }
         public bool IsFilledHRC { get => !String.IsNullOrEmpty(cboHRC.SelectedItem.ToString()); }
         public bool IsFilledThk { get => !String.IsNullOrEmpty(txtThk.Text); }
         public bool IsFilledWidth { get => !String.IsNullOrEmpty(txtWidth.Text); }
         public bool IsFilledLength { get => !String.IsNullOrEmpty(txtLength.Text); }
-        public bool IsFilledQtty { get => !String.IsNullOrEmpty(txtQuantity.Text); }
+        public bool IsFilledQty { get => !String.IsNullOrEmpty(txtQuantity.Text); }
         public void SetApplyButtonEnable(bool isEnable)
         {
             btnApply.Enabled = isEnable;
@@ -40,11 +40,27 @@ namespace PropertiesManager.View
         {
             InitializeComponent();
             this.control = control;
+            //System.Diagnostics.Debugger.Launch();            
+
             cboDesign.DataSource = control.GetDesigners();
             cboPartType.DataSource = control.GetPartTypes();
             cboItemName.DataSource = control.GetShoes();
             cboMaterial.DataSource = control.GetMaterials();
-            cboHRC.DataSource = control.GetHardness();
+            cboHRC.DataSource = control.GetHardness();            
+        }
+
+        public void FillProjectInfo()
+        {
+            Dictionary<string, string> projInfo = control.ReadFromFile();
+            if (projInfo == null)
+            {
+                return;
+            }
+
+            TextModel = projInfo[Controller.MODEL];
+            TextPart = projInfo[Controller.PART];
+            TextCodePrefix = projInfo[Controller.CODE_PREFIX];
+            TextDesginer = projInfo[Controller.DESIGNER];
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -80,17 +96,40 @@ namespace PropertiesManager.View
 
         private void cboPartType_TextChanged(object sender, EventArgs e)
         {
-            const string SHOE = "Shoe";
+
             control.ValidateApplyButton();
 
-            if (cboPartType.SelectedItem.ToString().Equals(SHOE, StringComparison.OrdinalIgnoreCase))
+            string selectedPartType = cboPartType.SelectedItem.ToString();
+            switch (selectedPartType)
             {
-                txtStnNo.Text = "0";
+                case Controller.SHOE:
+                    PopulateItemNameDataSource(cboItemName, control.GetShoes());
+                    numericStnNo.Value = 0;
+                    break;
+                case Controller.PLATE:
+                    PopulateItemNameDataSource(cboItemName, control.GetPlates());
+                    numericStnNo.Value = 1;
+                    break;
+                case Controller.INSERT:
+                    PopulateItemNameDataSource(cboItemName, control.GetInserts());
+                    numericStnNo.Value = 1;
+                    break;
+                case Controller.WCBLK:
+                    PopulateItemNameDataSource(cboItemName, control.GetWCblks());
+                    numericStnNo.Value = 1;
+                    break;
+                case Controller.OTHERS:
+                    PopulateItemNameDataSource(cboItemName, control.GetOthers());
+                    numericStnNo.Value = 1;
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                txtStnNo.Text = "1";
-            }
+        }
+
+        private void PopulateItemNameDataSource(ComboBox cboItemName, List<string> list)
+        {
+            cboItemName.DataSource = list;
         }
 
         private void txtStnNo_TextChanged(object sender, EventArgs e)

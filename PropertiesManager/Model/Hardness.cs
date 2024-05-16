@@ -20,6 +20,6 @@ namespace PropertiesManager.Model
             hardnesses.Add("60~63");
             hardnesses.Add("62~65");
         }
-        public List<string> GetHardnesses { get => hardnesses; }
+        public List<string> Get { get => hardnesses; }
     }
 }

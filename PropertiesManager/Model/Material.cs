@@ -13,7 +13,7 @@ namespace PropertiesManager.Model
         {
             materials.Add("S50C");
             materials.Add("DC53");
-            materials.Add("GOA");            
+            materials.Add("GOA");
             materials.Add("Mild Steel");
             materials.Add("NAK80");
             materials.Add("SKD11");
@@ -21,6 +21,6 @@ namespace PropertiesManager.Model
             materials.Add("YXM1");
             materials.Add("DEX20");
         }
-        public List<string> GetMaterials { get => materials; }
+        public List<string> Get { get => materials; }
     }
 }
