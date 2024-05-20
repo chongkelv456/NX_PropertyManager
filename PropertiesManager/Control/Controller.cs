@@ -33,6 +33,26 @@ namespace PropertiesManager.Control
         public const string CODE_PREFIX = "CODE_PREFIX";
         public const string DESIGNER = "DESIGNER";
 
+        public const string S50C = "S50C";
+        public const string DC53 = "DC53";
+        public const string GOA = "GOA";
+        public const string MILD_STELL = "MILD STELL";
+        public const string NAK80 = "NAK80";
+        public const string SKD11 = "SKD11";
+        public const string YXR3 = "YXR3";
+        public const string YXM1 = "YXM1";
+        public const string DEX20 = "DEX20";
+        public const string EG2 = "E.G. 2.0t";
+
+
+        public const string HYPHEN = "-";
+        public const string THIRTYFIVE_FOURTY = "35~40";
+        public const string FIFTYTWO_FIFTYFOUR= "52~54";
+        public const string FIFTYSEVEN_FIFTYNINE= "57~59";
+        public const string FIFTYEIGHT_SIXTY= "58~60";
+        public const string SIXTY_SIXTYTHREE= "60~63";
+        public const string SIXTYTWO_SIXTYFIVE= "62~65";
+
         const string DIRECTORY = @"D:\NXCUSTOM\temp";
         const string INFO_FILENAME = "project_info.data";
 
@@ -50,10 +70,11 @@ namespace PropertiesManager.Control
             other = new Other();
 
             uf = new UserForm(this);
-            drawing = new NxDrawing(this);
+            drawing = new NxDrawing(this);            
             uf.FillProjectInfo();
-            uf.ShowDialog();
-
+            uf.txtDwgCode_UpdateChange();
+            uf.InitialLoadComboContents();
+            uf.Show();
         }
 
         public void Apply()
@@ -65,9 +86,13 @@ namespace PropertiesManager.Control
             info.Add(uf.TextPart);
             info.Add(uf.TextCodePrefix);
             info.Add(uf.TextDesginer);
-            info.ForEach(x => message += x + "\n");
-            NXOpen.NXMessageBox.DialogType dialogType = NXOpen.NXMessageBox.DialogType.Information;
-            drawing.NXMessage(message, title, dialogType);
+            info.ForEach(x => message += x + "\n");            
+
+            var title_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TITLE, drawing.GetTitle_KeyValue());
+            drawing.SetAttributes(title_infos);
+            
+            var tool_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TOOL, drawing.GetTool_KeyValue());
+            drawing.SetAttributes(tool_infos);            
         }
 
         public List<string> GetDesigners()
@@ -201,6 +226,16 @@ namespace PropertiesManager.Control
             }
 
             return result;
+        }
+
+        public UserForm GetUserForm()
+        {
+            return uf;
+        }
+
+        public NxDrawing GetDrawing()
+        {
+            return drawing;
         }
     }
 }

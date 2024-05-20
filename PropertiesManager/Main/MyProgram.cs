@@ -1,5 +1,6 @@
 ﻿using System;
 using PropertiesManager.Control;
+using PropertiesManager.View;
 
 namespace PropertiesManager
 {

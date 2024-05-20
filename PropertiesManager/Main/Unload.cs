@@ -13,8 +13,8 @@ namespace PropertiesManager
         public static int GetUnloadOption(string args)
         {
             int unloadOption;
-            unloadOption = System.Convert.ToInt32(Session.LibraryUnloadOption.Immediately);         //After executing
-            //unloadOption = System.Convert.ToInt32(Session.LibraryUnloadOption.AtTermination);     //When NX session terminates
+            //unloadOption = System.Convert.ToInt32(Session.LibraryUnloadOption.Immediately);         //After executing; using Form.ShowDialog()
+            unloadOption = System.Convert.ToInt32(Session.LibraryUnloadOption.AtTermination);     //When NX session terminates; using Form.Show()
             //unloadOption = System.Convert.ToInt32(Session.LibraryUnloadOption.Explicitly);        //Using File-->Unload
 
             return unloadOption;

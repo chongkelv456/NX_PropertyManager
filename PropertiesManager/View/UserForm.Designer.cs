@@ -245,6 +245,7 @@ namespace PropertiesManager.View
             this.numericStnNo.Name = "numericStnNo";
             this.numericStnNo.Size = new System.Drawing.Size(200, 22);
             this.numericStnNo.TabIndex = 8;
+            this.numericStnNo.ValueChanged += new System.EventHandler(this.numericStnNo_ValueChanged);
             // 
             // btnLengthPick
             // 
@@ -254,6 +255,7 @@ namespace PropertiesManager.View
             this.btnLengthPick.TabIndex = 18;
             this.btnLengthPick.Text = "Pick...";
             this.btnLengthPick.UseVisualStyleBackColor = true;
+            this.btnLengthPick.Click += new System.EventHandler(this.btnLengthPick_Click);
             // 
             // btnWidthPick
             // 
@@ -263,6 +265,7 @@ namespace PropertiesManager.View
             this.btnWidthPick.TabIndex = 16;
             this.btnWidthPick.Text = "Pick...";
             this.btnWidthPick.UseVisualStyleBackColor = true;
+            this.btnWidthPick.Click += new System.EventHandler(this.btnWidthPick_Click);
             // 
             // txtQuantity
             // 
@@ -281,6 +284,7 @@ namespace PropertiesManager.View
             this.btnThkPick.TabIndex = 14;
             this.btnThkPick.Text = "Pick...";
             this.btnThkPick.UseVisualStyleBackColor = true;
+            this.btnThkPick.Click += new System.EventHandler(this.btnThkPick_Click);
             // 
             // label8
             // 
@@ -462,6 +466,7 @@ namespace PropertiesManager.View
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "UserForm";
             this.Text = "Properties Manager Form";
+            this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
