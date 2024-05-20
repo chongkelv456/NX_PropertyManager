@@ -42,6 +42,7 @@ namespace PropertiesManager.View
             this.btnApply = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.numericStnNo = new System.Windows.Forms.NumericUpDown();
             this.btnLengthPick = new System.Windows.Forms.Button();
             this.btnWidthPick = new System.Windows.Forms.Button();
@@ -68,13 +69,12 @@ namespace PropertiesManager.View
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.cboDesign);
             this.groupBox1.Controls.Add(this.txtCodePrefix);
@@ -84,9 +84,9 @@ namespace PropertiesManager.View
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(709, 110);
+            this.groupBox1.Size = new System.Drawing.Size(689, 90);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Information";
@@ -170,8 +170,7 @@ namespace PropertiesManager.View
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(442, 507);
+            this.btnCancel.Location = new System.Drawing.Point(436, 495);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 35);
             this.btnCancel.TabIndex = 1;
@@ -181,9 +180,8 @@ namespace PropertiesManager.View
             // 
             // btnApply
             // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(583, 507);
+            this.btnApply.Location = new System.Drawing.Point(577, 495);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(135, 35);
             this.btnApply.TabIndex = 5;
@@ -193,22 +191,18 @@ namespace PropertiesManager.View
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(715, 490);
+            this.panel1.Size = new System.Drawing.Size(700, 475);
             this.panel1.TabIndex = 3;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.numericStnNo);
             this.groupBox2.Controls.Add(this.btnLengthPick);
             this.groupBox2.Controls.Add(this.btnWidthPick);
@@ -232,12 +226,22 @@ namespace PropertiesManager.View
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(6, 119);
+            this.groupBox2.Location = new System.Drawing.Point(5, 100);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(709, 364);
+            this.groupBox2.Size = new System.Drawing.Size(691, 361);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Drawing Information:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PropertiesManager.Resource1.Other;
+            this.pictureBox1.Location = new System.Drawing.Point(416, 29);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(260, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
             // 
             // numericStnNo
             // 
@@ -459,7 +463,7 @@ namespace PropertiesManager.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(730, 554);
+            this.ClientSize = new System.Drawing.Size(720, 542);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.panel1);
@@ -472,6 +476,7 @@ namespace PropertiesManager.View
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).EndInit();
             this.ResumeLayout(false);
 
@@ -515,5 +520,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.ComboBox cboHRC;
         private System.Windows.Forms.ComboBox cboMaterial;
         private System.Windows.Forms.NumericUpDown numericStnNo;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

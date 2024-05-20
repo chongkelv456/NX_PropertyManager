@@ -17,7 +17,7 @@ namespace PropertiesManager.View
         public string TextModel { get => txtModel.Text; set => txtModel.Text = value; }
         public string TextPart { get => txtPart.Text; set => txtPart.Text = value; }
         public string TextCodePrefix { get => txtCodePrefix.Text; set => txtCodePrefix.Text = value; }
-        public string TextDesginer { get => cboDesign.SelectedItem.ToString(); set => cboDesign.SelectedItem = value; }
+        public string TextDesginer { get => cboDesign.Text; set => cboDesign.SelectedItem = value; }
         public string TextDwgCode { get => txtDwgCode.Text; set => txtDwgCode.Text = value; }
         public string TextStaNo { get => numericStnNo.Value.ToString(); }
         public string TextItemName { get => cboItemName.Text; }
@@ -50,11 +50,6 @@ namespace PropertiesManager.View
         {
             InitializeComponent();
             this.control = control;
-        }
-
-        public UserForm()
-        {
-
         }
 
         public void InitialLoadComboContents()
@@ -124,26 +119,31 @@ namespace PropertiesManager.View
                     PopulateItemNameDataSource(cboItemName, control.GetShoes());
                     cboMaterial.SelectedItem = Controller.S50C;
                     numericStnNo.Value = 0;
+                    pictureBox1.Image = Resource1.Shoe;
                     break;
                 case Controller.PLATE:
                     PopulateItemNameDataSource(cboItemName, control.GetPlates());
                     cboMaterial.SelectedItem = Controller.GOA;
                     numericStnNo.Value = 1;
+                    pictureBox1.Image = Resource1.Plate;
                     break;
                 case Controller.INSERT:
                     PopulateItemNameDataSource(cboItemName, control.GetInserts());
                     cboMaterial.SelectedItem = Controller.DC53;
                     numericStnNo.Value = 1;
+                    pictureBox1.Image = Resource1.Insert;
                     break;
                 case Controller.WCBLK:
                     PopulateItemNameDataSource(cboItemName, control.GetWCblks());
                     cboMaterial.SelectedItem = Controller.DC53;
                     numericStnNo.Value = 1;
+                    pictureBox1.Image = Resource1.WCBlk;
                     break;
                 case Controller.OTHERS:
                     PopulateItemNameDataSource(cboItemName, control.GetOthers());
                     cboMaterial.SelectedItem = Controller.EG2;
                     numericStnNo.Value = 0;
+                    pictureBox1.Image = Resource1.Other;
                     break;
                 default:
                     break;
@@ -262,5 +262,6 @@ namespace PropertiesManager.View
         {
             TextLength = control.GetDrawing().GetTextFromDimension();
         }
+
     }
 }
