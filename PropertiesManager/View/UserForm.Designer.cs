@@ -332,7 +332,7 @@ namespace PropertiesManager.View
             this.cboHRC.Name = "cboHRC";
             this.cboHRC.Size = new System.Drawing.Size(200, 24);
             this.cboHRC.TabIndex = 12;
-            this.cboHRC.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
+            this.cboHRC.TextChanged += new System.EventHandler(this.cboHRC_TextChanged);
             // 
             // cboMaterial
             // 
@@ -341,7 +341,7 @@ namespace PropertiesManager.View
             this.cboMaterial.Name = "cboMaterial";
             this.cboMaterial.Size = new System.Drawing.Size(200, 24);
             this.cboMaterial.TabIndex = 11;
-            this.cboMaterial.TextChanged += new System.EventHandler(this.cboItemName_TextChanged);
+            this.cboMaterial.TextChanged += new System.EventHandler(this.cboMaterial_TextChanged);
             // 
             // cboItemName
             // 

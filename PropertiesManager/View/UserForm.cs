@@ -89,28 +89,31 @@ namespace PropertiesManager.View
 
         private void txtModel_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();
         }
 
         private void textPart_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();
         }
 
         private void textCodePrefix_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();            
+            control.AskApplyBtnState();
+            control.AskTextDwgCode_Update();
+            control.UpdateProjectInfoToFile();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();            
+            control.UpdateProjectInfoToFile();
         }
 
         private void cboPartType_TextChanged(object sender, EventArgs e)
         {
 
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();
 
             string selectedPartType = cboPartType.SelectedItem.ToString();
             switch (selectedPartType)
@@ -157,12 +160,166 @@ namespace PropertiesManager.View
 
         private void txtStnNo_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();
         }
 
         private void cboItemName_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskApplyBtnState();
+            control.AskTextDwgCode_Update();            
+        }
+
+        private void txtDwgCode_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtMaterial_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtHRC_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtThk_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtWidth_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtLength_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void txtQuantity_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+        }
+
+        private void numericStnNo_ValueChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
+            control.AskTextDwgCode_Update();
+        }
+
+        public void txtDwgCode_UpdateChange()
+        {
+            //System.Diagnostics.Debugger.Launch();
+            string prefix = TextCodePrefix;
+            string runningNumber = GetRunningNumber();
+            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
+            TextDwgCode = prefix + runningNumber;
+        }
+
+        private string GetRunningNumber()
+        {
+            const string THREE_THOUSAND_ONE = "3001";
+            const string ELEVEN = "11";
+            const string TWENTYONE = "21";
+            const string ONE = "01";
+            const string TWO = "02";
+            const string THREE = "03";
+            const string FOUR = "04";
+            const string FIVE = "05";
+            const string SIX = "06";
+            const string SEVEN = "07";
+            const string EIGHT = "08";
+
+            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
+            if (TextPartType.Equals(Controller.WCBLK))
+            {
+                return THREE_THOUSAND_ONE;
+            }
+            else if (TextPartType.Equals(Controller.INSERT))
+            {
+                return stnNo + ELEVEN;
+            }
+            else if (TextPartType.Equals(Controller.SHOE))
+            {
+                switch (TextItemName)
+                {
+                    case Controller.UPPER_SHOE:
+                        return stnNo + ONE;
+                        break;
+                    case Controller.LOWER_SHOE:
+                        return stnNo + TWO;
+                        break;
+                    case Controller.LOWER_COMMON_PLATE:
+                        return stnNo + THREE;
+                        break;
+                    case Controller.PARALLEL_BAR:
+                        return stnNo + FOUR;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            else if (TextPartType.Equals(Controller.OTHERS))
+            {
+                return stnNo + TWENTYONE;
+            }
+            // Remaining the PLATE clause
+            switch (TextItemName)
+            {
+                case Controller.UPPER_PAD_SPACER:
+                    return stnNo + ONE;
+                    break;
+                case Controller.UPPER_PAD:
+                    return stnNo + TWO;
+                    break;
+                case Controller.PUNCH_HOLDER:
+                    return stnNo + THREE;
+                    break;
+                case Controller.BOTTOMING_PLATE:
+                    return stnNo + FOUR;
+                    break;
+                case Controller.STRIPPER_PLATE:
+                    return stnNo + FIVE;
+                    break;
+                case Controller.DIE_PLATE_R:
+                case Controller.DIE_PLATE_F:
+                case Controller.DIE_PLATE:
+                    return stnNo + SIX;
+                    break;
+                case Controller.LOWER_PAD:
+                    return stnNo + SEVEN;
+                    break;
+                case Controller.LOWER_PAD_SPACER:
+                    return stnNo + EIGHT;
+                    break;
+                default:
+                    break;
+            }
+            return stnNo;
+        }
+
+        private void btnThkPick_Click(object sender, EventArgs e)
+        {
+            TextThk = control.GetDrawing().GetTextFromDimension();
+        }
+
+        private void btnWidthPick_Click(object sender, EventArgs e)
+        {
+            TextWidth = control.GetDrawing().GetTextFromDimension();
+        }
+
+        private void btnLengthPick_Click(object sender, EventArgs e)
+        {
+            TextLength = control.GetDrawing().GetTextFromDimension();
+        }
+
+        private void cboMaterial_TextChanged(object sender, EventArgs e)
+        {
+            control.AskApplyBtnState();
 
             string selectedMaterial = cboMaterial.Text;
             switch (selectedMaterial)
@@ -199,149 +356,9 @@ namespace PropertiesManager.View
             }
         }
 
-        private void txtDwgCode_TextChanged(object sender, EventArgs e)
+        private void cboHRC_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction(false);
+            control.AskApplyBtnState();
         }
-
-        private void txtMaterial_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void txtHRC_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void txtThk_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void txtWidth_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void txtLength_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void txtQuantity_TextChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();
-        }
-
-        private void numericStnNo_ValueChanged(object sender, EventArgs e)
-        {
-            control.AskTextChangedAction();            
-        }
-
-        public void txtDwgCode_UpdateChange()
-        {
-            //System.Diagnostics.Debugger.Launch();
-            string prefix = TextCodePrefix;
-            string runningNumber = GetRunningNumber();
-            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-            TextDwgCode = prefix + runningNumber;
-        }
-
-        private string GetRunningNumber()
-        {
-            const string THREE_THOUSAND_ONE = "3001";
-            const string ELEVEN = "11";
-            const string TWENTYONE = "21";
-            const string ONE = "01";
-            const string TWO = "02";
-            const string THREE = "03";
-            const string FOUR = "04";
-            const string FIVE = "05";
-            const string SIX = "06";
-            const string SEVEN = "07";
-            const string EIGHT = "08";
-
-            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-            if (TextPartType.Equals(Controller.WCBLK))
-            {
-                return THREE_THOUSAND_ONE;
-            }else if (TextPartType.Equals(Controller.INSERT))
-            {
-                return stnNo + ELEVEN;
-            }else if (TextPartType.Equals(Controller.SHOE))
-            {
-                switch (TextItemName)
-                {
-                    case Controller.UPPER_SHOE:
-                        return stnNo + ONE;
-                        break;
-                    case Controller.LOWER_SHOE:
-                        return stnNo + TWO;
-                        break;
-                    case Controller.LOWER_COMMON_PLATE:
-                        return stnNo + THREE;
-                        break;
-                    case Controller.PARALLEL_BAR:
-                        return stnNo + FOUR;
-                        break;
-                    default:
-                        break;
-                }
-                
-            }else if (TextPartType.Equals(Controller.OTHERS))
-            {
-                return stnNo + TWENTYONE;
-            }
-            // Remaining the PLATE clause
-            switch (TextItemName)
-            {
-                case Controller.UPPER_PAD_SPACER:
-                    return stnNo + ONE;
-                    break;
-                case Controller.UPPER_PAD:
-                    return stnNo + TWO;
-                    break;
-                case Controller.PUNCH_HOLDER:
-                    return stnNo + THREE;
-                    break;
-                case Controller.BOTTOMING_PLATE:
-                    return stnNo + FOUR;
-                    break;
-                case Controller.STRIPPER_PLATE:
-                    return stnNo + FIVE;
-                    break;
-                case Controller.DIE_PLATE_R:
-                case Controller.DIE_PLATE_F:
-                case Controller.DIE_PLATE:
-                    return stnNo + SIX;
-                    break;
-                case Controller.LOWER_PAD:
-                    return stnNo + SEVEN;
-                    break;
-                case Controller.LOWER_PAD_SPACER:
-                    return stnNo + EIGHT;
-                    break;
-                default:
-                    break;   
-            }
-            return stnNo;
-        }
-
-        private void btnThkPick_Click(object sender, EventArgs e)
-        {
-            TextThk = control.GetDrawing().GetTextFromDimension();
-        }
-
-        private void btnWidthPick_Click(object sender, EventArgs e)
-        {
-            TextWidth = control.GetDrawing().GetTextFromDimension();
-        }
-
-        private void btnLengthPick_Click(object sender, EventArgs e)
-        {
-            TextLength = control.GetDrawing().GetTextFromDimension();
-        }
-
     }
 }
