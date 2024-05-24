@@ -168,12 +168,18 @@ namespace PropertiesManager.Control
                 uf.IsFilledLength &&
                 uf.IsFilledQty;
 
-        public void AskTextChangedAction()
+        public void AskTextChangedAction(bool isUpdateDwgCode = true, bool isUpdateProjectInfo = true)
         {
             //System.Diagnostics.Debugger.Launch();            
             uf.SetApplyButtonEnable(isProjectInfoFilled && isDrawingInfoFilled);
-            uf.txtDwgCode_UpdateChange();
-            UpdateProjectInfoToFile();
+            if (isUpdateDwgCode)
+            {
+                uf.txtDwgCode_UpdateChange();
+            }
+            if (isUpdateProjectInfo)
+            {
+                UpdateProjectInfoToFile();
+            }            
         }
 
         private void UpdateProjectInfoToFile()

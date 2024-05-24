@@ -100,7 +100,7 @@ namespace PropertiesManager.View
         private void textCodePrefix_TextChanged(object sender, EventArgs e)
         {
             control.AskTextChangedAction();
-            txtDwgCode_UpdateChange();
+            //txtDwgCode_UpdateChange();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
@@ -202,7 +202,7 @@ namespace PropertiesManager.View
 
         private void txtDwgCode_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
+            control.AskTextChangedAction(false);
         }
 
         private void txtMaterial_TextChanged(object sender, EventArgs e)
@@ -253,6 +253,7 @@ namespace PropertiesManager.View
         {
             const string THREE_THOUSAND_ONE = "3001";
             const string ELEVEN = "11";
+            const string TWENTYONE = "21";
             const string ONE = "01";
             const string TWO = "02";
             const string THREE = "03";
@@ -268,7 +269,7 @@ namespace PropertiesManager.View
                 return THREE_THOUSAND_ONE;
             }else if (TextPartType.Equals(Controller.INSERT))
             {
-                return stnNo + ELEVEN;
+                return stnNo + TWENTYONE;
             }else if (TextPartType.Equals(Controller.SHOE))
             {
                 switch (TextItemName)
@@ -279,10 +280,10 @@ namespace PropertiesManager.View
                     case Controller.LOWER_SHOE:
                         return stnNo + TWO;
                         break;
-                    case Controller.PARALLEL_BAR:
+                    case Controller.LOWER_COMMON_PLATE:
                         return stnNo + THREE;
                         break;
-                    case Controller.LOWER_COMMON_PLATE:
+                    case Controller.PARALLEL_BAR:
                         return stnNo + FOUR;
                         break;
                     default:
