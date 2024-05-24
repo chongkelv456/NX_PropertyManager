@@ -95,16 +95,7 @@ namespace PropertiesManager.Control
         }
 
         public void Apply()
-        {
-            //var message = "Yeay, you have pressed APPLY!\n";
-            //var title = "Information";
-            //List<string> info = new List<string>();
-            //info.Add(uf.TextModel);
-            //info.Add(uf.TextPart);
-            //info.Add(uf.TextCodePrefix);
-            //info.Add(uf.TextDesginer);
-            //info.ForEach(x => message += x + "\n");
-
+        {         
             var title_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TITLE, drawing.GetTitle_KeyValue());
             drawing.SetAttributes(title_infos);
 

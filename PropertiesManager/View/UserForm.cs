@@ -99,8 +99,7 @@ namespace PropertiesManager.View
 
         private void textCodePrefix_TextChanged(object sender, EventArgs e)
         {
-            control.AskTextChangedAction();
-            //txtDwgCode_UpdateChange();
+            control.AskTextChangedAction();            
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
