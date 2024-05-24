@@ -268,7 +268,7 @@ namespace PropertiesManager.View
                 return THREE_THOUSAND_ONE;
             }else if (TextPartType.Equals(Controller.INSERT))
             {
-                return stnNo + TWENTYONE;
+                return stnNo + ELEVEN;
             }else if (TextPartType.Equals(Controller.SHOE))
             {
                 switch (TextItemName)
@@ -291,7 +291,7 @@ namespace PropertiesManager.View
                 
             }else if (TextPartType.Equals(Controller.OTHERS))
             {
-                return stnNo + ELEVEN;
+                return stnNo + TWENTYONE;
             }
             // Remaining the PLATE clause
             switch (TextItemName)
