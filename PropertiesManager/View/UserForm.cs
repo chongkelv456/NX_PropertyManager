@@ -42,6 +42,7 @@ namespace PropertiesManager.View
         public bool IsFilledWidth { get => !String.IsNullOrEmpty(txtWidth.Text); }
         public bool IsFilledLength { get => !String.IsNullOrEmpty(txtLength.Text); }
         public bool IsFilledQty { get => !String.IsNullOrEmpty(txtQuantity.Text); }
+        private Dictionary<string, string> projInfo;
         public void SetApplyButtonEnable(bool isEnable)
         {
             btnApply.Enabled = isEnable;
@@ -50,6 +51,7 @@ namespace PropertiesManager.View
         {
             InitializeComponent();
             this.control = control;
+            projInfo = control.ReadFromFile();
         }
 
         public void InitialLoadComboContents()
@@ -63,7 +65,6 @@ namespace PropertiesManager.View
 
         public void FillProjectInfo()
         {
-            Dictionary<string, string> projInfo = control.ReadFromFile();
             if (projInfo == null)
             {
                 return;
@@ -88,29 +89,29 @@ namespace PropertiesManager.View
 
         private void txtModel_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void textPart_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void textCodePrefix_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
             txtDwgCode_UpdateChange();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void cboPartType_TextChanged(object sender, EventArgs e)
         {
 
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
 
             string selectedPartType = cboPartType.SelectedItem.ToString();
             switch (selectedPartType)
@@ -157,12 +158,12 @@ namespace PropertiesManager.View
 
         private void txtStnNo_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void cboItemName_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
 
             string selectedMaterial = cboMaterial.Text;
             switch (selectedMaterial)
@@ -201,51 +202,130 @@ namespace PropertiesManager.View
 
         private void txtDwgCode_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtMaterial_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtHRC_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtThk_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
+            control.AskTextChangedAction();
         }
 
         private void numericStnNo_ValueChanged(object sender, EventArgs e)
         {
-            control.ValidateApplyButton();
-            txtDwgCode_UpdateChange();
+            control.AskTextChangedAction();            
         }
 
         public void txtDwgCode_UpdateChange()
         {
             //System.Diagnostics.Debugger.Launch();
             string prefix = TextCodePrefix;
-            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0"+TextStaNo;
-            TextDwgCode = prefix + stnNo;
+            string runningNumber = GetRunningNumber();
+            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
+            TextDwgCode = prefix + runningNumber;
+        }
+
+        private string GetRunningNumber()
+        {
+            const string THREE_THOUSAND_ONE = "3001";
+            const string ELEVEN = "11";
+            const string ONE = "01";
+            const string TWO = "02";
+            const string THREE = "03";
+            const string FOUR = "04";
+            const string FIVE = "05";
+            const string SIX = "06";
+            const string SEVEN = "07";
+            const string EIGHT = "08";
+
+            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
+            if (TextPartType.Equals(Controller.WCBLK))
+            {
+                return THREE_THOUSAND_ONE;
+            }else if (TextPartType.Equals(Controller.INSERT))
+            {
+                return stnNo + ELEVEN;
+            }else if (TextPartType.Equals(Controller.SHOE))
+            {
+                switch (TextItemName)
+                {
+                    case Controller.UPPER_SHOE:
+                        return stnNo + ONE;
+                        break;
+                    case Controller.LOWER_SHOE:
+                        return stnNo + TWO;
+                        break;
+                    case Controller.PARALLEL_BAR:
+                        return stnNo + THREE;
+                        break;
+                    case Controller.LOWER_COMMON_PLATE:
+                        return stnNo + FOUR;
+                        break;
+                    default:
+                        break;
+                }
+                
+            }else if (TextPartType.Equals(Controller.OTHERS))
+            {
+                return stnNo + ELEVEN;
+            }
+            // Remaining the PLATE clause
+            switch (TextItemName)
+            {
+                case Controller.UPPER_PAD_SPACER:
+                    return stnNo + ONE;
+                    break;
+                case Controller.UPPER_PAD:
+                    return stnNo + TWO;
+                    break;
+                case Controller.PUNCH_HOLDER:
+                    return stnNo + THREE;
+                    break;
+                case Controller.BOTTOMING_PLATE:
+                    return stnNo + FOUR;
+                    break;
+                case Controller.STRIPPER_PLATE:
+                    return stnNo + FIVE;
+                    break;
+                case Controller.DIE_PLATE_R:
+                case Controller.DIE_PLATE_F:
+                case Controller.DIE_PLATE:
+                    return stnNo + SIX;
+                    break;
+                case Controller.LOWER_PAD:
+                    return stnNo + SEVEN;
+                    break;
+                case Controller.LOWER_PAD_SPACER:
+                    return stnNo + EIGHT;
+                    break;
+                default:
+                    break;   
+            }
+            return stnNo;
         }
 
         private void btnThkPick_Click(object sender, EventArgs e)

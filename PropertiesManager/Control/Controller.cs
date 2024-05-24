@@ -47,11 +47,27 @@ namespace PropertiesManager.Control
 
         public const string HYPHEN = "-";
         public const string THIRTYFIVE_FOURTY = "35~40";
-        public const string FIFTYTWO_FIFTYFOUR= "52~54";
-        public const string FIFTYSEVEN_FIFTYNINE= "57~59";
-        public const string FIFTYEIGHT_SIXTY= "58~60";
-        public const string SIXTY_SIXTYTHREE= "60~63";
-        public const string SIXTYTWO_SIXTYFIVE= "62~65";
+        public const string FIFTYTWO_FIFTYFOUR = "52~54";
+        public const string FIFTYSEVEN_FIFTYNINE = "57~59";
+        public const string FIFTYEIGHT_SIXTY = "58~60";
+        public const string SIXTY_SIXTYTHREE = "60~63";
+        public const string SIXTYTWO_SIXTYFIVE = "62~65";
+
+        public const string UPPER_PAD_SPACER = "UPPER PAD SPACER";
+        public const string UPPER_PAD = "UPPER PAD";
+        public const string PUNCH_HOLDER = "PUNCH HOLDER";
+        public const string BOTTOMING_PLATE = "BOTTOMING PLATE";
+        public const string STRIPPER_PLATE = "STRIPPER PLATE";
+        public const string DIE_PLATE = "DIE PLATE";
+        public const string DIE_PLATE_R = "DIE PLATE-R";
+        public const string DIE_PLATE_F = "DIE PLATE-F";
+        public const string LOWER_PAD = "LOWER PAD";
+        public const string LOWER_PAD_SPACER = "LOWER PAD SPACER";
+
+        public const string UPPER_SHOE = "UPPER SHOE";
+        public const string LOWER_SHOE = "LOWER SHOE";
+        public const string PARALLEL_BAR = "PARALLEL BAR";
+        public const string LOWER_COMMON_PLATE = "LOWER COMMON PLATE";
 
         const string DIRECTORY = @"D:\NXCUSTOM\temp";
         const string INFO_FILENAME = "project_info.data";
@@ -70,29 +86,30 @@ namespace PropertiesManager.Control
             other = new Other();
 
             uf = new UserForm(this);
-            drawing = new NxDrawing(this);            
+            drawing = new NxDrawing(this);
+            uf.InitialLoadComboContents();
             uf.FillProjectInfo();
             uf.txtDwgCode_UpdateChange();
-            uf.InitialLoadComboContents();
+
             uf.Show();
         }
 
         public void Apply()
         {
-            var message = "Yeay, you have pressed APPLY!\n";
-            var title = "Information";
-            List<string> info = new List<string>();
-            info.Add(uf.TextModel);
-            info.Add(uf.TextPart);
-            info.Add(uf.TextCodePrefix);
-            info.Add(uf.TextDesginer);
-            info.ForEach(x => message += x + "\n");            
+            //var message = "Yeay, you have pressed APPLY!\n";
+            //var title = "Information";
+            //List<string> info = new List<string>();
+            //info.Add(uf.TextModel);
+            //info.Add(uf.TextPart);
+            //info.Add(uf.TextCodePrefix);
+            //info.Add(uf.TextDesginer);
+            //info.ForEach(x => message += x + "\n");
 
             var title_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TITLE, drawing.GetTitle_KeyValue());
             drawing.SetAttributes(title_infos);
-            
+
             var tool_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TOOL, drawing.GetTool_KeyValue());
-            drawing.SetAttributes(tool_infos);            
+            drawing.SetAttributes(tool_infos);
         }
 
         public List<string> GetDesigners()
@@ -135,15 +152,12 @@ namespace PropertiesManager.Control
             return other.Get;
         }
 
-        public void ValidateApplyButton()
-        {
-            //System.Diagnostics.Debugger.Launch();
-            bool isProjectInfoFilled = uf.IsFilledTxtModel &&
+        private bool isProjectInfoFilled => uf.IsFilledTxtModel &&
                  uf.IsFilledTextPart &&
                  uf.IsFilledCodePrefix &&
                  uf.IsFilledDesigner;
 
-            bool isDrawingInfoFilled = uf.IsFilledPartType &&
+        private bool isDrawingInfoFilled => uf.IsFilledPartType &&
                 uf.IsFilledStnNo &&
                 uf.IsFilledItemName &&
                 uf.IsFilledDwgCode &&
@@ -154,8 +168,16 @@ namespace PropertiesManager.Control
                 uf.IsFilledLength &&
                 uf.IsFilledQty;
 
+        public void AskTextChangedAction()
+        {
+            //System.Diagnostics.Debugger.Launch();            
             uf.SetApplyButtonEnable(isProjectInfoFilled && isDrawingInfoFilled);
+            uf.txtDwgCode_UpdateChange();
+            UpdateProjectInfoToFile();
+        }
 
+        private void UpdateProjectInfoToFile()
+        {
             if (isProjectInfoFilled)
             {
                 List<string> info = new List<string>();

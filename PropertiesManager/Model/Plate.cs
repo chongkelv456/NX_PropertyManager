@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PropertiesManager.Control;
 
 namespace PropertiesManager.Model
 {
@@ -12,16 +13,16 @@ namespace PropertiesManager.Model
 
         public Plate()
         {
-            plates.Add("UPPER PAD SPACER");
-            plates.Add("UPPER PAD");
-            plates.Add("PUNCH HOLDER");
-            plates.Add("BOTTOMING PLATE");
-            plates.Add("STRIPPER PLATE");           
-            plates.Add("DIE PLATE");
-            plates.Add("DIE PLATE-R");
-            plates.Add("DIE PLATE-F");
-            plates.Add("LOWER PAD");
-            plates.Add("LOWER PAD SPACER");
+            plates.Add(Controller.UPPER_PAD_SPACER);
+            plates.Add(Controller.UPPER_PAD);
+            plates.Add(Controller.PUNCH_HOLDER);
+            plates.Add(Controller.BOTTOMING_PLATE);
+            plates.Add(Controller.STRIPPER_PLATE);
+            plates.Add(Controller.DIE_PLATE);
+            plates.Add(Controller.DIE_PLATE_R);
+            plates.Add(Controller.DIE_PLATE_F);
+            plates.Add(Controller.LOWER_PAD);
+            plates.Add(Controller.LOWER_PAD_SPACER);
         }
 
         public List<string> Get { get => plates; }
