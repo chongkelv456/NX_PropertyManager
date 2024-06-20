@@ -34,6 +34,9 @@ namespace PropertiesManager.Model
         const string DESIGNBY = "DesignBy";
         const string PART_TYPE = "PartType";
         const string DESIGN_DATE = "Design Date";
+        const string IS_STANDARD_PART = "isStandardPart";
+        const string STDPART_ITEM = "StdPartItem";
+        const string STD_PART = "STD PART";
 
         public NxDrawing(Controller control)
         {
@@ -59,8 +62,7 @@ namespace PropertiesManager.Model
             {
                 string message = $"I don't know what error: {e.Message}";
                 NXMessage(message, "Error", NXMessageBox.DialogType.Error);
-            }
-
+            }            
         }
 
         public List<NXObject.AttributeInformation> GetAttributesInfos(string category, Dictionary<string, string> keyValue_titles)
@@ -69,16 +71,24 @@ namespace PropertiesManager.Model
 
             Dictionary<string, string> keyValue_tools = new Dictionary<string, string>();
             keyValue_tools.Add(PART_TYPE, control.GetUserForm().TextPartType);
-
+            //System.Diagnostics.Debugger.Launch();
             foreach (var title in keyValue_titles)
             {
-                NXObject.AttributeInformation info = new NXObject.AttributeInformation
+                NXObject.AttributeInformation info = new NXObject.AttributeInformation();
+
+                if (title.Value.Equals("True"))
                 {
-                    Type = NXObject.AttributeType.String,
-                    Category = category,
-                    Title = title.Key,
-                    StringValue = title.Value
-                };
+                    info.Type = NXObject.AttributeType.Boolean;
+                    info.BooleanValue = true;
+                }
+                else
+                {
+                    info.Type = NXObject.AttributeType.String;
+                    info.StringValue = title.Value;                    
+                }
+                info.Category = category;
+                info.Title = title.Key;
+
                 result.Add(info);
             }
 
@@ -104,10 +114,26 @@ namespace PropertiesManager.Model
             return keyValue_titles;
         }
 
+        public void DeleteStdPartAttribute()
+        {
+            workPart.DeleteUserAttribute(NXObject.AttributeType.String, STDPART_ITEM, false, Update.Option.Now);
+            workPart.DeleteUserAttribute(NXObject.AttributeType.Boolean, IS_STANDARD_PART, false, Update.Option.Now);
+        }
+
         public Dictionary<string, string> GetTool_KeyValue()
         {
             Dictionary<string, string> keyvaluePairs = new Dictionary<string, string>();
             keyvaluePairs.Add(PART_TYPE, control.GetUserForm().TextPartType);
+
+            return keyvaluePairs;
+        }
+
+        public Dictionary<string, string> GetStandardPart_KeyValue()
+        {
+            Dictionary<string, string> keyvaluePairs = new Dictionary<string, string>();
+            keyvaluePairs.Add(PART_TYPE, STD_PART);
+            keyvaluePairs.Add(IS_STANDARD_PART, "True");
+            keyvaluePairs.Add(STDPART_ITEM, control.GetUserForm().TextStandardPartItemName);
 
             return keyvaluePairs;
         }

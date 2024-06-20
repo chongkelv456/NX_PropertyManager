@@ -46,9 +46,7 @@ namespace PropertiesManager.View
             this.numericStnNo = new System.Windows.Forms.NumericUpDown();
             this.btnLengthPick = new System.Windows.Forms.Button();
             this.btnWidthPick = new System.Windows.Forms.Button();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.btnThkPick = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.txtLength = new System.Windows.Forms.TextBox();
             this.cboPartType = new System.Windows.Forms.ComboBox();
             this.txtWidth = new System.Windows.Forms.TextBox();
@@ -66,11 +64,23 @@ namespace PropertiesManager.View
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabFabrication = new System.Windows.Forms.TabPage();
+            this.tabStandardPart = new System.Windows.Forms.TabPage();
+            this.btnStdApply = new System.Windows.Forms.Button();
+            this.btnStdCancel = new System.Windows.Forms.Button();
+            this.cboStdItemName = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabFabrication.SuspendLayout();
+            this.tabStandardPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -170,7 +180,7 @@ namespace PropertiesManager.View
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(436, 495);
+            this.btnCancel.Location = new System.Drawing.Point(409, 320);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 35);
             this.btnCancel.TabIndex = 1;
@@ -181,7 +191,7 @@ namespace PropertiesManager.View
             // btnApply
             // 
             this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(577, 495);
+            this.btnApply.Location = new System.Drawing.Point(550, 320);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(135, 35);
             this.btnApply.TabIndex = 5;
@@ -194,7 +204,7 @@ namespace PropertiesManager.View
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(700, 475);
             this.panel1.TabIndex = 3;
@@ -203,12 +213,12 @@ namespace PropertiesManager.View
             // 
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox2.Controls.Add(this.pictureBox1);
+            this.groupBox2.Controls.Add(this.btnCancel);
+            this.groupBox2.Controls.Add(this.btnApply);
             this.groupBox2.Controls.Add(this.numericStnNo);
             this.groupBox2.Controls.Add(this.btnLengthPick);
             this.groupBox2.Controls.Add(this.btnWidthPick);
-            this.groupBox2.Controls.Add(this.txtQuantity);
             this.groupBox2.Controls.Add(this.btnThkPick);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtLength);
             this.groupBox2.Controls.Add(this.cboPartType);
             this.groupBox2.Controls.Add(this.txtWidth);
@@ -236,7 +246,7 @@ namespace PropertiesManager.View
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PropertiesManager.Resource1.Other;
-            this.pictureBox1.Location = new System.Drawing.Point(416, 29);
+            this.pictureBox1.Location = new System.Drawing.Point(425, 21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(260, 150);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -271,15 +281,6 @@ namespace PropertiesManager.View
             this.btnWidthPick.UseVisualStyleBackColor = true;
             this.btnWidthPick.Click += new System.EventHandler(this.btnWidthPick_Click);
             // 
-            // txtQuantity
-            // 
-            this.txtQuantity.Location = new System.Drawing.Point(136, 307);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(200, 22);
-            this.txtQuantity.TabIndex = 19;
-            this.txtQuantity.Text = "1";
-            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
-            // 
             // btnThkPick
             // 
             this.btnThkPick.Location = new System.Drawing.Point(348, 213);
@@ -289,16 +290,6 @@ namespace PropertiesManager.View
             this.btnThkPick.Text = "Pick...";
             this.btnThkPick.UseVisualStyleBackColor = true;
             this.btnThkPick.Click += new System.EventHandler(this.btnThkPick_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 317);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label8.Size = new System.Drawing.Size(92, 17);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "QUANTITY:";
             // 
             // txtLength
             // 
@@ -458,15 +449,109 @@ namespace PropertiesManager.View
             this.label12.TabIndex = 6;
             this.label12.Text = "THICKNESS:";
             // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Location = new System.Drawing.Point(163, 548);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(200, 22);
+            this.txtQuantity.TabIndex = 19;
+            this.txtQuantity.Text = "1";
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(33, 550);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Size = new System.Drawing.Size(92, 17);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "QUANTITY:";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabFabrication);
+            this.tabControl1.Controls.Add(this.tabStandardPart);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(736, 524);
+            this.tabControl1.TabIndex = 6;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabFabrication
+            // 
+            this.tabFabrication.Controls.Add(this.panel1);
+            this.tabFabrication.Location = new System.Drawing.Point(4, 25);
+            this.tabFabrication.Name = "tabFabrication";
+            this.tabFabrication.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFabrication.Size = new System.Drawing.Size(728, 495);
+            this.tabFabrication.TabIndex = 0;
+            this.tabFabrication.Text = "Fabrication Part";
+            this.tabFabrication.UseVisualStyleBackColor = true;
+            // 
+            // tabStandardPart
+            // 
+            this.tabStandardPart.Controls.Add(this.btnStdApply);
+            this.tabStandardPart.Controls.Add(this.btnStdCancel);
+            this.tabStandardPart.Controls.Add(this.cboStdItemName);
+            this.tabStandardPart.Controls.Add(this.label15);
+            this.tabStandardPart.Location = new System.Drawing.Point(4, 25);
+            this.tabStandardPart.Name = "tabStandardPart";
+            this.tabStandardPart.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStandardPart.Size = new System.Drawing.Size(728, 495);
+            this.tabStandardPart.TabIndex = 1;
+            this.tabStandardPart.Text = "Standard Part";
+            this.tabStandardPart.UseVisualStyleBackColor = true;
+            // 
+            // btnStdApply
+            // 
+            this.btnStdApply.Location = new System.Drawing.Point(550, 320);
+            this.btnStdApply.Name = "btnStdApply";
+            this.btnStdApply.Size = new System.Drawing.Size(135, 35);
+            this.btnStdApply.TabIndex = 3;
+            this.btnStdApply.Text = "&Apply";
+            this.btnStdApply.UseVisualStyleBackColor = true;
+            this.btnStdApply.Click += new System.EventHandler(this.btnStdApply_Click);
+            // 
+            // btnStdCancel
+            // 
+            this.btnStdCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStdCancel.Location = new System.Drawing.Point(409, 320);
+            this.btnStdCancel.Name = "btnStdCancel";
+            this.btnStdCancel.Size = new System.Drawing.Size(135, 35);
+            this.btnStdCancel.TabIndex = 2;
+            this.btnStdCancel.Text = "&Cancel";
+            this.btnStdCancel.UseVisualStyleBackColor = true;
+            this.btnStdCancel.Click += new System.EventHandler(this.btnStdCancel_Click);
+            // 
+            // cboStdItemName
+            // 
+            this.cboStdItemName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboStdItemName.FormattingEnabled = true;
+            this.cboStdItemName.Location = new System.Drawing.Point(195, 25);
+            this.cboStdItemName.Name = "cboStdItemName";
+            this.cboStdItemName.Size = new System.Drawing.Size(254, 24);
+            this.cboStdItemName.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(18, 24);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(171, 17);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Standard Part Item Name:";
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(720, 542);
-            this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(757, 641);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.txtQuantity);
+            this.Controls.Add(this.label8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "UserForm";
             this.Text = "Properties Manager Form";
@@ -478,7 +563,12 @@ namespace PropertiesManager.View
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabFabrication.ResumeLayout(false);
+            this.tabStandardPart.ResumeLayout(false);
+            this.tabStandardPart.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -521,5 +611,12 @@ namespace PropertiesManager.View
         private System.Windows.Forms.ComboBox cboMaterial;
         private System.Windows.Forms.NumericUpDown numericStnNo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabFabrication;
+        private System.Windows.Forms.TabPage tabStandardPart;
+        private System.Windows.Forms.ComboBox cboStdItemName;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnStdCancel;
+        private System.Windows.Forms.Button btnStdApply;
     }
 }

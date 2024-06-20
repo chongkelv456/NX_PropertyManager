@@ -28,6 +28,7 @@ namespace PropertiesManager.View
         public string TextWidth { get => txtWidth.Text; set => txtWidth.Text = value; }
         public string TextLength { get => txtLength.Text; set => txtLength.Text = value; }
         public string TextQuantity { get => txtQuantity.Text; }
+        public string TextStandardPartItemName { get => cboStdItemName.Text; }
         public bool IsFilledTxtModel { get => !String.IsNullOrEmpty(txtModel.Text); }
         public bool IsFilledTextPart { get => !String.IsNullOrEmpty(txtPart.Text); }
         public bool IsFilledCodePrefix { get => !String.IsNullOrEmpty(txtCodePrefix.Text); }
@@ -56,11 +57,18 @@ namespace PropertiesManager.View
 
         public void InitialLoadComboContents()
         {
-            cboDesign.DataSource = control.GetDesigners();
-            cboPartType.DataSource = control.GetPartTypes();
-            cboItemName.DataSource = control.GetShoes();
-            cboMaterial.DataSource = control.GetMaterials();
-            cboHRC.DataSource = control.GetHardness();
+            if(tabControl1.SelectedTab.Text.Equals("Fabrication Part", StringComparison.OrdinalIgnoreCase))
+            {
+                cboDesign.DataSource = control.GetDesigners();
+                cboPartType.DataSource = control.GetPartTypes();
+                cboItemName.DataSource = control.GetShoes();
+                cboMaterial.DataSource = control.GetMaterials();
+                cboHRC.DataSource = control.GetHardness();
+            }
+            else
+            {                
+                cboStdItemName.DataSource = control.GetStandardParts();
+            }
         }
 
         public void FillProjectInfo()
@@ -106,7 +114,7 @@ namespace PropertiesManager.View
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
         {
-            control.AskApplyBtnState();            
+            control.AskApplyBtnState();
             control.UpdateProjectInfoToFile();
         }
 
@@ -166,7 +174,7 @@ namespace PropertiesManager.View
         private void cboItemName_TextChanged(object sender, EventArgs e)
         {
             control.AskApplyBtnState();
-            control.AskTextDwgCode_Update();            
+            control.AskTextDwgCode_Update();
         }
 
         private void txtDwgCode_TextChanged(object sender, EventArgs e)
@@ -359,6 +367,22 @@ namespace PropertiesManager.View
         private void cboHRC_TextChanged(object sender, EventArgs e)
         {
             control.AskApplyBtnState();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            InitialLoadComboContents();
+        }
+
+        private void btnStdCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnStdApply_Click(object sender, EventArgs e)
+        {
+            control.StdApply();
+            this.Close();
         }
     }
 }

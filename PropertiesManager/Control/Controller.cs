@@ -22,6 +22,7 @@ namespace PropertiesManager.Control
         private Insert insert;
         private WCblk wcblk;
         private Other other;
+        private StandardPart standardPart;
 
         public const string SHOE = "SHOE";
         public const string PLATE = "PLATE";
@@ -84,6 +85,7 @@ namespace PropertiesManager.Control
             insert = new Insert();
             wcblk = new WCblk();
             other = new Other();
+            standardPart = new StandardPart();
 
             uf = new UserForm(this);
             drawing = new NxDrawing(this);
@@ -101,7 +103,9 @@ namespace PropertiesManager.Control
 
             var tool_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TOOL, drawing.GetTool_KeyValue());
             drawing.SetAttributes(tool_infos);
-        }
+
+            drawing.DeleteStdPartAttribute();
+        }   
 
         public List<string> GetDesigners()
         {
@@ -141,6 +145,10 @@ namespace PropertiesManager.Control
         public List<string> GetOthers()
         {
             return other.Get;
+        }
+        public List<string> GetStandardParts()
+        {
+            return standardPart.Get;
         }
 
         private bool isProjectInfoFilled => uf.IsFilledTxtModel &&
@@ -251,6 +259,12 @@ namespace PropertiesManager.Control
         public NxDrawing GetDrawing()
         {
             return drawing;
+        }
+
+        public void StdApply()
+        {
+            var tool_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TOOL, drawing.GetStandardPart_KeyValue());
+            drawing.SetAttributes(tool_infos);
         }
     }
 }
