@@ -17,7 +17,7 @@ namespace PropertiesManager.View
         public string TextModel { get => txtModel.Text; set => txtModel.Text = value; }
         public string TextPart { get => txtPart.Text; set => txtPart.Text = value; }
         public string TextCodePrefix { get => txtCodePrefix.Text; set => txtCodePrefix.Text = value; }
-        public string TextDesginer { get => cboDesign.Text; set => cboDesign.SelectedItem = value; }
+        public string TextDesginer { get => cboDesign.Text; set => cboDesign.Text = value; }
         public string TextDwgCode { get => txtDwgCode.Text; set => txtDwgCode.Text = value; }
         public string TextStaNo { get => numericStnNo.Value.ToString(); }
         public string TextItemName { get => cboItemName.Text; }
@@ -56,10 +56,10 @@ namespace PropertiesManager.View
         }
 
         public void InitialLoadComboContents()
-        {
+        {            
             if(tabControl1.SelectedTab.Text.Equals("Fabrication Part", StringComparison.OrdinalIgnoreCase))
             {
-                cboDesign.DataSource = control.GetDesigners();
+                //cboDesign.DataSource = control.GetDesigners();
                 cboPartType.DataSource = control.GetPartTypes();
                 cboItemName.DataSource = control.GetShoes();
                 cboMaterial.DataSource = control.GetMaterials();
@@ -219,8 +219,7 @@ namespace PropertiesManager.View
         }
 
         public void txtDwgCode_UpdateChange()
-        {
-            //System.Diagnostics.Debugger.Launch();
+        {            
             string prefix = TextCodePrefix;
             string runningNumber = GetRunningNumber();
             string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;

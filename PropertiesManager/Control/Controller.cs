@@ -75,7 +75,7 @@ namespace PropertiesManager.Control
 
         public Controller()
         {
-            //System.Diagnostics.Debugger.Launch();
+            
             designer = new Designer();
             partType = new PartType();
             plate = new Plate();
@@ -191,7 +191,7 @@ namespace PropertiesManager.Control
         }
 
         public void WriteToFile(List<string> projectInfoToText)
-        {
+        {            
             if (!Directory.Exists(DIRECTORY))
             {
                 Directory.CreateDirectory(DIRECTORY);
