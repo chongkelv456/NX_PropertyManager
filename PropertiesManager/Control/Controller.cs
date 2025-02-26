@@ -22,6 +22,7 @@ namespace PropertiesManager.Control
         private Insert insert;
         private WCblk wcblk;
         private Other other;
+        private Assembly assembly;
         private StandardPart standardPart;
 
         public const string SHOE = "SHOE";
@@ -71,12 +72,18 @@ namespace PropertiesManager.Control
         public const string PARALLEL_BAR = "PARALLEL BAR";
         public const string LOWER_COMMON_PLATE = "LOWER COMMON PLATE";
 
+        public const string MAIN_ASSEMBLY = "MAIN ASSEMBLY";
+        public const string TOP_ASSEMBLY = "TOP ASSEMBLY";
+        public const string BOTTOM_ASSEMBLY = "BOTTOM ASSEMBLY";
+        public const string LEFT_ASSEMBLY = "LEFT ASSEMBLY";
+        public const string RIGHT_ASSEMBLY = "RIGHT ASSEMBLY";
+        public const string ASSEMBLY_FOR = "ASSEMBLY FOR ";
+
         const string DIRECTORY = @"D:\NXCUSTOM\temp";
         const string INFO_FILENAME = "project_info.data";
 
         public Controller()
-        {
-            
+        {            
             designer = new Designer();
             partType = new PartType();
             plate = new Plate();
@@ -86,6 +93,7 @@ namespace PropertiesManager.Control
             insert = new Insert();
             wcblk = new WCblk();
             other = new Other();
+            assembly = new Assembly();
             standardPart = new StandardPart();
 
             uf = new UserForm(this);
@@ -150,6 +158,10 @@ namespace PropertiesManager.Control
         public List<string> GetStandardParts()
         {
             return standardPart.Get;
+        }
+        public List<string> GetAsm()
+        {
+            return assembly.Get;
         }
 
         private bool isProjectInfoFilled => uf.IsFilledTxtModel &&

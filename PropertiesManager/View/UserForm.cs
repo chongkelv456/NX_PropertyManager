@@ -131,34 +131,61 @@ namespace PropertiesManager.View
                     cboMaterial.SelectedItem = Controller.S50C;
                     numericStnNo.Value = 0;
                     pictureBox1.Image = Resource1.Shoe;
+                    ClearMaterialTextBox();
                     break;
                 case Controller.PLATE:
                     PopulateItemNameDataSource(cboItemName, control.GetPlates());
                     cboMaterial.SelectedItem = Controller.GOA;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.Plate;
+                    ClearMaterialTextBox();
                     break;
                 case Controller.INSERT:
                     PopulateItemNameDataSource(cboItemName, control.GetInserts());
                     cboMaterial.SelectedItem = Controller.DC53;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.Insert;
+                    ClearMaterialTextBox();
                     break;
                 case Controller.WCBLK:
                     PopulateItemNameDataSource(cboItemName, control.GetWCblks());
                     cboMaterial.SelectedItem = Controller.DC53;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.WCBlk;
+                    ClearMaterialTextBox();
                     break;
                 case Controller.OTHERS:
                     PopulateItemNameDataSource(cboItemName, control.GetOthers());
                     cboMaterial.SelectedItem = Controller.EG2;
                     numericStnNo.Value = 0;
                     pictureBox1.Image = Resource1.Other;
+                    SetMaterialTextBoxHyphen();
+                    break;
+                case Controller.ASM:
+                    PopulateItemNameDataSource(cboItemName, control.GetAsm());
+                    cboMaterial.SelectedItem = Controller.MAIN_ASSEMBLY;
+                    numericStnNo.Value = 0;
+                    pictureBox1.Image = Resource1.Shoe;
+                    cboMaterial.Text = Controller.HYPHEN;
+                    SetMaterialTextBoxHyphen();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void SetMaterialTextBoxHyphen()
+        {
+            txtThk.Text = Controller.HYPHEN;
+            txtWidth.Text = Controller.HYPHEN;
+            txtLength.Text = Controller.HYPHEN;
+        }
+
+        private void ClearMaterialTextBox()
+        {
+            txtThk.Text = string.Empty;
+            txtWidth.Text = string.Empty;
+            txtLength.Text = string.Empty;
         }
 
         private void PopulateItemNameDataSource(ComboBox cboItemName, List<string> list)
@@ -229,6 +256,7 @@ namespace PropertiesManager.View
         private string GetRunningNumber()
         {
             const string THREE_THOUSAND_ONE = "3001";
+            const string FOUR_ZERO = "0000";
             const string ELEVEN = "11";
             const string TWENTYONE = "21";
             const string ONE = "01";
@@ -254,17 +282,13 @@ namespace PropertiesManager.View
                 switch (TextItemName)
                 {
                     case Controller.UPPER_SHOE:
-                        return stnNo + ONE;
-                        break;
+                        return stnNo + ONE;                        
                     case Controller.LOWER_SHOE:
-                        return stnNo + TWO;
-                        break;
+                        return stnNo + TWO;                        
                     case Controller.LOWER_COMMON_PLATE:
-                        return stnNo + THREE;
-                        break;
+                        return stnNo + THREE;                        
                     case Controller.PARALLEL_BAR:
-                        return stnNo + FOUR;
-                        break;
+                        return stnNo + FOUR;                        
                     default:
                         break;
                 }
@@ -274,35 +298,31 @@ namespace PropertiesManager.View
             {
                 return stnNo + TWENTYONE;
             }
+            else if (TextPartType.Equals(Controller.ASM))
+            {
+                return FOUR_ZERO;
+            }
             // Remaining the PLATE clause
             switch (TextItemName)
             {
                 case Controller.UPPER_PAD_SPACER:
-                    return stnNo + ONE;
-                    break;
+                    return stnNo + ONE;                    
                 case Controller.UPPER_PAD:
-                    return stnNo + TWO;
-                    break;
+                    return stnNo + TWO;                    
                 case Controller.PUNCH_HOLDER:
-                    return stnNo + THREE;
-                    break;
+                    return stnNo + THREE;                    
                 case Controller.BOTTOMING_PLATE:
-                    return stnNo + FOUR;
-                    break;
+                    return stnNo + FOUR;                    
                 case Controller.STRIPPER_PLATE:
-                    return stnNo + FIVE;
-                    break;
+                    return stnNo + FIVE;                    
                 case Controller.DIE_PLATE_R:
                 case Controller.DIE_PLATE_F:
                 case Controller.DIE_PLATE:
-                    return stnNo + SIX;
-                    break;
+                    return stnNo + SIX;                    
                 case Controller.LOWER_PAD:
-                    return stnNo + SEVEN;
-                    break;
+                    return stnNo + SEVEN;                    
                 case Controller.LOWER_PAD_SPACER:
-                    return stnNo + EIGHT;
-                    break;
+                    return stnNo + EIGHT;                    
                 default:
                     break;
             }

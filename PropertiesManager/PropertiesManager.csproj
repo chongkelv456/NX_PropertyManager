@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Control\Controller.cs" />
     <Compile Include="Main\MyProgram.cs" />
+    <Compile Include="Model\Assembly.cs" />
     <Compile Include="Model\Designer.cs" />
     <Compile Include="Model\Hardness.cs" />
     <Compile Include="Model\Insert.cs" />
