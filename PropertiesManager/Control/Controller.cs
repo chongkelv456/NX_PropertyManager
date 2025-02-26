@@ -29,6 +29,7 @@ namespace PropertiesManager.Control
         public const string INSERT = "INSERT";
         public const string WCBLK = "W/C BLK";
         public const string OTHERS = "OTHERS";
+        public const string ASM = "ASM";
         public const string MODEL = "MODEL";
         public const string PART = "PART";
         public const string CODE_PREFIX = "CODE_PREFIX";

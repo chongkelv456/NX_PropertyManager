@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PropertiesManager.Control;
 
 namespace PropertiesManager.Model
 {
@@ -12,11 +13,12 @@ namespace PropertiesManager.Model
 
         public PartType()
         {
-            partTypes.Add("SHOE");
-            partTypes.Add("PLATE");
-            partTypes.Add("INSERT");
-            partTypes.Add("W/C BLK");
-            partTypes.Add("OTHERS");            
+            partTypes.Add(Controller.SHOE);
+            partTypes.Add(Controller.PLATE);
+            partTypes.Add(Controller.INSERT);
+            partTypes.Add(Controller.WCBLK);
+            partTypes.Add(Controller.OTHERS);
+            partTypes.Add(Controller.ASM);
         }
 
         public List<string> Get { get => partTypes; }
