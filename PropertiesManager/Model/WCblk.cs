@@ -8,13 +8,20 @@ namespace PropertiesManager.Model
 {
     public class WCblk
     {
-        private List<string> wcBlks = new List<string>();
+        private List<string> lists = new List<string>();
 
         public WCblk()
         {
-            wcBlks.Add("WC BLOCK");
+            lists.Add("WC BLOCK");
         }
 
-        public List<string> Get { get => wcBlks; }
+        public static List<string> Get 
+        {
+            get
+            {
+                WCblk wCblk = new WCblk();
+                return wCblk.lists;
+            }
+        }
     }
 }

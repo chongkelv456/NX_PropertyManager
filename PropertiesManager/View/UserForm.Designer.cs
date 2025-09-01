@@ -30,6 +30,8 @@ namespace PropertiesManager.View
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSaveProjInfo = new System.Windows.Forms.Button();
+            this.chkRetriveProjInfo = new System.Windows.Forms.CheckBox();
             this.cboDesign = new System.Windows.Forms.ComboBox();
             this.txtCodePrefix = new System.Windows.Forms.TextBox();
             this.txtPart = new System.Windows.Forms.TextBox();
@@ -86,6 +88,8 @@ namespace PropertiesManager.View
             // groupBox1
             // 
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox1.Controls.Add(this.btnSaveProjInfo);
+            this.groupBox1.Controls.Add(this.chkRetriveProjInfo);
             this.groupBox1.Controls.Add(this.cboDesign);
             this.groupBox1.Controls.Add(this.txtCodePrefix);
             this.groupBox1.Controls.Add(this.txtPart);
@@ -101,20 +105,42 @@ namespace PropertiesManager.View
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Information";
             // 
+            // btnSaveProjInfo
+            // 
+            this.btnSaveProjInfo.Enabled = false;
+            this.btnSaveProjInfo.Location = new System.Drawing.Point(541, 17);
+            this.btnSaveProjInfo.Name = "btnSaveProjInfo";
+            this.btnSaveProjInfo.Size = new System.Drawing.Size(117, 30);
+            this.btnSaveProjInfo.TabIndex = 9;
+            this.btnSaveProjInfo.Text = "Save to file";
+            this.btnSaveProjInfo.UseVisualStyleBackColor = true;
+            this.btnSaveProjInfo.Click += new System.EventHandler(this.btnSaveProjInfo_Click);
+            // 
+            // chkRetriveProjInfo
+            // 
+            this.chkRetriveProjInfo.AutoSize = true;
+            this.chkRetriveProjInfo.Location = new System.Drawing.Point(541, 61);
+            this.chkRetriveProjInfo.Name = "chkRetriveProjInfo";
+            this.chkRetriveProjInfo.Size = new System.Drawing.Size(151, 20);
+            this.chkRetriveProjInfo.TabIndex = 8;
+            this.chkRetriveProjInfo.Text = "Retrieve project info:";
+            this.chkRetriveProjInfo.UseVisualStyleBackColor = true;
+            this.chkRetriveProjInfo.CheckedChanged += new System.EventHandler(this.chkRetriveProjInfo_CheckedChanged);
+            // 
             // cboDesign
             // 
             this.cboDesign.FormattingEnabled = true;
-            this.cboDesign.Location = new System.Drawing.Point(442, 55);
+            this.cboDesign.Location = new System.Drawing.Point(365, 55);
             this.cboDesign.Name = "cboDesign";
-            this.cboDesign.Size = new System.Drawing.Size(200, 24);
+            this.cboDesign.Size = new System.Drawing.Size(165, 24);
             this.cboDesign.TabIndex = 4;
             this.cboDesign.TextChanged += new System.EventHandler(this.cboDesign_TextChanged);
             // 
             // txtCodePrefix
             // 
-            this.txtCodePrefix.Location = new System.Drawing.Point(442, 26);
+            this.txtCodePrefix.Location = new System.Drawing.Point(365, 26);
             this.txtCodePrefix.Name = "txtCodePrefix";
-            this.txtCodePrefix.Size = new System.Drawing.Size(200, 22);
+            this.txtCodePrefix.Size = new System.Drawing.Size(165, 22);
             this.txtCodePrefix.TabIndex = 3;
             this.txtCodePrefix.TextChanged += new System.EventHandler(this.textCodePrefix_TextChanged);
             // 
@@ -122,7 +148,7 @@ namespace PropertiesManager.View
             // 
             this.txtPart.Location = new System.Drawing.Point(73, 59);
             this.txtPart.Name = "txtPart";
-            this.txtPart.Size = new System.Drawing.Size(200, 22);
+            this.txtPart.Size = new System.Drawing.Size(165, 22);
             this.txtPart.TabIndex = 2;
             this.txtPart.TextChanged += new System.EventHandler(this.textPart_TextChanged);
             // 
@@ -130,29 +156,29 @@ namespace PropertiesManager.View
             // 
             this.txtModel.Location = new System.Drawing.Point(73, 26);
             this.txtModel.Name = "txtModel";
-            this.txtModel.Size = new System.Drawing.Size(200, 22);
+            this.txtModel.Size = new System.Drawing.Size(165, 22);
             this.txtModel.TabIndex = 1;
             this.txtModel.TextChanged += new System.EventHandler(this.txtModel_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(324, 54);
+            this.label4.Location = new System.Drawing.Point(247, 54);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.label4.Size = new System.Drawing.Size(75, 27);
+            this.label4.Size = new System.Drawing.Size(71, 26);
             this.label4.TabIndex = 0;
             this.label4.Text = "Design by:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(324, 21);
+            this.label3.Location = new System.Drawing.Point(247, 21);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.label3.Size = new System.Drawing.Size(112, 27);
+            this.label3.Size = new System.Drawing.Size(106, 26);
             this.label3.TabIndex = 0;
             this.label3.Text = "Dwg code prefix:";
             // 
@@ -163,7 +189,7 @@ namespace PropertiesManager.View
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.label2.Size = new System.Drawing.Size(49, 27);
+            this.label2.Size = new System.Drawing.Size(47, 26);
             this.label2.TabIndex = 0;
             this.label2.Text = "PART:";
             // 
@@ -174,7 +200,7 @@ namespace PropertiesManager.View
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.label1.Size = new System.Drawing.Size(61, 27);
+            this.label1.Size = new System.Drawing.Size(57, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "MODEL:";
             // 
@@ -357,7 +383,7 @@ namespace PropertiesManager.View
             this.label5.Location = new System.Drawing.Point(6, 29);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label5.Size = new System.Drawing.Size(99, 17);
+            this.label5.Size = new System.Drawing.Size(96, 16);
             this.label5.TabIndex = 6;
             this.label5.Text = "PART TYPE:";
             // 
@@ -367,7 +393,7 @@ namespace PropertiesManager.View
             this.label6.Location = new System.Drawing.Point(6, 61);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label6.Size = new System.Drawing.Size(111, 17);
+            this.label6.Size = new System.Drawing.Size(105, 16);
             this.label6.TabIndex = 6;
             this.label6.Text = "STATION NO.:";
             // 
@@ -377,7 +403,7 @@ namespace PropertiesManager.View
             this.label7.Location = new System.Drawing.Point(6, 93);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label7.Size = new System.Drawing.Size(97, 17);
+            this.label7.Size = new System.Drawing.Size(94, 16);
             this.label7.TabIndex = 6;
             this.label7.Text = "ITEM NAME:";
             // 
@@ -395,7 +421,7 @@ namespace PropertiesManager.View
             this.label9.Location = new System.Drawing.Point(6, 125);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label9.Size = new System.Drawing.Size(131, 17);
+            this.label9.Size = new System.Drawing.Size(126, 16);
             this.label9.TabIndex = 6;
             this.label9.Text = "DRAWING CODE:";
             // 
@@ -405,7 +431,7 @@ namespace PropertiesManager.View
             this.label10.Location = new System.Drawing.Point(6, 157);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label10.Size = new System.Drawing.Size(90, 17);
+            this.label10.Size = new System.Drawing.Size(87, 16);
             this.label10.TabIndex = 6;
             this.label10.Text = "MATERIAL:";
             // 
@@ -415,7 +441,7 @@ namespace PropertiesManager.View
             this.label14.Location = new System.Drawing.Point(6, 285);
             this.label14.Name = "label14";
             this.label14.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Size = new System.Drawing.Size(79, 17);
+            this.label14.Size = new System.Drawing.Size(75, 16);
             this.label14.TabIndex = 6;
             this.label14.Text = "LENGTH:";
             // 
@@ -425,7 +451,7 @@ namespace PropertiesManager.View
             this.label11.Location = new System.Drawing.Point(6, 189);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label11.Size = new System.Drawing.Size(51, 17);
+            this.label11.Size = new System.Drawing.Size(49, 16);
             this.label11.TabIndex = 6;
             this.label11.Text = "HRC:";
             // 
@@ -435,7 +461,7 @@ namespace PropertiesManager.View
             this.label13.Location = new System.Drawing.Point(6, 253);
             this.label13.Name = "label13";
             this.label13.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label13.Size = new System.Drawing.Size(67, 17);
+            this.label13.Size = new System.Drawing.Size(65, 16);
             this.label13.TabIndex = 6;
             this.label13.Text = "WIDTH:";
             // 
@@ -445,7 +471,7 @@ namespace PropertiesManager.View
             this.label12.Location = new System.Drawing.Point(6, 221);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label12.Size = new System.Drawing.Size(99, 17);
+            this.label12.Size = new System.Drawing.Size(96, 16);
             this.label12.TabIndex = 6;
             this.label12.Text = "THICKNESS:";
             // 
@@ -464,7 +490,7 @@ namespace PropertiesManager.View
             this.label8.Location = new System.Drawing.Point(33, 550);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label8.Size = new System.Drawing.Size(92, 17);
+            this.label8.Size = new System.Drawing.Size(89, 16);
             this.label8.TabIndex = 6;
             this.label8.Text = "QUANTITY:";
             // 
@@ -539,7 +565,7 @@ namespace PropertiesManager.View
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(18, 24);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(171, 17);
+            this.label15.Size = new System.Drawing.Size(160, 16);
             this.label15.TabIndex = 0;
             this.label15.Text = "Standard Part Item Name:";
             // 
@@ -618,5 +644,7 @@ namespace PropertiesManager.View
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnStdCancel;
         private System.Windows.Forms.Button btnStdApply;
+        private System.Windows.Forms.Button btnSaveProjInfo;
+        private System.Windows.Forms.CheckBox chkRetriveProjInfo;
     }
 }

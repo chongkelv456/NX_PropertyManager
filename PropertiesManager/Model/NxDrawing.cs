@@ -47,8 +47,9 @@ namespace PropertiesManager.Model
             workPart = session.Parts.Work;
         }
 
-        public void NXMessage(string message, string title, NXMessageBox.DialogType dialogType)
+        public static void ShowMessageBox(string message, string title, NXMessageBox.DialogType dialogType)
         {
+            UI ui = UI.GetUI();
             ui.NXMessageBox.Show(title, dialogType, message);
         }
 
@@ -61,7 +62,7 @@ namespace PropertiesManager.Model
             catch (Exception e)
             {
                 string message = $"I don't know what error: {e.Message}";
-                NXMessage(message, "Error", NXMessageBox.DialogType.Error);
+                ShowMessageBox(message, "Error", NXMessageBox.DialogType.Error);
             }            
         }
 

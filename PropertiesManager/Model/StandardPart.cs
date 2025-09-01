@@ -10,7 +10,7 @@ namespace PropertiesManager.Model
     {
         List<string> lists = new List<string>();
 
-        const string ADJUST_PIN = "ADJUST PIN";        
+        const string ADJUST_PIN = "ADJUST PIN";
         const string BLANK_PUNCH = "BLANK PUNCH";
         const string BLOCK_PUNCH = "BLOCK PUNCH";
         const string BURRING_PUNCH = "BURRING PUNCH";
@@ -34,7 +34,7 @@ namespace PropertiesManager.Model
         const string LIFTER_PIN_SETS = "LIFTER PIN SETS";
         const string MISFEED_SENSOR = "MISFEED SENSOR";
         const string PILOT = "PILOT";
-        const string POSITIONING_SWITCHES = "POSITIONING SWITCHES";        
+        const string POSITIONING_SWITCHES = "POSITIONING SWITCHES";
         const string PUSHING_PINS = "PUSHING PINS";
         const string SENSOR_COVER = "SENSOR COVER";
         const string SET_SCREW = "SET SCREW";
@@ -91,6 +91,13 @@ namespace PropertiesManager.Model
             lists.Add(WIRE_SPRING);
         }
 
-        public List<string> Get { get => lists; }
+        public static List<string> Get
+        {            
+            get
+            {
+                StandardPart standardPart = new StandardPart();
+                return standardPart.lists;
+            }
+        }
     }
 }

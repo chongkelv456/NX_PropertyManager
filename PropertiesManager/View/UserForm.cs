@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NXOpen;
 using PropertiesManager.Control;
+using PropertiesManager.Model;
+using PropertiesManager.Services;
+using PropertiesManager.Constants;
 
 namespace PropertiesManager.View
 {
@@ -50,25 +54,50 @@ namespace PropertiesManager.View
         }
         public UserForm(Controller control)
         {
-            InitializeComponent();
             this.control = control;
-            projInfo = control.ReadFromFile();
+
+            InitializeComponent();
+            InitialLoadComboContents();                        
+        }
+
+        private void InitializeCboHRC()
+        {            
+            cboHRC.DataSource = Hardness.Get;
+        }
+
+        private void InitializeCboMaterial()
+        {            
+            cboMaterial.DataSource = Model.Material.Get;
+        }
+
+        private void InitializeCboItemName()
+        {            
+            cboItemName.DataSource = ShoeItems.Get;
+        }
+
+        private void InitializeCboPartType()
+        {            
+            cboPartType.DataSource = PartType.Get;
+        }
+
+        private void InitializeCboDesign()
+        {            
+            cboDesign.DataSource = Designer.Get;
         }
 
         public void InitialLoadComboContents()
+        {
+            InitializeCboDesign();
+            InitializeCboPartType();
+            InitializeCboItemName();
+            InitializeCboMaterial();
+            InitializeCboHRC();
+            InitializeCboStdItemName();
+        }
+
+        private void InitializeCboStdItemName()
         {            
-            if(tabControl1.SelectedTab.Text.Equals("Fabrication Part", StringComparison.OrdinalIgnoreCase))
-            {
-                //cboDesign.DataSource = control.GetDesigners();
-                cboPartType.DataSource = control.GetPartTypes();
-                cboItemName.DataSource = control.GetShoes();
-                cboMaterial.DataSource = control.GetMaterials();
-                cboHRC.DataSource = control.GetHardness();
-            }
-            else
-            {                
-                cboStdItemName.DataSource = control.GetStandardParts();
-            }
+            cboStdItemName.DataSource = StandardPart.Get;
         }
 
         public void FillProjectInfo()
@@ -78,10 +107,10 @@ namespace PropertiesManager.View
                 return;
             }
 
-            TextModel = projInfo[Controller.MODEL];
-            TextPart = projInfo[Controller.PART];
-            TextCodePrefix = projInfo[Controller.CODE_PREFIX];
-            TextDesginer = projInfo[Controller.DESIGNER];
+            TextModel = projInfo[Const.ProjectInfo.MODEL];
+            TextPart = projInfo[Const.ProjectInfo.PART];
+            TextCodePrefix = projInfo[Const.ProjectInfo.CODE_PREFIX];
+            TextDesginer = projInfo[Const.ProjectInfo.DESIGNER];
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -97,76 +126,86 @@ namespace PropertiesManager.View
 
         private void txtModel_TextChanged(object sender, EventArgs e)
         {
-            control.AskApplyBtnState();
+            UpdateBtnSaveProjetInfoState();
+        }
+
+        private void UpdateBtnSaveProjetInfoState()
+        {
+            if (IsProjectInfoFilled())
+            {
+                btnSaveProjInfo.Enabled = true;
+            }
+            else
+            {
+                btnSaveProjInfo.Enabled = false;
+            }
         }
 
         private void textPart_TextChanged(object sender, EventArgs e)
         {
-            control.AskApplyBtnState();
+            UpdateBtnSaveProjetInfoState();
         }
 
         private void textCodePrefix_TextChanged(object sender, EventArgs e)
         {
-            control.AskApplyBtnState();
-            control.AskTextDwgCode_Update();
-            control.UpdateProjectInfoToFile();
+            UpdateBtnSaveProjetInfoState();
+            //control.AskApplyBtnState();
+            //control.AskTextDwgCode_Update();            
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
         {
-            control.AskApplyBtnState();
-            control.UpdateProjectInfoToFile();
+            UpdateBtnSaveProjetInfoState();
+            //control.AskApplyBtnState();            
         }
 
         private void cboPartType_TextChanged(object sender, EventArgs e)
         {
-
-            control.AskApplyBtnState();
-
+            //control.AskApplyBtnState();
             string selectedPartType = cboPartType.SelectedItem.ToString();
             switch (selectedPartType)
             {
-                case Controller.SHOE:
-                    PopulateItemNameDataSource(cboItemName, control.GetShoes());
-                    cboMaterial.SelectedItem = Controller.S50C;
+                case Const.PartType.SHOE:
+                    PopulateItemNameDataSource(cboItemName, ShoeItems.Get);
+                    cboMaterial.SelectedItem = Const.Material.S50C;
                     numericStnNo.Value = 0;
                     pictureBox1.Image = Resource1.Shoe;
                     ClearMaterialTextBox();
                     break;
-                case Controller.PLATE:
-                    PopulateItemNameDataSource(cboItemName, control.GetPlates());
-                    cboMaterial.SelectedItem = Controller.GOA;
+                case Const.PartType.PLATE:
+                    PopulateItemNameDataSource(cboItemName, Plate.Get);
+                    cboMaterial.SelectedItem = Const.Material.GOA;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.Plate;
                     ClearMaterialTextBox();
                     break;
-                case Controller.INSERT:
-                    PopulateItemNameDataSource(cboItemName, control.GetInserts());
-                    cboMaterial.SelectedItem = Controller.DC53;
+                case Const.PartType.INSERT:
+                    PopulateItemNameDataSource(cboItemName, Insert.Get);
+                    cboMaterial.SelectedItem = Const.Material.DC53;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.Insert;
                     ClearMaterialTextBox();
                     break;
-                case Controller.WCBLK:
-                    PopulateItemNameDataSource(cboItemName, control.GetWCblks());
-                    cboMaterial.SelectedItem = Controller.DC53;
+                case Const.PartType.WCBLK:
+                    PopulateItemNameDataSource(cboItemName, WCblk.Get);
+                    cboMaterial.SelectedItem = Const.Material.DC53;
                     numericStnNo.Value = 1;
                     pictureBox1.Image = Resource1.WCBlk;
                     ClearMaterialTextBox();
                     break;
-                case Controller.OTHERS:
-                    PopulateItemNameDataSource(cboItemName, control.GetOthers());
-                    cboMaterial.SelectedItem = Controller.EG2;
+                case Const.PartType.OTHERS:
+                    PopulateItemNameDataSource(cboItemName, Other.Get);
+                    cboMaterial.SelectedItem = Const.Material.EG2;
                     numericStnNo.Value = 0;
                     pictureBox1.Image = Resource1.Other;
                     SetMaterialTextBoxHyphen();
                     break;
-                case Controller.ASM:
-                    PopulateItemNameDataSource(cboItemName, control.GetAsm());
-                    cboMaterial.SelectedItem = Controller.MAIN_ASSEMBLY;
+                case Const.PartType.ASM:
+                    PopulateItemNameDataSource(cboItemName, Assembly.Get);
+                    cboMaterial.SelectedItem = Const.AsmType.MAIN_ASSEMBLY;
                     numericStnNo.Value = 0;
                     pictureBox1.Image = Resource1.Shoe;
-                    cboMaterial.Text = Controller.HYPHEN;
+                    cboMaterial.Text = Const.HRC.HYPHEN;
                     SetMaterialTextBoxHyphen();
                     break;
                 default:
@@ -176,9 +215,9 @@ namespace PropertiesManager.View
 
         private void SetMaterialTextBoxHyphen()
         {
-            txtThk.Text = Controller.HYPHEN;
-            txtWidth.Text = Controller.HYPHEN;
-            txtLength.Text = Controller.HYPHEN;
+            txtThk.Text = Const.HRC.HYPHEN;
+            txtWidth.Text = Const.HRC.HYPHEN;
+            txtLength.Text = Const.HRC.HYPHEN;
         }
 
         private void ClearMaterialTextBox()
@@ -269,59 +308,59 @@ namespace PropertiesManager.View
             const string EIGHT = "08";
 
             string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-            if (TextPartType.Equals(Controller.WCBLK))
+            if (TextPartType.Equals(Const.PartType.WCBLK))
             {
                 return THREE_THOUSAND_ONE;
             }
-            else if (TextPartType.Equals(Controller.INSERT))
+            else if (TextPartType.Equals(Const.PartType.INSERT))
             {
                 return stnNo + ELEVEN;
             }
-            else if (TextPartType.Equals(Controller.SHOE))
+            else if (TextPartType.Equals(Const.PartType.SHOE))
             {
                 switch (TextItemName)
                 {
-                    case Controller.UPPER_SHOE:
+                    case Const.ShoeType.UPPER_SHOE:
                         return stnNo + ONE;                        
-                    case Controller.LOWER_SHOE:
+                    case Const.ShoeType.LOWER_SHOE:
                         return stnNo + TWO;                        
-                    case Controller.LOWER_COMMON_PLATE:
+                    case Const.ShoeType.LOWER_COMMON_PLATE:
                         return stnNo + THREE;                        
-                    case Controller.PARALLEL_BAR:
+                    case Const.ShoeType.PARALLEL_BAR:
                         return stnNo + FOUR;                        
                     default:
                         break;
                 }
 
             }
-            else if (TextPartType.Equals(Controller.OTHERS))
+            else if (TextPartType.Equals(Const.PartType.OTHERS))
             {
                 return stnNo + TWENTYONE;
             }
-            else if (TextPartType.Equals(Controller.ASM))
+            else if (TextPartType.Equals(Const.PartType.ASM))
             {
                 return FOUR_ZERO;
             }
             // Remaining the PLATE clause
             switch (TextItemName)
             {
-                case Controller.UPPER_PAD_SPACER:
+                case Const.PlateType.UPPER_PAD_SPACER:
                     return stnNo + ONE;                    
-                case Controller.UPPER_PAD:
+                case Const.PlateType.UPPER_PAD:
                     return stnNo + TWO;                    
-                case Controller.PUNCH_HOLDER:
+                case Const.PlateType.PUNCH_HOLDER:
                     return stnNo + THREE;                    
-                case Controller.BOTTOMING_PLATE:
+                case Const.PlateType.BOTTOMING_PLATE:
                     return stnNo + FOUR;                    
-                case Controller.STRIPPER_PLATE:
+                case Const.PlateType.STRIPPER_PLATE:
                     return stnNo + FIVE;                    
-                case Controller.DIE_PLATE_R:
-                case Controller.DIE_PLATE_F:
-                case Controller.DIE_PLATE:
+                case Const.PlateType.DIE_PLATE_R:
+                case Const.PlateType.DIE_PLATE_F:
+                case Const.PlateType.DIE_PLATE:
                     return stnNo + SIX;                    
-                case Controller.LOWER_PAD:
+                case Const.PlateType.LOWER_PAD:
                     return stnNo + SEVEN;                    
-                case Controller.LOWER_PAD_SPACER:
+                case Const.PlateType.LOWER_PAD_SPACER:
                     return stnNo + EIGHT;                    
                 default:
                     break;
@@ -351,31 +390,31 @@ namespace PropertiesManager.View
             string selectedMaterial = cboMaterial.Text;
             switch (selectedMaterial)
             {
-                case Controller.MILD_STELL:
-                case Controller.S50C:
-                case Controller.EG2:
-                    cboHRC.SelectedItem = Controller.HYPHEN;
+                case Const.Material.MILD_STELL:
+                case Const.Material.S50C:
+                case Const.Material.EG2:
+                    cboHRC.SelectedItem = Const.HRC.HYPHEN;
                     break;
-                case Controller.NAK80:
-                    cboHRC.SelectedItem = Controller.THIRTYFIVE_FOURTY;
+                case Const.Material.NAK80:
+                    cboHRC.SelectedItem = Const.HRC.THIRTYFIVE_FOURTY;
                     break;
-                case Controller.GOA:
-                    cboHRC.SelectedItem = Controller.FIFTYTWO_FIFTYFOUR;
+                case Const.Material.GOA:
+                    cboHRC.SelectedItem = Const.HRC.FIFTYTWO_FIFTYFOUR;
                     break;
-                case Controller.DC53:
-                    cboHRC.SelectedItem = Controller.FIFTYEIGHT_SIXTY;
+                case Const.Material.DC53:
+                    cboHRC.SelectedItem = Const.HRC.FIFTYEIGHT_SIXTY;
                     break;
-                case Controller.SKD11:
-                    cboHRC.SelectedItem = Controller.SIXTY_SIXTYTHREE;
+                case Const.Material.SKD11:
+                    cboHRC.SelectedItem = Const.HRC.SIXTY_SIXTYTHREE;
                     break;
-                case Controller.YXR3:
-                    cboHRC.SelectedItem = Controller.FIFTYEIGHT_SIXTY;
+                case Const.Material.YXR3:
+                    cboHRC.SelectedItem = Const.HRC.FIFTYEIGHT_SIXTY;
                     break;
-                case Controller.YXM1:
-                    cboHRC.SelectedItem = Controller.FIFTYEIGHT_SIXTY;
+                case Const.Material.YXM1:
+                    cboHRC.SelectedItem = Const.HRC.FIFTYEIGHT_SIXTY;
                     break;
-                case Controller.DEX20:
-                    cboHRC.SelectedItem = Controller.SIXTYTWO_SIXTYFIVE;
+                case Const.Material.DEX20:
+                    cboHRC.SelectedItem = Const.HRC.SIXTYTWO_SIXTYFIVE;
                     break;
                 default:
                     break;
@@ -389,8 +428,7 @@ namespace PropertiesManager.View
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            InitialLoadComboContents();
+        {            
         }
 
         private void btnStdCancel_Click(object sender, EventArgs e)
@@ -402,6 +440,69 @@ namespace PropertiesManager.View
         {
             control.StdApply();
             this.Close();
+        }
+
+        private void chkRetriveProjInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRetriveProjInfo.Checked)
+            {
+                UpdateProjectInfo();
+            }
+            else
+            {
+                ClearProjectInfo();
+            }
+        }
+
+        private void UpdateProjectInfo()
+        {
+            var projInfo = ProjectInfoService.ReadFromFile();
+            TextModel = projInfo.Model;
+            TextPart = projInfo.Part;
+            TextCodePrefix = projInfo.CodePrefix;
+            TextDesginer = projInfo.Designer;                        
+        }
+
+        private void ClearProjectInfo()
+        {
+            TextModel = string.Empty;
+            TextPart = string.Empty;
+            TextCodePrefix = string.Empty;
+            TextDesginer = string.Empty;
+        }
+
+        private void btnSaveProjInfo_Click(object sender, EventArgs e)
+        {
+            UpdateProjectInfoToFile();
+        }
+
+        private void UpdateProjectInfoToFile()
+        {
+            if (!IsProjectInfoFilled())
+            {
+                string message = "Please fill in all project information fields before saving.";
+                string title = "Incomplete Information";
+                NxDrawing.ShowMessageBox(message, title, NXMessageBox.DialogType.Error);                
+                return;
+            }
+
+            List<string> info = new List<string>()
+            {
+                TextModel,
+                TextPart,
+                TextCodePrefix,
+                TextDesginer
+            };
+
+            ProjectInfoService.WriteToFile(info);
+        }
+
+        private bool IsProjectInfoFilled()
+        {
+            return !string.IsNullOrEmpty(TextModel) &&
+                   !string.IsNullOrEmpty(TextPart) &&
+                   !string.IsNullOrEmpty(TextCodePrefix) &&
+                   !string.IsNullOrEmpty(TextDesginer);
         }
     }
 }

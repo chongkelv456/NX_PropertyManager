@@ -5,22 +5,30 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using PropertiesManager.Constants;
 
 namespace PropertiesManager.Model
 {
     public class Assembly
     {
-        private List<string> assemblys = new List<string>();
+        private List<string> lists = new List<string>();
 
         public Assembly() {
-            assemblys.Add(Controller.MAIN_ASSEMBLY);
-            assemblys.Add(Controller.TOP_ASSEMBLY);
-            assemblys.Add(Controller.BOTTOM_ASSEMBLY);
-            assemblys.Add(Controller.LEFT_ASSEMBLY);
-            assemblys.Add(Controller.RIGHT_ASSEMBLY);
-            assemblys.Add(Controller.ASSEMBLY_FOR);
+            lists.Add(Const.AsmType.MAIN_ASSEMBLY);
+            lists.Add(Const.AsmType.TOP_ASSEMBLY);
+            lists.Add(Const.AsmType.BOTTOM_ASSEMBLY);
+            lists.Add(Const.AsmType.LEFT_ASSEMBLY);
+            lists.Add(Const.AsmType.RIGHT_ASSEMBLY);
+            lists.Add(Const.AsmType.ASSEMBLY_FOR);
         }
 
-        public List<string> Get { get => assemblys; }
+        public static List<string> Get 
+        {
+            get
+            {
+                Assembly assembly = new Assembly();
+                return assembly.lists;
+            }
+        }
     }
 }

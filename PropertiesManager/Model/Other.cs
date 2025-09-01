@@ -8,14 +8,21 @@ namespace PropertiesManager.Model
 {
     public class Other
     {
-        private List<string> others = new List<string>();
+        private List<string> lists = new List<string>();
 
         public Other()
         {
-            others.Add("CHUTE");
-            others.Add("CHUTE FOR PRODUCT");
+            lists.Add("CHUTE");
+            lists.Add("CHUTE FOR PRODUCT");
         }
 
-        public List<string> Get { get => others; }
+        public static List<string> Get 
+        {
+            get
+            {
+                Other other = new Other();
+                return other.lists;
+            }
+        }
     }
 }

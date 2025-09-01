@@ -4,26 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PropertiesManager.Control;
+using PropertiesManager.Constants;
 
 namespace PropertiesManager.Model
 {
     public class Material
     {
-        private List<string> materials = new List<string>();
+        private List<string> lists = new List<string>();
         
         public Material()
         {
-            materials.Add(Controller.S50C);
-            materials.Add(Controller.DC53);
-            materials.Add(Controller.GOA);
-            materials.Add(Controller.MILD_STELL);
-            materials.Add(Controller.NAK80);
-            materials.Add(Controller.SKD11);
-            materials.Add(Controller.YXR3);
-            materials.Add(Controller.YXM1);
-            materials.Add(Controller.DEX20);
-            materials.Add(Controller.EG2);
+            lists.Add(Const.Material.S50C);
+            lists.Add(Const.Material.DC53);
+            lists.Add(Const.Material.GOA);
+            lists.Add(Const.Material.MILD_STELL);
+            lists.Add(Const.Material.NAK80);
+            lists.Add(Const.Material.SKD11);
+            lists.Add(Const.Material.YXR3);
+            lists.Add(Const.Material.YXM1);
+            lists.Add(Const.Material.DEX20);
+            lists.Add(Const.Material.EG2);
         }
-        public List<string> Get { get => materials; }
+        public static List<string> Get 
+        { 
+            get
+            {
+                Material material = new Material();
+                return material.lists;
+            }
+        }
     }
 }

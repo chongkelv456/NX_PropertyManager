@@ -8,19 +8,24 @@ namespace PropertiesManager.Model
 {
     public class Designer
     {
-        private List<string> designers = new List<string>();
+        private List<string> lists = new List<string>();
 
         public Designer()
         {
-            designers.Add("Kelvin");
-            designers.Add("Ong TK");
-            designers.Add("Ian");
-            designers.Add("Liew SF");
-            designers.Add("Lim KC");
+            lists.Add("Kelvin");
+            lists.Add("Ong TK");
+            lists.Add("Ian");
+            lists.Add("Liew SF");
+            lists.Add("Lim KC");
         }
 
-        public List<string> Get { get => designers; }
-
-        // Todo: Append the name list by external data
+        public static List<string> Get
+        {
+            get
+            {
+                Designer designer = new Designer();
+                return designer.lists;
+            }
+        }
     }
 }

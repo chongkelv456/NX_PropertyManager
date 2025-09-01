@@ -8,26 +8,24 @@ using PropertiesManager.Constants;
 
 namespace PropertiesManager.Model
 {
-    public class PartType
+    public class ShoeItems
     {
         private List<string> lists = new List<string>();
-
-        public PartType()
+        
+        public ShoeItems()
         {
-            lists.Add(Const.PartType.SHOE);
-            lists.Add(Const.PartType.PLATE);
-            lists.Add(Const.PartType.INSERT);
-            lists.Add(Const.PartType.WCBLK);
-            lists.Add(Const.PartType.OTHERS);
-            lists.Add(Const.PartType.ASM);
+            lists.Add(Const.ShoeType.UPPER_SHOE);
+            lists.Add(Const.ShoeType.LOWER_SHOE);
+            lists.Add(Const.ShoeType.PARALLEL_BAR);
+            lists.Add(Const.ShoeType.LOWER_COMMON_PLATE);
         }
 
         public static List<string> Get 
         {
             get
             {
-                PartType partType = new PartType();
-                return partType.lists;
+                ShoeItems items = new ShoeItems();
+                return items.lists;
             }
         
         }

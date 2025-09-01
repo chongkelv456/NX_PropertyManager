@@ -8,36 +8,43 @@ namespace PropertiesManager.Model
 {
     public class Insert
     {
-        private List<string> inserts = new List<string>();
+        private List<string> lists = new List<string>();
 
         public Insert()
         {
-            inserts.Add("DIE INSERT");
-            inserts.Add("FORMING INSERT");
-            inserts.Add("BURRING INSERT");
-            inserts.Add("DEBURR INSERT");
-            inserts.Add("CHAMFER INSERT");
-            inserts.Add("BENDING INSERT");
-            inserts.Add("SIDE PIERCE INSERT");
-            inserts.Add("RIVETING INSERT");
-            inserts.Add("PUNHLD INSERT");
-            inserts.Add("STR INSERT");
-            inserts.Add("MARKING INSERT");
-            inserts.Add("CUTTING PUNCH");
-            inserts.Add("PROFILE PUNCH");
-            inserts.Add("FORMING PUNCH");
-            inserts.Add("PILOT");
-            inserts.Add("MATERIAL GUIDE-F/R");
-            inserts.Add("MATERIAL GUIDE-F");
-            inserts.Add("MATERIAL GUIDE-R");
-            inserts.Add("MISFEED SENSOR LEVER");
-            inserts.Add("MISFEED SENSOR PLT");
-            inserts.Add("MISFEED SENSOR STAND");
-            inserts.Add("MISFEED SENSOR GUIDE");
+            lists.Add("DIE INSERT");
+            lists.Add("FORMING INSERT");
+            lists.Add("BURRING INSERT");
+            lists.Add("DEBURR INSERT");
+            lists.Add("CHAMFER INSERT");
+            lists.Add("BENDING INSERT");
+            lists.Add("SIDE PIERCE INSERT");
+            lists.Add("RIVETING INSERT");
+            lists.Add("PUNHLD INSERT");
+            lists.Add("STR INSERT");
+            lists.Add("MARKING INSERT");
+            lists.Add("CUTTING PUNCH");
+            lists.Add("PROFILE PUNCH");
+            lists.Add("FORMING PUNCH");
+            lists.Add("PILOT");
+            lists.Add("MATERIAL GUIDE-F/R");
+            lists.Add("MATERIAL GUIDE-F");
+            lists.Add("MATERIAL GUIDE-R");
+            lists.Add("MISFEED SENSOR LEVER");
+            lists.Add("MISFEED SENSOR PLT");
+            lists.Add("MISFEED SENSOR STAND");
+            lists.Add("MISFEED SENSOR GUIDE");
 
-            inserts.Sort();
+            lists.Sort();
         }
 
-        public List<string> Get { get => inserts; }
+        public static List<string> Get 
+        {
+            get
+            {
+                Insert insert = new Insert();
+                return insert.lists;
+            }
+        }
     }
 }

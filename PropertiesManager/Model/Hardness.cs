@@ -4,23 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PropertiesManager.Control;
+using PropertiesManager.Constants;
 
 namespace PropertiesManager.Model
 {
     public class Hardness
     {
-        private List<string> hardnesses = new List<string>();
+        private List<string> lists = new List<string>();
 
         public Hardness()
         {
-            hardnesses.Add(Controller.HYPHEN);
-            hardnesses.Add(Controller.THIRTYFIVE_FOURTY);
-            hardnesses.Add(Controller.FIFTYTWO_FIFTYFOUR);
-            hardnesses.Add(Controller.FIFTYSEVEN_FIFTYNINE);
-            hardnesses.Add(Controller.FIFTYEIGHT_SIXTY);
-            hardnesses.Add(Controller.SIXTY_SIXTYTHREE);
-            hardnesses.Add(Controller.SIXTYTWO_SIXTYFIVE);
+            lists.Add(Const.HRC.HYPHEN);
+            lists.Add(Const.HRC.THIRTYFIVE_FOURTY);
+            lists.Add(Const.HRC.FIFTYTWO_FIFTYFOUR);
+            lists.Add(Const.HRC.FIFTYSEVEN_FIFTYNINE);
+            lists.Add(Const.HRC.FIFTYEIGHT_SIXTY);
+            lists.Add(Const.HRC.SIXTY_SIXTYTHREE);
+            lists.Add(Const.HRC.SIXTYTWO_SIXTYFIVE);
         }
-        public List<string> Get { get => hardnesses; }
+        public static List<string> Get 
+        {
+            get
+            {
+                Hardness hardness = new Hardness();
+                return hardness.lists;
+            }
+        }
     }
 }

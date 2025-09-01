@@ -67,6 +67,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Const.cs" />
     <Compile Include="Control\Controller.cs" />
     <Compile Include="Main\MyProgram.cs" />
     <Compile Include="Model\Assembly.cs" />
@@ -78,7 +79,8 @@
     <Compile Include="Model\Other.cs" />
     <Compile Include="Model\PartType.cs" />
     <Compile Include="Model\Plate.cs" />
-    <Compile Include="Model\Shoe.cs" />
+    <Compile Include="Model\ProjectInfoModel.cs" />
+    <Compile Include="Model\ShoeItems.cs" />
     <Compile Include="Model\StandardPart.cs" />
     <Compile Include="Model\WCblk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ProjectInfoService.cs" />
     <Compile Include="View\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
