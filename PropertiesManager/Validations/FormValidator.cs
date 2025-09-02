@@ -35,7 +35,9 @@ namespace PropertiesManager.Validations
         /// </summary>
         public ValidationResult ValidateForApply(FormValidationData data)
         {
-            var result = new ValidationResult { IsValid = true };
+            var result = new ValidationResult { 
+                IsValid = true
+            };
 
             // Validate input information
             var projectInfoValidation = ValidateInputField(data);
@@ -47,37 +49,42 @@ namespace PropertiesManager.Validations
 
             // Validate Path
             var pathValidation = ValidatePath(data.Path);
+            result.IsDirectoryValid = pathValidation?.IsValid ?? false;
+
             if (!pathValidation.IsValid)
             {
                 result.Errors.AddRange(pathValidation.Errors);
                 result.IsValid = false;
-            }
-
+            }            
+            
             return result;
         }
 
         private ValidationResult ValidatePath(string path)
         {
-            var result = new ValidationResult { IsValid = true };
+            var result = new ValidationResult { 
+                IsValid = true
+            };
 
             if(string.IsNullOrEmpty(path))
             {
-                result.AddError("Project directory is required");
+                result.AddError("Project directory is required");                
                 return result;
             }
 
             if(!Directory.Exists(path))
             {
-                result.AddError($"Project directory does not exist: {path}");
+                result.AddError($"Project directory does not exist: {path}");                
                 return result;
-            }
-
+            }            
             return result;
         }
 
         private ValidationResult ValidateInputField(FormValidationData data)
         {
-            var result = new ValidationResult { IsValid = true };
+            var result = new ValidationResult { 
+                IsValid = true
+            };
 
             foreach(var fieldName in _requiredFields)
             {

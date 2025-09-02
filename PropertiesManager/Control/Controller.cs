@@ -28,8 +28,8 @@ namespace PropertiesManager.Control
             uf = new UserForm(this);
             drawing = new NxDrawing(this);
             
-            uf.FillProjectInfo();
-            uf.txtDwgCode_UpdateChange();
+            //uf.FillProjectInfo();
+            //uf.txtDwgCode_UpdateChange();
 
             uf.Show();
         }

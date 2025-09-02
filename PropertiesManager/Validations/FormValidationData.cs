@@ -24,6 +24,7 @@ namespace PropertiesManager.Validations
         public string Thickness { get; set; }
         public string Width { get; set; }
         public string Length { get; set; }
+        public string Quantity { get; set; }
 
         // Project Information
         public string Model { get; set; }

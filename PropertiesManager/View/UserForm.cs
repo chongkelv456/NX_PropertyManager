@@ -22,6 +22,7 @@ namespace PropertiesManager.View
         private readonly PartTypeConfigService _partTypeService = new PartTypeConfigService();
         private Controller control;
         bool showDebugMessage = false; // Set to true to show debug messages
+        bool debugMode = false;
         public string GetPath => txtPath.Text.Trim();
         public string TextModel { get => txtModel.Text.Trim(); set => txtModel.Text = value; }
         public string TextPart { get => txtPart.Text.Trim(); set => txtPart.Text = value; }
@@ -159,7 +160,7 @@ namespace PropertiesManager.View
         {
             UpdateBtnSaveProjetInfoState();
             CheckInputAndEnableApply();
-            txtDwgCode_UpdateChange();
+            //txtDwgCode_UpdateChange();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
@@ -171,55 +172,27 @@ namespace PropertiesManager.View
         private void cboPartType_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-            string selectedPartType = cboPartType.SelectedItem.ToString();
-            switch (selectedPartType)
-            {
-                case Const.PartType.SHOE:
-                    PopulateItemNameDataSource(cboItemName, ShoeItems.Get);
-                    cboMaterial.SelectedItem = Const.Material.S50C;
-                    numericStnNo.Value = 0;
-                    pictureBox1.Image = Resource1.Shoe;
-                    ClearMaterialTextBox();
-                    break;
-                case Const.PartType.PLATE:
-                    PopulateItemNameDataSource(cboItemName, Plate.Get);
-                    cboMaterial.SelectedItem = Const.Material.GOA;
-                    numericStnNo.Value = 1;
-                    pictureBox1.Image = Resource1.Plate;
-                    ClearMaterialTextBox();
-                    break;
-                case Const.PartType.INSERT:
-                    PopulateItemNameDataSource(cboItemName, Insert.Get);
-                    cboMaterial.SelectedItem = Const.Material.DC53;
-                    numericStnNo.Value = 1;
-                    pictureBox1.Image = Resource1.Insert;
-                    ClearMaterialTextBox();
-                    break;
-                case Const.PartType.WCBLK:
-                    PopulateItemNameDataSource(cboItemName, WCblk.Get);
-                    cboMaterial.SelectedItem = Const.Material.DC53;
-                    numericStnNo.Value = 1;
-                    pictureBox1.Image = Resource1.WCBlk;
-                    ClearMaterialTextBox();
-                    break;
-                case Const.PartType.OTHERS:
-                    PopulateItemNameDataSource(cboItemName, Other.Get);
-                    cboMaterial.SelectedItem = Const.Material.EG2;
-                    numericStnNo.Value = 0;
-                    pictureBox1.Image = Resource1.Other;
-                    SetMaterialTextBoxHyphen();
-                    break;
-                case Const.PartType.ASM:
-                    PopulateItemNameDataSource(cboItemName, Assembly.Get);
-                    cboMaterial.SelectedItem = Const.AsmType.MAIN_ASSEMBLY;
-                    numericStnNo.Value = 0;
-                    pictureBox1.Image = Resource1.Shoe;
-                    cboMaterial.Text = Const.HRC.HYPHEN;
-                    SetMaterialTextBoxHyphen();
-                    break;
-                default:
-                    break;
-            }
+
+            if (cboPartType.SelectedItem is not string selectedPartType)
+                return;
+
+            var config = _partTypeService.GetConfig(selectedPartType);
+            if(config == null)
+                return;
+
+            PopulateItemNameDataSource(cboItemName, config.GetItems());
+
+            cboMaterial.SelectedItem = config.Material;
+            numericStnNo.Value = config.StationNumber;
+            pictureBox1.Image = config.Image;
+
+            if(config.OverrideMaterialText)
+                cboMaterial.SelectedItem = Const.HRC.HYPHEN;
+
+            if(config.UseHyphen)
+                SetMaterialTextBoxHyphen();
+            else
+                ClearMaterialTextBox();
         }
 
         private void SetMaterialTextBoxHyphen()
@@ -236,7 +209,7 @@ namespace PropertiesManager.View
             txtLength.Text = string.Empty;
         }
 
-        private void PopulateItemNameDataSource(ComboBox cboItemName, List<string> list)
+        private void PopulateItemNameDataSource(ComboBox cboItemName, IEnumerable<string> list)
         {
             cboItemName.DataSource = list;
         }        
@@ -244,7 +217,7 @@ namespace PropertiesManager.View
         private void cboItemName_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-            txtDwgCode_UpdateChange();
+            //txtDwgCode_UpdateChange();
         }
 
         private void txtDwgCode_TextChanged(object sender, EventArgs e)
@@ -275,16 +248,16 @@ namespace PropertiesManager.View
         private void numericStnNo_ValueChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-            txtDwgCode_UpdateChange();
+            //txtDwgCode_UpdateChange();
         }
 
-        public void txtDwgCode_UpdateChange()
-        {
-            string prefix = TextCodePrefix;
-            string runningNumber = GetRunningNumber();
-            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-            TextDwgCode = prefix + runningNumber;
-        }
+        //public void txtDwgCode_UpdateChange()
+        //{
+        //    string prefix = TextCodePrefix;
+        //    string runningNumber = GetRunningNumber();
+        //    string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
+        //    TextDwgCode = prefix + runningNumber;
+        //}
 
         private string GetRunningNumber()
         {
@@ -515,13 +488,18 @@ namespace PropertiesManager.View
                 Model = TextModel,
                 Part = TextPart,
                 CodePrefix = TextCodePrefix,
-                Designer = TextDesginer
+                Designer = TextDesginer,
+                Quantity = TextQuantity
             };
+
+            if(debugMode)
+                System.Diagnostics.Debugger.Launch();
 
             var validationResult = _validator.ValidateForApply(validationData);
             btnApply.Enabled = validationResult.IsValid;
+            btnDwgCodeRefresh.Enabled = validationResult.IsDirectoryValid;
 
-            if(showDebugMessage && !validationResult.IsValid)
+            if (showDebugMessage && !validationResult.IsValid)
             {
                 string message = string.Join(Environment.NewLine, validationResult.Errors);
                 string title = "Validation Errors";
@@ -532,6 +510,11 @@ namespace PropertiesManager.View
         private void txtPath_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
+        }
+
+        private void btnDwgCodeRefresh_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

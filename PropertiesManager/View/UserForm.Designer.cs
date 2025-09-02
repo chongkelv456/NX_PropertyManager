@@ -77,6 +77,7 @@ namespace PropertiesManager.View
             this.btnStdCancel = new System.Windows.Forms.Button();
             this.cboStdItemName = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnDwgCodeRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -247,6 +248,7 @@ namespace PropertiesManager.View
             this.groupBox2.Controls.Add(this.numericStnNo);
             this.groupBox2.Controls.Add(this.btnLengthPick);
             this.groupBox2.Controls.Add(this.btnWidthPick);
+            this.groupBox2.Controls.Add(this.btnDwgCodeRefresh);
             this.groupBox2.Controls.Add(this.btnThkPick);
             this.groupBox2.Controls.Add(this.txtLength);
             this.groupBox2.Controls.Add(this.cboPartType);
@@ -275,9 +277,9 @@ namespace PropertiesManager.View
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PropertiesManager.Resource1.Other;
-            this.pictureBox1.Location = new System.Drawing.Point(425, 21);
+            this.pictureBox1.Location = new System.Drawing.Point(440, 21);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(260, 150);
+            this.pictureBox1.Size = new System.Drawing.Size(245, 139);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
@@ -598,6 +600,17 @@ namespace PropertiesManager.View
             this.label15.TabIndex = 0;
             this.label15.Text = "Standard Part Item Name:";
             // 
+            // btnDwgCodeRefresh
+            // 
+            this.btnDwgCodeRefresh.Enabled = false;
+            this.btnDwgCodeRefresh.Location = new System.Drawing.Point(348, 120);
+            this.btnDwgCodeRefresh.Name = "btnDwgCodeRefresh";
+            this.btnDwgCodeRefresh.Size = new System.Drawing.Size(72, 25);
+            this.btnDwgCodeRefresh.TabIndex = 14;
+            this.btnDwgCodeRefresh.Text = "Refresh...";
+            this.btnDwgCodeRefresh.UseVisualStyleBackColor = true;
+            this.btnDwgCodeRefresh.Click += new System.EventHandler(this.btnDwgCodeRefresh_Click);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -679,5 +692,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.CheckBox chkRetriveProjInfo;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtPath;
+        private System.Windows.Forms.Button btnDwgCodeRefresh;
     }
 }
