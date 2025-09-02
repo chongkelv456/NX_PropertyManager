@@ -12,7 +12,7 @@ namespace PropertiesManager.Validations
     /// </summary>
     public class FormValidator
     {
-        private readonly List<string> _requiredFields = new List<string>
+        private readonly List<string> _requiredFieldsForApply = new List<string>
         {
             nameof(FormValidationData.Path),
             nameof(FormValidationData.PartType),
@@ -30,63 +30,120 @@ namespace PropertiesManager.Validations
             nameof(FormValidationData.Designer)
         };
 
+        private readonly List<string> _requiredFieldsForRefresh = new List<string>
+        {
+            nameof(FormValidationData.PartType),
+            nameof(FormValidationData.StationNumber),
+            nameof(FormValidationData.ItemName),
+            nameof(FormValidationData.Path)
+        };
+
+        /// <summary>
+        /// Validate PartType, StationNumber, ItemName, DrawingCode for enabling Refresh button
+        /// </summary>
+        public ValidationResult ValidateForRefresh(FormValidationData data)
+        {
+            var result = new ValidationResult
+            {
+                IsValid = true
+            };
+            // Validate input information
+            var inputFieldsValidation = ValidateInputFieldForRefresh(data);
+            if (!inputFieldsValidation.IsValid)
+            {
+                result.Errors.AddRange(inputFieldsValidation.Errors);
+                result.IsValid = false;
+            }
+
+            // Validate Path
+            var pathValidation = ValidatePath(data.Path);
+            if (!pathValidation.IsValid)
+            {
+                result.Errors.AddRange(pathValidation.Errors);
+                result.IsValid = false;
+            }
+
+            return result;
+        }
+
+        private ValidationResult ValidateInputFieldForRefresh(FormValidationData data)
+        {
+            var result = new ValidationResult
+            {
+                IsValid = true
+            };
+
+            foreach (var fieldName in _requiredFieldsForRefresh)
+            {
+                var value = GetFieldValue(data, fieldName);
+                if (string.IsNullOrEmpty(value))
+                {
+                    result.AddError($"{GetDisplayName(fieldName)} is required");
+                    continue;
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Validate all form inputs for enabling Apply button
         /// </summary>
         public ValidationResult ValidateForApply(FormValidationData data)
         {
-            var result = new ValidationResult { 
+            var result = new ValidationResult
+            {
                 IsValid = true
             };
 
             // Validate input information
-            var projectInfoValidation = ValidateInputField(data);
-            if(!projectInfoValidation.IsValid)
+            var inputFieldsValidation = ValidateInputField(data);
+            if (!inputFieldsValidation.IsValid)
             {
-                result.Errors.AddRange(projectInfoValidation.Errors);
+                result.Errors.AddRange(inputFieldsValidation.Errors);
                 result.IsValid = false;
-            }            
+            }
 
             // Validate Path
             var pathValidation = ValidatePath(data.Path);
-            result.IsDirectoryValid = pathValidation?.IsValid ?? false;
-
             if (!pathValidation.IsValid)
             {
                 result.Errors.AddRange(pathValidation.Errors);
                 result.IsValid = false;
-            }            
-            
+            }
+
             return result;
         }
 
         private ValidationResult ValidatePath(string path)
         {
-            var result = new ValidationResult { 
+            var result = new ValidationResult
+            {
                 IsValid = true
             };
 
-            if(string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
             {
-                result.AddError("Project directory is required");                
+                result.AddError("Project directory is required");
                 return result;
             }
 
-            if(!Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
-                result.AddError($"Project directory does not exist: {path}");                
+                result.AddError($"Project directory does not exist: {path}");
                 return result;
-            }            
+            }
             return result;
         }
 
         private ValidationResult ValidateInputField(FormValidationData data)
         {
-            var result = new ValidationResult { 
+            var result = new ValidationResult
+            {
                 IsValid = true
             };
 
-            foreach(var fieldName in _requiredFields)
+            foreach (var fieldName in _requiredFieldsForApply)
             {
                 var value = GetFieldValue(data, fieldName);
                 if (string.IsNullOrEmpty(value))

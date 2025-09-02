@@ -12,7 +12,7 @@ namespace PropertiesManager.Validations
     public class ValidationResult
     {
         public bool IsValid { get; set; }
-        public bool IsDirectoryValid { get; set; }
+        //public bool IsDirectoryValid { get; set; }
         public List<string> Errors { get; set; } = new List<string>();
         public void AddError(string error)
         {

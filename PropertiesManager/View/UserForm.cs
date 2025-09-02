@@ -497,7 +497,9 @@ namespace PropertiesManager.View
 
             var validationResult = _validator.ValidateForApply(validationData);
             btnApply.Enabled = validationResult.IsValid;
-            btnDwgCodeRefresh.Enabled = validationResult.IsDirectoryValid;
+
+            var refreshValidationResult = _validator.ValidateForRefresh(validationData);
+            btnDwgCodeRefresh.Enabled = refreshValidationResult.IsValid;
 
             if (showDebugMessage && !validationResult.IsValid)
             {
