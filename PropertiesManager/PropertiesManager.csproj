@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Const.cs" />
+    <Compile Include="Constants\ToolingStructureType.cs" />
     <Compile Include="Control\Controller.cs" />
     <Compile Include="Main\MyProgram.cs" />
     <Compile Include="Model\Assembly.cs" />
@@ -92,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\CodeGeneratorService.cs" />
     <Compile Include="Services\PartTypeConfigService.cs" />
     <Compile Include="Services\ProjectInfoService.cs" />
     <Compile Include="Validations\FormValidationData.cs" />
