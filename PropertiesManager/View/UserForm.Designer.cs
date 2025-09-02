@@ -70,6 +70,8 @@ namespace PropertiesManager.View
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFabrication = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtPath = new System.Windows.Forms.TextBox();
             this.tabStandardPart = new System.Windows.Forms.TabPage();
             this.btnStdApply = new System.Windows.Forms.Button();
             this.btnStdCancel = new System.Windows.Forms.Button();
@@ -82,6 +84,7 @@ namespace PropertiesManager.View
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabFabrication.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabStandardPart.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,7 +209,7 @@ namespace PropertiesManager.View
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(409, 320);
+            this.btnCancel.Location = new System.Drawing.Point(409, 311);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 35);
             this.btnCancel.TabIndex = 1;
@@ -217,7 +220,7 @@ namespace PropertiesManager.View
             // btnApply
             // 
             this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(550, 320);
+            this.btnApply.Location = new System.Drawing.Point(550, 311);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(135, 35);
             this.btnApply.TabIndex = 5;
@@ -232,7 +235,7 @@ namespace PropertiesManager.View
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(700, 475);
+            this.panel1.Size = new System.Drawing.Size(700, 461);
             this.panel1.TabIndex = 3;
             // 
             // groupBox2
@@ -264,7 +267,7 @@ namespace PropertiesManager.View
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Location = new System.Drawing.Point(5, 100);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(691, 361);
+            this.groupBox2.Size = new System.Drawing.Size(691, 354);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Drawing Information:";
@@ -477,7 +480,7 @@ namespace PropertiesManager.View
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(163, 548);
+            this.txtQuantity.Location = new System.Drawing.Point(163, 607);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(200, 22);
             this.txtQuantity.TabIndex = 19;
@@ -487,7 +490,7 @@ namespace PropertiesManager.View
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(33, 550);
+            this.label8.Location = new System.Drawing.Point(33, 609);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Size = new System.Drawing.Size(89, 16);
@@ -501,20 +504,46 @@ namespace PropertiesManager.View
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(736, 524);
+            this.tabControl1.Size = new System.Drawing.Size(736, 589);
             this.tabControl1.TabIndex = 6;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabFabrication
             // 
+            this.tabFabrication.Controls.Add(this.groupBox3);
             this.tabFabrication.Controls.Add(this.panel1);
             this.tabFabrication.Location = new System.Drawing.Point(4, 25);
             this.tabFabrication.Name = "tabFabrication";
             this.tabFabrication.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFabrication.Size = new System.Drawing.Size(728, 495);
+            this.tabFabrication.Size = new System.Drawing.Size(728, 560);
             this.tabFabrication.TabIndex = 0;
             this.tabFabrication.Text = "Fabrication Part";
             this.tabFabrication.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox3.Controls.Add(this.txtPath);
+            this.groupBox3.Location = new System.Drawing.Point(6, 473);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(700, 71);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Where is the project directory? Copy and paste the address here:";
+            // 
+            // txtPath
+            // 
+            this.txtPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
+            this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPath.Location = new System.Drawing.Point(6, 21);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(688, 22);
+            this.txtPath.TabIndex = 0;
+            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
             // tabStandardPart
             // 
@@ -525,7 +554,7 @@ namespace PropertiesManager.View
             this.tabStandardPart.Location = new System.Drawing.Point(4, 25);
             this.tabStandardPart.Name = "tabStandardPart";
             this.tabStandardPart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStandardPart.Size = new System.Drawing.Size(728, 495);
+            this.tabStandardPart.Size = new System.Drawing.Size(728, 560);
             this.tabStandardPart.TabIndex = 1;
             this.tabStandardPart.Text = "Standard Part";
             this.tabStandardPart.UseVisualStyleBackColor = true;
@@ -555,7 +584,7 @@ namespace PropertiesManager.View
             // 
             this.cboStdItemName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cboStdItemName.FormattingEnabled = true;
-            this.cboStdItemName.Location = new System.Drawing.Point(195, 25);
+            this.cboStdItemName.Location = new System.Drawing.Point(195, 58);
             this.cboStdItemName.Name = "cboStdItemName";
             this.cboStdItemName.Size = new System.Drawing.Size(254, 24);
             this.cboStdItemName.TabIndex = 1;
@@ -591,6 +620,8 @@ namespace PropertiesManager.View
             ((System.ComponentModel.ISupportInitialize)(this.numericStnNo)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabFabrication.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabStandardPart.ResumeLayout(false);
             this.tabStandardPart.PerformLayout();
             this.ResumeLayout(false);
@@ -646,5 +677,7 @@ namespace PropertiesManager.View
         private System.Windows.Forms.Button btnStdApply;
         private System.Windows.Forms.Button btnSaveProjInfo;
         private System.Windows.Forms.CheckBox chkRetriveProjInfo;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtPath;
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Model\NxDrawing.cs" />
     <Compile Include="Model\Other.cs" />
     <Compile Include="Model\PartType.cs" />
+    <Compile Include="Model\PartTypeConfig.cs" />
     <Compile Include="Model\Plate.cs" />
     <Compile Include="Model\ProjectInfoModel.cs" />
     <Compile Include="Model\ShoeItems.cs" />
@@ -90,7 +91,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\PartTypeConfigService.cs" />
     <Compile Include="Services\ProjectInfoService.cs" />
+    <Compile Include="Validations\FormValidationData.cs" />
+    <Compile Include="Validations\FormValidator.cs" />
+    <Compile Include="Validations\ValidationResult.cs" />
     <Compile Include="View\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,5 +133,6 @@
   <ItemGroup>
     <None Include="Resources\Screenshot 2024-05-20 160115.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
