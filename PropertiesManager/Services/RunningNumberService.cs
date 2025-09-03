@@ -39,7 +39,8 @@ namespace PropertiesManager.Services
             {
                 string fileName = _fileSystemService.GetFileNameWithoutExtension(file);
 
-                if (!DoesFileMatchPrefix(fileName, codePrefix, stationPart))
+                bool isSkippStationCheckType = type == ToolingStructureType.WCBLK;
+                if (!isSkippStationCheckType && !DoesFileMatchPrefix(fileName, codePrefix, stationPart))
                     continue;
 
                 if (!TryExtractRunningNumber(fileName, stationPart, out int runningNumber))
@@ -77,7 +78,9 @@ namespace PropertiesManager.Services
             if (existingNumbers == null)
                 throw new ArgumentNullException(nameof(existingNumbers));
 
-            string stationPart = FormatStationNumber(stationNumber);
+            string stationPart = type == ToolingStructureType.WCBLK
+                ? "30"
+                : FormatStationNumber(stationNumber);
 
             if (existingNumbers.Count > 0)
             {
@@ -109,7 +112,7 @@ namespace PropertiesManager.Services
             {
                 string codePart = _drawingCodeService.GetDrawingCode(fileName);
 
-                if (codePart.Length != 4 || !codePart.StartsWith(stationPart))
+                if (codePart.Length != 4)
                     return false;
 
                 return int.TryParse(codePart.Substring(2), out runningNumber);

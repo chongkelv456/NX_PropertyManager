@@ -35,7 +35,8 @@ namespace PropertiesManager.Validations
             nameof(FormValidationData.PartType),
             nameof(FormValidationData.StationNumber),
             nameof(FormValidationData.ItemName),
-            nameof(FormValidationData.Path)
+            nameof(FormValidationData.Path),
+            nameof(FormValidationData.CodePrefix)
         };
 
         /// <summary>

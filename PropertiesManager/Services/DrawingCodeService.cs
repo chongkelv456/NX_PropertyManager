@@ -57,7 +57,9 @@ namespace PropertiesManager.Services
                 throw new ArgumentException($"Unsupported ToolingStructureType: {type}");
             }
 
-            string stationPart = FormatStationNumber(stationNumber);
+            string stationPart = type == ToolingStructureType.WCBLK
+                ? "30"
+                : FormatStationNumber(stationNumber);
             string typePart = FormatTypeCode(typeCode);
 
             return stationPart + typePart;

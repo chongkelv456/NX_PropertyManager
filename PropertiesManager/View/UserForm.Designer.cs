@@ -48,6 +48,7 @@ namespace PropertiesManager.View
             this.numericStnNo = new System.Windows.Forms.NumericUpDown();
             this.btnLengthPick = new System.Windows.Forms.Button();
             this.btnWidthPick = new System.Windows.Forms.Button();
+            this.btnDwgCodeRefresh = new System.Windows.Forms.Button();
             this.btnThkPick = new System.Windows.Forms.Button();
             this.txtLength = new System.Windows.Forms.TextBox();
             this.cboPartType = new System.Windows.Forms.ComboBox();
@@ -77,7 +78,6 @@ namespace PropertiesManager.View
             this.btnStdCancel = new System.Windows.Forms.Button();
             this.cboStdItemName = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.btnDwgCodeRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -290,7 +290,7 @@ namespace PropertiesManager.View
             this.numericStnNo.Name = "numericStnNo";
             this.numericStnNo.Size = new System.Drawing.Size(200, 22);
             this.numericStnNo.TabIndex = 8;
-            this.numericStnNo.ValueChanged += new System.EventHandler(this.numericStnNo_ValueChanged);
+            this.numericStnNo.ValueChanged += new System.EventHandler(this.numericStnNo_ValueChanged_1);
             // 
             // btnLengthPick
             // 
@@ -311,6 +311,17 @@ namespace PropertiesManager.View
             this.btnWidthPick.Text = "Pick...";
             this.btnWidthPick.UseVisualStyleBackColor = true;
             this.btnWidthPick.Click += new System.EventHandler(this.btnWidthPick_Click);
+            // 
+            // btnDwgCodeRefresh
+            // 
+            this.btnDwgCodeRefresh.Enabled = false;
+            this.btnDwgCodeRefresh.Location = new System.Drawing.Point(348, 120);
+            this.btnDwgCodeRefresh.Name = "btnDwgCodeRefresh";
+            this.btnDwgCodeRefresh.Size = new System.Drawing.Size(72, 25);
+            this.btnDwgCodeRefresh.TabIndex = 14;
+            this.btnDwgCodeRefresh.Text = "Refresh...";
+            this.btnDwgCodeRefresh.UseVisualStyleBackColor = true;
+            this.btnDwgCodeRefresh.Click += new System.EventHandler(this.btnDwgCodeRefresh_Click);
             // 
             // btnThkPick
             // 
@@ -599,17 +610,6 @@ namespace PropertiesManager.View
             this.label15.Size = new System.Drawing.Size(160, 16);
             this.label15.TabIndex = 0;
             this.label15.Text = "Standard Part Item Name:";
-            // 
-            // btnDwgCodeRefresh
-            // 
-            this.btnDwgCodeRefresh.Enabled = false;
-            this.btnDwgCodeRefresh.Location = new System.Drawing.Point(348, 120);
-            this.btnDwgCodeRefresh.Name = "btnDwgCodeRefresh";
-            this.btnDwgCodeRefresh.Size = new System.Drawing.Size(72, 25);
-            this.btnDwgCodeRefresh.TabIndex = 14;
-            this.btnDwgCodeRefresh.Text = "Refresh...";
-            this.btnDwgCodeRefresh.UseVisualStyleBackColor = true;
-            this.btnDwgCodeRefresh.Click += new System.EventHandler(this.btnDwgCodeRefresh_Click);
             // 
             // UserForm
             // 

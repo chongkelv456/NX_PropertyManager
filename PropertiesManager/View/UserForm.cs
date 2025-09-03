@@ -19,6 +19,7 @@ namespace PropertiesManager.View
     public partial class UserForm : Form
     {
         private readonly FormValidator _validator;
+        private readonly IToolingTypeMapperService _toolingTypeMapper;
         private readonly PartTypeConfigService _partTypeService = new PartTypeConfigService();
         private Controller control;
         bool showDebugMessage = false; // Set to true to show debug messages
@@ -61,11 +62,94 @@ namespace PropertiesManager.View
         public UserForm(Controller control)
         {
             this.control = control;
-
             InitializeComponent();
             InitialLoadComboContents();
 
             _validator = new FormValidator();
+            _toolingTypeMapper = new ToolingTypeMapperService();
+        }
+
+        /// <summary>
+        /// Gets the ToolingStructureType based on current ComboBox selections
+        /// </summary>
+        /// <returns>ToolingStructureType corresponding to current selections</returns>
+        public ToolingStructureType GetSelectedToolingType()
+        {
+            try
+            {
+                string partType = TextPartType;
+                string itemName = TextItemName;
+
+                return _toolingTypeMapper.GetToolingStructureType(partType, itemName);
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle invalid selections
+                string message = $"Invalid selection combination: {ex.Message}";
+                string title = "Invalid Selection";
+                NxDrawing.ShowMessageBox(message, title, NXMessageBox.DialogType.Warning);
+
+                // Return default or throw based on your preference
+                return ToolingStructureType.SHOE; // Default fallback
+            }
+        }
+
+        /// <summary>
+        /// Validates if the current selection combination is valid
+        /// </summary>
+        /// <returns>True if current selections are valid</returns>
+        public bool IsCurrentSelectionValid()
+        {
+            string partType = TextPartType;
+            string itemName = TextItemName;
+
+            return _toolingTypeMapper.IsValidCombination(partType, itemName);
+        }
+
+        /// <summary>
+        /// Gets the drawing code for current selections (convenience method)
+        /// </summary>
+        /// <param name="stationNumber">Station number</param>
+        /// <returns>Generated drawing code</returns>
+        public string GetDrawingCodeForCurrentSelection(int stationNumber = 1)
+        {
+            try
+            {
+                ToolingStructureType toolingType = GetSelectedToolingType();
+                string codePrefix = TextCodePrefix;
+                string dirPath = GetPath;
+
+                // Use your CodeGeneratorService
+                return StaticCodeGeneratorService.GenerateDrawingCode(toolingType, dirPath, codePrefix, stationNumber);
+            }
+            catch (Exception ex)
+            {
+                string message = $"Error generating drawing code: {ex.Message}";
+                string title = "Drawing Code Error";
+                NxDrawing.ShowMessageBox(message, title, NXMessageBox.DialogType.Error);
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Refreshes drawing code if current selections are valid
+        /// </summary>
+        private void RefreshDrawingCodeIfValid()
+        {
+            if (IsCurrentSelectionValid() && !string.IsNullOrEmpty(TextCodePrefix) && !string.IsNullOrEmpty(GetPath))
+            {
+                try
+                {
+                    int stationNumber = (int)numericStnNo.Value;
+                    string newDrawingCode = GetDrawingCodeForCurrentSelection(stationNumber);
+
+                    TextDwgCode = newDrawingCode;
+                }
+                catch
+                {
+                    // Silently ignore errors during auto-refresh
+                }
+            }
         }
 
         private void InitializeCboHRC()
@@ -160,7 +244,6 @@ namespace PropertiesManager.View
         {
             UpdateBtnSaveProjetInfoState();
             CheckInputAndEnableApply();
-            //txtDwgCode_UpdateChange();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)
@@ -177,7 +260,7 @@ namespace PropertiesManager.View
                 return;
 
             var config = _partTypeService.GetConfig(selectedPartType);
-            if(config == null)
+            if (config == null)
                 return;
 
             PopulateItemNameDataSource(cboItemName, config.GetItems());
@@ -186,13 +269,16 @@ namespace PropertiesManager.View
             numericStnNo.Value = config.StationNumber;
             pictureBox1.Image = config.Image;
 
-            if(config.OverrideMaterialText)
+            if (config.OverrideMaterialText)
                 cboMaterial.SelectedItem = Const.HRC.HYPHEN;
 
-            if(config.UseHyphen)
+            if (config.UseHyphen)
                 SetMaterialTextBoxHyphen();
             else
                 ClearMaterialTextBox();
+
+            // Auto-refresh drawing code when selection changes (optional)
+            RefreshDrawingCodeIfValid();
         }
 
         private void SetMaterialTextBoxHyphen()
@@ -212,18 +298,20 @@ namespace PropertiesManager.View
         private void PopulateItemNameDataSource(ComboBox cboItemName, IEnumerable<string> list)
         {
             cboItemName.DataSource = list;
-        }        
+        }
 
         private void cboItemName_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-            //txtDwgCode_UpdateChange();
+
+            // Auto-refresh drawing code when selection changes (optional)
+            RefreshDrawingCodeIfValid();
         }
 
         private void txtDwgCode_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-        }        
+        }
 
         private void txtThk_TextChanged(object sender, EventArgs e)
         {
@@ -243,97 +331,7 @@ namespace PropertiesManager.View
         private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
             CheckInputAndEnableApply();
-        }
-
-        private void numericStnNo_ValueChanged(object sender, EventArgs e)
-        {
-            CheckInputAndEnableApply();
-            //txtDwgCode_UpdateChange();
-        }
-
-        //public void txtDwgCode_UpdateChange()
-        //{
-        //    string prefix = TextCodePrefix;
-        //    string runningNumber = GetRunningNumber();
-        //    string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-        //    TextDwgCode = prefix + runningNumber;
-        //}
-
-        private string GetRunningNumber()
-        {
-            const string THREE_THOUSAND_ONE = "3001";
-            const string FOUR_ZERO = "0000";
-            const string ELEVEN = "11";
-            const string TWENTYONE = "21";
-            const string ONE = "01";
-            const string TWO = "02";
-            const string THREE = "03";
-            const string FOUR = "04";
-            const string FIVE = "05";
-            const string SIX = "06";
-            const string SEVEN = "07";
-            const string EIGHT = "08";
-
-            string stnNo = numericStnNo.Value >= 10 ? TextStaNo : "0" + TextStaNo;
-            if (TextPartType.Equals(Const.PartType.WCBLK))
-            {
-                return THREE_THOUSAND_ONE;
-            }
-            else if (TextPartType.Equals(Const.PartType.INSERT))
-            {
-                return stnNo + ELEVEN;
-            }
-            else if (TextPartType.Equals(Const.PartType.SHOE))
-            {
-                switch (TextItemName)
-                {
-                    case Const.ShoeType.UPPER_SHOE:
-                        return stnNo + ONE;
-                    case Const.ShoeType.LOWER_SHOE:
-                        return stnNo + TWO;
-                    case Const.ShoeType.LOWER_COMMON_PLATE:
-                        return stnNo + THREE;
-                    case Const.ShoeType.PARALLEL_BAR:
-                        return stnNo + FOUR;
-                    default:
-                        break;
-                }
-
-            }
-            else if (TextPartType.Equals(Const.PartType.OTHERS))
-            {
-                return stnNo + TWENTYONE;
-            }
-            else if (TextPartType.Equals(Const.PartType.ASM))
-            {
-                return FOUR_ZERO;
-            }
-            // Remaining the PLATE clause
-            switch (TextItemName)
-            {
-                case Const.PlateType.UPPER_PAD_SPACER:
-                    return stnNo + ONE;
-                case Const.PlateType.UPPER_PAD:
-                    return stnNo + TWO;
-                case Const.PlateType.PUNCH_HOLDER:
-                    return stnNo + THREE;
-                case Const.PlateType.BOTTOMING_PLATE:
-                    return stnNo + FOUR;
-                case Const.PlateType.STRIPPER_PLATE:
-                    return stnNo + FIVE;
-                case Const.PlateType.DIE_PLATE_R:
-                case Const.PlateType.DIE_PLATE_F:
-                case Const.PlateType.DIE_PLATE:
-                    return stnNo + SIX;
-                case Const.PlateType.LOWER_PAD:
-                    return stnNo + SEVEN;
-                case Const.PlateType.LOWER_PAD_SPACER:
-                    return stnNo + EIGHT;
-                default:
-                    break;
-            }
-            return stnNo;
-        }
+        }           
 
         private void btnThkPick_Click(object sender, EventArgs e)
         {
@@ -492,7 +490,7 @@ namespace PropertiesManager.View
                 Quantity = TextQuantity
             };
 
-            if(debugMode)
+            if (debugMode)
                 System.Diagnostics.Debugger.Launch();
 
             var validationResult = _validator.ValidateForApply(validationData);
@@ -516,7 +514,14 @@ namespace PropertiesManager.View
 
         private void btnDwgCodeRefresh_Click(object sender, EventArgs e)
         {
+            if (int.TryParse(TextStaNo, out int stationNumber) && IsCurrentSelectionValid())
+                TextDwgCode = GetDrawingCodeForCurrentSelection(stationNumber);
+        }
 
+        private void numericStnNo_ValueChanged_1(object sender, EventArgs e)
+        {
+            CheckInputAndEnableApply();
+            RefreshDrawingCodeIfValid();
         }
     }
 }

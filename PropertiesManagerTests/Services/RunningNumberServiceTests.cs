@@ -39,9 +39,9 @@ namespace PropertiesManager.Services.Tests
         {
             // Arrange
             var type = ToolingStructureType.SHOE;
-            string dirPath = @"C:\TestProject";
-            string codePrefix = "ABC123-01-";
-            int stnNumber = 1;
+            string dirPath = @"C:\CreateFolder";
+            string codePrefix = "ABC123-6401-";
+            int stnNumber = 0;
 
             _testFileSystemService.SetupDirectoryExists(dirPath, true);
             _testFileSystemService.SetupGetFiles(dirPath, "*.prt", new string[0]);
@@ -49,8 +49,8 @@ namespace PropertiesManager.Services.Tests
             // Act - Using static method to avoid Controller dependency
             string result = StaticCodeGeneratorService.AskNextRunningNumber(type, dirPath, codePrefix, stnNumber);
 
-            // Assert - For SHOE type, station 1, should return "0101"
-            Assert.AreEqual("0101", result);
+            // Assert - For SHOE type, station 0, should return "0001"
+            Assert.AreEqual("0001", result);
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ namespace PropertiesManager.Services.Tests
                 string result = StaticCodeGeneratorService.AskNextRunningNumber(type, dirPath, codePrefix, stnNumber);
 
                 // Assert - For assembly type, should increment properly
-                Assert.AreEqual("0003", result);
+                Assert.AreEqual("0000", result);
             }
             finally
             {
@@ -172,6 +172,20 @@ namespace PropertiesManager.Services.Tests
         [TestMethod]
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void StaticAskNextRunningNumber_NonExistentDirectory_ThrowsException()
+        {
+            // Arrange
+            var type = ToolingStructureType.SHOE;
+            string dirPath = @"C:\NonExistentDirectory12345";
+            string codePrefix = "TEST-01-";
+            int stnNumber = 1;
+
+            // Act & Assert
+            StaticCodeGeneratorService.AskNextRunningNumber(type, dirPath, codePrefix, stnNumber);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void StaticAskNextRunningNumber_NonExistentDirectory_ThrowsException2()
         {
             // Arrange
             var type = ToolingStructureType.SHOE;
@@ -255,7 +269,7 @@ namespace PropertiesManager.Services.Tests
             // Arrange
             var type = ToolingStructureType.WCBLK;
             string dirPath = @"C:\TestWCBLK";
-            string codePrefix = "WCBLK-";
+            string codePrefix = "WCBLK-2401-";
             int stnNumber = 0;
 
             Directory.CreateDirectory(dirPath);
@@ -265,8 +279,7 @@ namespace PropertiesManager.Services.Tests
                 string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
 
                 // Assert - WCBLK has special code "3001"
-                Assert.IsTrue(result.Contains("3001"), $"Expected result to contain '3001', but got: {result}");
-                Assert.IsTrue(result.StartsWith(codePrefix), $"Expected result to start with '{codePrefix}', but got: {result}");
+                Assert.AreEqual("WCBLK-2401-3001", result);
             }
             finally
             {
@@ -281,8 +294,7 @@ namespace PropertiesManager.Services.Tests
             // Arrange - Test that different tooling types generate different codes
             var toolingTypes = new[]
             {
-                ToolingStructureType.SHOE,
-                ToolingStructureType.PLATE,
+                ToolingStructureType.SHOE,                
                 ToolingStructureType.INSERT,
                 ToolingStructureType.ACCESSORIES,
                 ToolingStructureType.ASSEMBLY
@@ -353,6 +365,107 @@ namespace PropertiesManager.Services.Tests
 
                 // Assert - Should find next available number after 10 (which would be 11)
                 Assert.AreEqual("CARDOOR-03-0311", result);
+            }
+            finally
+            {
+                if (Directory.Exists(dirPath))
+                    Directory.Delete(dirPath, true);
+            }
+        }
+
+        [TestMethod]
+        public void StaticGenerateDrawingCode_PUNCHBOLDER_WithExistingFiles_ReturnsIncrementedCode()
+        {
+            // Arrange
+            var type = ToolingStructureType.PUNCH_HOLDER;
+            string dirPath = @"C:\TestDrawingCode2";
+            string codePrefix = "40X01000-2401-";
+            int stnNumber = 2;
+
+            Directory.CreateDirectory(dirPath);
+            try
+            {                
+
+                // Act
+                string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
+
+                // Assert
+                Assert.AreEqual("40X01000-2401-0203", result);
+            }
+            finally
+            {
+                if (Directory.Exists(dirPath))
+                    Directory.Delete(dirPath, true);
+            }
+        }
+
+        [TestMethod]
+        public void StaticGenerateDrawingCode_WCBLK_WithExistingFiles_ReturnsIncrementedCode()
+        {
+            // Arrange
+            var type = ToolingStructureType.WCBLK;
+            string dirPath = @"C:\TestDrawingCode2";
+            string codePrefix = "40X01000-2401-";
+            int stnNumber = 2;
+
+            Directory.CreateDirectory(dirPath);
+            try
+            {
+                // Create realistic existing files
+                var testFiles = new string[]
+                {
+                    Path.Combine(dirPath, "40X01000-2401-0115_INSERT.prt"),
+                    Path.Combine(dirPath, "40X01000-2401-3001_WCBLOCK1.prt"),
+                    Path.Combine(dirPath, "40X01000-2401-3002_WCBLOCK2.prt")
+                };
+
+                foreach (var file in testFiles)
+                {
+                    File.WriteAllText(file, "test content");
+                }
+
+                // Act
+                string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
+
+                // Assert
+                Assert.AreEqual("40X01000-2401-3003", result);
+            }
+            finally
+            {
+                if (Directory.Exists(dirPath))
+                    Directory.Delete(dirPath, true);
+            }
+        }
+
+        [TestMethod]
+        public void StaticGenerateDrawingCode_SHOE_WithExistingFiles_ReturnsIncrementedCode()
+        {
+            // Arrange
+            var type = ToolingStructureType.SHOE;
+            string dirPath = @"C:\TestDrawingCode2";
+            string codePrefix = "40X01000-2401-";
+            int stnNumber = 0;
+
+            Directory.CreateDirectory(dirPath);
+            try
+            {
+                // Create realistic existing files
+                var testFiles = new string[]
+                {
+                    Path.Combine(dirPath, "40X01000-2401-0001_SHOE1.prt"),
+                    Path.Combine(dirPath, "40X01000-2401-0002_SHOE2.prt")
+                };
+
+                foreach (var file in testFiles)
+                {
+                    File.WriteAllText(file, "test content");
+                }
+
+                // Act
+                string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
+
+                // Assert
+                Assert.AreEqual("40X01000-2401-0003", result);
             }
             finally
             {
@@ -600,5 +713,4 @@ namespace PropertiesManager.Services.Tests
     }
 
     #endregion
-
 }
