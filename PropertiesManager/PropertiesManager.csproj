@@ -94,15 +94,19 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\CodeGeneratorService.cs" />
+    <Compile Include="Services\CodeGeneratorServiceBuilder.cs" />
     <Compile Include="Services\DrawingCodeService.cs" />
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\IDrawingCodeService.cs" />
     <Compile Include="Services\IFileSystemService.cs" />
     <Compile Include="Services\IRunningNumberService.cs" />
+    <Compile Include="Services\IServiceFactory.cs" />
     <Compile Include="Services\IVersionAnalysisService.cs" />
     <Compile Include="Services\PartTypeConfigService.cs" />
     <Compile Include="Services\ProjectInfoService.cs" />
     <Compile Include="Services\RunningNumberService.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\StaticCodeGeneratorService.cs" />
     <Compile Include="Services\VersionAnalysisService.cs" />
     <Compile Include="Validations\FormValidationData.cs" />
     <Compile Include="Validations\FormValidator.cs" />

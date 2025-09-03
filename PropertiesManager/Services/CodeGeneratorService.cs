@@ -11,6 +11,9 @@ using PropertiesManager.Model;
 
 namespace PropertiesManager.Services
 {
+    /// <summary>
+    /// Service for generating codes, file names, and managing tooling structure creation
+    /// </summary>
     public class CodeGeneratorService
     {
         private readonly IFileSystemService _fileSystemService;
@@ -35,6 +38,30 @@ namespace PropertiesManager.Services
             _drawingCodeService = drawingCodeService ?? new DrawingCodeService();
             _versionAnalysisService = versionAnalysisService ?? new VersionAnalysisService(_fileSystemService);
             _runningNumberService = runningNumberService ?? new RunningNumberService(_fileSystemService, _drawingCodeService);
+        }
+
+        // Factory method for easy instance creation
+        public static CodeGeneratorService Create(Controller control, ProjectInfoModel projectInfo)
+        {
+            return CodeGeneratorServiceBuilder.CreateDefault(control, projectInfo);
+        }
+
+        // Factory method for testing with mocks
+        public static CodeGeneratorService CreateForTesting(
+            Controller control,
+            ProjectInfoModel projectInfo,
+            IFileSystemService mockFileSystem = null,
+            IVersionAnalysisService mockVersionAnalysis = null,
+            IRunningNumberService mockRunningNumber = null,
+            IDrawingCodeService mockDrawingCode = null)
+        {
+            return CodeGeneratorServiceBuilder.CreateForTesting(
+                control,
+                projectInfo,
+                mockFileSystem,
+                mockVersionAnalysis,
+                mockRunningNumber,
+                mockDrawingCode);
         }
 
         // Instance methods that use injected dependencies
@@ -140,34 +167,37 @@ namespace PropertiesManager.Services
         }
 
         // Delegate methods to services (maintaining backward compatibility)
-        public static Tuple<string, string> NormalizeDrawingCodeParts(string input)
+        public Tuple<string, string> NormalizeDrawingCodeParts(string input)
         {
-            var service = new DrawingCodeService();
-            return service.NormalizeDrawingCodeParts(input);
+            return _drawingCodeService.NormalizeDrawingCodeParts(input);
         }
 
-        public static string GetDrawingCode(string input)
+        public string GetDrawingCode(string input)
         {
-            var service = new DrawingCodeService();
-            return service.GetDrawingCode(input);
+            return _drawingCodeService.GetDrawingCode(input);
         }
 
-        public static string GetDrawingCodeFromType(ToolingStructureType type, int stnNumber = 0)
+        public string GetDrawingCodeFromType(ToolingStructureType type, int stnNumber = 0)
         {
-            var service = new DrawingCodeService();
-            return service.GetDrawingCodeFromType(type, stnNumber);
+            return _drawingCodeService.GetDrawingCodeFromType(type, stnNumber);
         }
 
-        public static string GetCodePrefix(string rawCodePrefix)
+        public string GetCodePrefix(string rawCodePrefix)
         {
-            var service = new DrawingCodeService();
-            return service.GetCodePrefix(rawCodePrefix);
+            return _drawingCodeService.GetCodePrefix(rawCodePrefix);
         }
 
-        public static int GetStationNumber(string drawingCode)
+        public int GetStationNumber(string drawingCode)
         {
-            var service = new DrawingCodeService();
-            return service.GetStationNumber(drawingCode);
+            return _drawingCodeService.GetStationNumber(drawingCode);
         }
+
+        // Properties for accessing dependencies (useful for testing)
+        internal IFileSystemService FileSystemService => _fileSystemService;
+        internal IVersionAnalysisService VersionAnalysisService => _versionAnalysisService;
+        internal IRunningNumberService RunningNumberService => _runningNumberService;
+        internal IDrawingCodeService DrawingCodeService => _drawingCodeService;
+        internal Controller Control => _control;
+        internal ProjectInfoModel ProjectInfo => _projectInfo;
     }
 }
