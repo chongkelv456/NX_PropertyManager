@@ -55,8 +55,8 @@ namespace PropertiesManager.Services
                 // OTHERS mappings - maps to ACCESSORIES type
                 [Const.PartType.OTHERS] = new Dictionary<string, ToolingStructureType>
                 {
-                    ["CHUTE"] = ToolingStructureType.ACCESSORIES,
-                    ["CHUTE FOR PRODUCT"] = ToolingStructureType.ACCESSORIES
+                    ["CHUTE"] = ToolingStructureType.OTHERS,
+                    ["CHUTE FOR PRODUCT"] = ToolingStructureType.OTHERS
                 },
 
                 // ASM mappings - maps to ASSEMBLY type

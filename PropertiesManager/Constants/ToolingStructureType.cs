@@ -9,7 +9,7 @@ namespace PropertiesManager.Constants
     public enum ToolingStructureType
     {
         SHOE,
-        ACCESSORIES,
+        OTHERS,
         UPPER_PAD_SPACER,
         UPPER_PAD,
         PUNCH_HOLDER,
@@ -20,7 +20,7 @@ namespace PropertiesManager.Constants
         LOWER_PAD_SPACER,
         INSERT,
         ASSEMBLY,        
-        WCBLK
+        WCBLK,        
     }
 
 }

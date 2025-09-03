@@ -15,7 +15,7 @@ namespace PropertiesManager.Services
         private static readonly Dictionary<ToolingStructureType, int> TypeCodeMap = new Dictionary<ToolingStructureType, int>
         {
             { ToolingStructureType.SHOE, 1},
-            { ToolingStructureType.ACCESSORIES, 30},
+            { ToolingStructureType.OTHERS, 30},
             { ToolingStructureType.UPPER_PAD_SPACER, 1},
             { ToolingStructureType.UPPER_PAD, 2},
             { ToolingStructureType.PUNCH_HOLDER, 3},
@@ -57,12 +57,32 @@ namespace PropertiesManager.Services
                 throw new ArgumentException($"Unsupported ToolingStructureType: {type}");
             }
 
-            string stationPart = type == ToolingStructureType.WCBLK
-                ? "30"
-                : FormatStationNumber(stationNumber);
+            string stationPart = GenerateStationPartFromType(type, stationNumber);
             string typePart = FormatTypeCode(typeCode);
 
             return stationPart + typePart;
+        }
+
+        public string GenerateStationPartFromType(ToolingStructureType type, int stationNumber)
+        {
+            int stnNo;
+
+            if(type == ToolingStructureType.ASSEMBLY 
+                || type == ToolingStructureType.SHOE 
+                || type == ToolingStructureType.OTHERS)
+            {
+                stnNo = 0;
+            }
+            else if (type == ToolingStructureType.WCBLK)
+            {
+                stnNo = 30;
+            }
+            else
+            {
+               stnNo = stationNumber;
+            }
+
+            return FormatStationNumber(stnNo);
         }
 
         public int GetStationNumber(string drawingCode)

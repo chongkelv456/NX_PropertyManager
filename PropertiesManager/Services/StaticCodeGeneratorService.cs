@@ -124,7 +124,7 @@ namespace PropertiesManager.Services
                 throw new DirectoryNotFoundException($"Directory does not exist: {dirPath}");
 
             string[] files = _fileSystemService.Value.GetFiles(dirPath, "*.prt");
-            string stationPart = runningNumberService.FormatStationNumber(stnNumber);
+            string stationPart = runningNumberService.FormatStationNumber(type, stnNumber);
             int defaultTypeCode = int.Parse(_drawingCodeService.Value.GetDrawingCodeFromType(type, stnNumber).Substring(2));
 
             var runningNumbers = runningNumberService.AnalyzeExistingRunningNumbers(

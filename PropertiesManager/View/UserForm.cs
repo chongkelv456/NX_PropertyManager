@@ -244,6 +244,7 @@ namespace PropertiesManager.View
         {
             UpdateBtnSaveProjetInfoState();
             CheckInputAndEnableApply();
+            RefreshDrawingCodeIfValid();
         }
 
         private void cboDesign_TextChanged(object sender, EventArgs e)

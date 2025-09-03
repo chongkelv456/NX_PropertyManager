@@ -121,7 +121,7 @@ namespace PropertiesManager.Services.Tests
             var result = _mapperService.GetToolingStructureType("OTHERS", "CHUTE");
 
             // Assert
-            Assert.AreEqual(ToolingStructureType.ACCESSORIES, result);
+            Assert.AreEqual(ToolingStructureType.OTHERS, result);
         }
 
         [TestMethod]

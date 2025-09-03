@@ -47,6 +47,6 @@ namespace PropertiesManager.Services
         /// </summary>
         /// <param name="stationNumber">Station number</param>
         /// <returns>Formatted station number</returns>
-        string FormatStationNumber(int stationNumber);
+        string FormatStationNumber(ToolingStructureType type, int stationNumber);
     }
 }

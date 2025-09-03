@@ -81,7 +81,7 @@ namespace PropertiesManager.Services
             ValidateRunningNumberInputs(dirPath, codePrefix);
 
             string[] files = _fileSystemService.GetFiles(dirPath, "*.prt");
-            string stationPart = _runningNumberService.FormatStationNumber(stnNumber);
+            string stationPart = _runningNumberService.FormatStationNumber(type, stnNumber);
             int defaultTypeCode = int.Parse(_drawingCodeService.GetDrawingCodeFromType(type, stnNumber).Substring(2));
 
             List<int> runningNumbers = _runningNumberService.AnalyzeExistingRunningNumbers(

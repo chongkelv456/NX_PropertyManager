@@ -46,6 +46,21 @@ namespace PropertiesManager.Services
                 if (!TryExtractRunningNumber(fileName, stationPart, out int runningNumber))
                     continue;
 
+                // For WCBLK, also check if the full code starts with "30" (WCBLK station code)
+                if (type == ToolingStructureType.WCBLK)
+                {
+                    try
+                    {
+                        string codePart = _drawingCodeService.GetDrawingCode(fileName);
+                        if (!codePart.StartsWith("30"))
+                            continue;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }                
+
                 if (!ShouldIncludeFile(type, runningNumber, defaultTypeCode))
                     continue;
 
@@ -58,7 +73,7 @@ namespace PropertiesManager.Services
         public bool ShouldIncludeFile(ToolingStructureType type, int runningNumber, int defaultTypeCode)
         {
             // Apply ACCESSORIES and INSERT filter
-            if (type == ToolingStructureType.ACCESSORIES || type == ToolingStructureType.INSERT)
+            if (type == ToolingStructureType.OTHERS || type == ToolingStructureType.INSERT)
             {
                 if (runningNumber < defaultTypeCode)
                     return false;
@@ -78,9 +93,7 @@ namespace PropertiesManager.Services
             if (existingNumbers == null)
                 throw new ArgumentNullException(nameof(existingNumbers));
 
-            string stationPart = type == ToolingStructureType.WCBLK
-                ? "30"
-                : FormatStationNumber(stationNumber);
+            string stationPart = FormatStationNumber(type, stationNumber);
 
             if (existingNumbers.Count > 0)
             {
@@ -91,12 +104,26 @@ namespace PropertiesManager.Services
             return _drawingCodeService.GetDrawingCodeFromType(type, stationNumber);
         }
 
-        public string FormatStationNumber(int stationNumber)
+        public string FormatStationNumber(ToolingStructureType type, int stationNumber)
         {
             if (stationNumber < 0)
                 throw new ArgumentException("Station number cannot be negative", nameof(stationNumber));
 
-            return stationNumber.ToString("D2");
+            return GenerateStationPartFromType(type, stationNumber);
+        }
+
+        public string GenerateStationPartFromType(ToolingStructureType type, int stationNumber)
+        {
+            int stnNo = type switch
+            {
+                ToolingStructureType.ASSEMBLY or
+                ToolingStructureType.SHOE or
+                ToolingStructureType.OTHERS => 0,
+                ToolingStructureType.WCBLK => 30,
+                _ => stationNumber
+            };         
+
+            return stnNo.ToString("D2");
         }
 
         private bool DoesFileMatchPrefix(string fileName, string codePrefix, string stationPart)
@@ -135,7 +162,7 @@ namespace PropertiesManager.Services
                 ToolingStructureType.STRIPPER_PLATE,
                 ToolingStructureType.DIE_PLATE,
                 ToolingStructureType.LOWER_PAD,
-                ToolingStructureType.LOWER_PAD_SPACER
+                ToolingStructureType.LOWER_PAD_SPACER,                
             };
 
             return excludedTypes.Contains(type);

@@ -97,7 +97,7 @@ namespace PropertiesManager.Services.Tests
         public void StaticAskNextRunningNumber_ACCESSORIES_WithGaps_ReturnsCorrectNumber()
         {
             // Arrange
-            var type = ToolingStructureType.ACCESSORIES;
+            var type = ToolingStructureType.OTHERS;
             string dirPath = @"C:\TestAccessories";
             string codePrefix = "XYZ789-03-";
             int stnNumber = 3;
@@ -108,10 +108,10 @@ namespace PropertiesManager.Services.Tests
                 // Create files with gaps in sequence (30, 32, 35, 40)
                 var testFiles = new string[]
                 {
-                    Path.Combine(dirPath, "XYZ789-03-0330_ACCESSORY1.prt"),
-                    Path.Combine(dirPath, "XYZ789-03-0332_ACCESSORY2.prt"),
-                    Path.Combine(dirPath, "XYZ789-03-0335_ACCESSORY3.prt"),
-                    Path.Combine(dirPath, "XYZ789-03-0340_ACCESSORY4.prt")
+                    Path.Combine(dirPath, "XYZ789-03-0030_ACCESSORY1.prt"),
+                    Path.Combine(dirPath, "XYZ789-03-0032_ACCESSORY2.prt"),
+                    Path.Combine(dirPath, "XYZ789-03-0035_ACCESSORY3.prt"),
+                    Path.Combine(dirPath, "XYZ789-03-0040_ACCESSORY4.prt")
                 };
 
                 foreach (var file in testFiles)
@@ -123,7 +123,7 @@ namespace PropertiesManager.Services.Tests
                 string result = StaticCodeGeneratorService.AskNextRunningNumber(type, dirPath, codePrefix, stnNumber);
 
                 // Assert - Next after 40 should be 41, formatted as "0341"
-                Assert.AreEqual("0341", result);
+                Assert.AreEqual("0041", result);
             }
             finally
             {
@@ -217,7 +217,7 @@ namespace PropertiesManager.Services.Tests
                 string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
 
                 // Assert - Should combine prefix with running number
-                Assert.AreEqual("ABC123-01-0101", result);
+                Assert.AreEqual("ABC123-01-0001", result);
             }
             finally
             {
@@ -296,7 +296,7 @@ namespace PropertiesManager.Services.Tests
             {
                 ToolingStructureType.SHOE,                
                 ToolingStructureType.INSERT,
-                ToolingStructureType.ACCESSORIES,
+                ToolingStructureType.OTHERS,
                 ToolingStructureType.ASSEMBLY
             };
 
@@ -347,12 +347,12 @@ namespace PropertiesManager.Services.Tests
                 // Create realistic existing files
                 var testFiles = new string[]
                 {
-                    Path.Combine(dirPath, "CARDOOR-03-0301_UPPER_SHOE-V00.prt"),
-                    Path.Combine(dirPath, "CARDOOR-03-0302_LOWER_SHOE-V00.prt"),
-                    Path.Combine(dirPath, "CARDOOR-03-0303_PARALLEL_BAR-V00.prt"),
-                    Path.Combine(dirPath, "CARDOOR-03-0310_CUSTOM_SHOE-V00.prt"), // Gap in sequence
-                    Path.Combine(dirPath, "CARDOOR-01-0105_UPPER_SHOE-V00.prt"), // Different station (should be ignored)
-                    Path.Combine(dirPath, "OTHER-03-0305_SHOE-V00.prt") // Different prefix (should be ignored)
+                    Path.Combine(dirPath, "CARDOOR-03-0001_UPPER_SHOE-V00.prt"),
+                    Path.Combine(dirPath, "CARDOOR-03-0002_LOWER_SHOE-V00.prt"),
+                    Path.Combine(dirPath, "CARDOOR-03-0003_PARALLEL_BAR-V00.prt"),
+                    Path.Combine(dirPath, "CARDOOR-03-0010_CUSTOM_SHOE-V00.prt"), // Gap in sequence
+                    Path.Combine(dirPath, "CARDOOR-01-0005_UPPER_SHOE-V00.prt"), // Different station (should be ignored)
+                    Path.Combine(dirPath, "OTHER-03-0005_SHOE-V00.prt") // Different prefix (should be ignored)
                 };
 
                 foreach (var file in testFiles)
@@ -364,7 +364,7 @@ namespace PropertiesManager.Services.Tests
                 string result = StaticCodeGeneratorService.GenerateDrawingCode(type, dirPath, codePrefix, stnNumber);
 
                 // Assert - Should find next available number after 10 (which would be 11)
-                Assert.AreEqual("CARDOOR-03-0311", result);
+                Assert.AreEqual("CARDOOR-03-0011", result);
             }
             finally
             {
@@ -444,7 +444,7 @@ namespace PropertiesManager.Services.Tests
             var type = ToolingStructureType.SHOE;
             string dirPath = @"C:\TestDrawingCode2";
             string codePrefix = "40X01000-2401-";
-            int stnNumber = 0;
+            int stnNumber = 2;
 
             Directory.CreateDirectory(dirPath);
             try
@@ -452,6 +452,7 @@ namespace PropertiesManager.Services.Tests
                 // Create realistic existing files
                 var testFiles = new string[]
                 {
+                    Path.Combine(dirPath, "40X01000-2401-0115_INSERT.prt"),
                     Path.Combine(dirPath, "40X01000-2401-0001_SHOE1.prt"),
                     Path.Combine(dirPath, "40X01000-2401-0002_SHOE2.prt")
                 };
@@ -603,7 +604,7 @@ namespace PropertiesManager.Services.Tests
             return realService.GetNextRunningNumber(existingNumbers, type, stationNumber);
         }
 
-        public string FormatStationNumber(int stationNumber)
+        public string FormatStationNumber(ToolingStructureType type, int stationNumber)
         {
             if (_stationNumberMappings.ContainsKey(stationNumber))
                 return _stationNumberMappings[stationNumber];
