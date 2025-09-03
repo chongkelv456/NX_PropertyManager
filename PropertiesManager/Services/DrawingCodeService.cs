@@ -25,7 +25,8 @@ namespace PropertiesManager.Services
             { ToolingStructureType.LOWER_PAD, 7},
             { ToolingStructureType.LOWER_PAD_SPACER, 8},
             { ToolingStructureType.INSERT, 11},
-            { ToolingStructureType.ASSEMBLY, 0}
+            { ToolingStructureType.ASSEMBLY, 0},
+            {ToolingStructureType.WCBLK, 1}
         };
 
         public string GetDrawingCode(string input)

@@ -19,8 +19,7 @@ namespace PropertiesManager.Constants
         LOWER_PAD,
         LOWER_PAD_SPACER,
         INSERT,
-        ASSEMBLY,
-        PLATE,
+        ASSEMBLY,        
         WCBLK
     }
 
