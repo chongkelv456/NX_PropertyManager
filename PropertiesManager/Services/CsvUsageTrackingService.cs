@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using PropertiesManager.Constants;
+using System.Diagnostics;
 
 namespace PropertiesManager.Services
 {
@@ -16,6 +17,9 @@ namespace PropertiesManager.Services
     /// </summary>
     public class CsvUsageTrackingService : IUsageTrackingService
     {
+        private static readonly string SessionId = Guid.NewGuid().ToString();
+        private static readonly Stopwatch SessionStopwatch = Stopwatch.StartNew();
+
         public void LogUsage(ApiUsageRecord record)
         {
             try
@@ -46,9 +50,8 @@ namespace PropertiesManager.Services
         {
             var record = new ApiUsageRecord
             {
-                ApiName = apiName,
-                // Todo: Fetch engineer name from user form.
-                EnginnerName = GetEngineerName(),
+                ApiName = apiName,                
+                EngineerName = Environment.UserName,
                 Version = GetApiVersion(),
                 UsedTime = DateTime.Now,
                 ComputerName = Environment.MachineName
@@ -57,23 +60,21 @@ namespace PropertiesManager.Services
             LogUsage(record);
         }
 
-        private string GetEngineerName()
+        public void LogError(string apiName, Exception exception)
         {
-            try
+            var record = new ApiUsageRecord
             {
-                // Try to get designer name from project info file first
-                var projectInfo = ProjectInfoService.ReadFromFile();
-                if (!string.IsNullOrEmpty(projectInfo.Designer))
-                {
-                    return projectInfo.Designer;
-                }
-            }
-            catch
-            {
-                // Fallback to environment if project info unavailable
-            }
-
-            return Environment.UserName;
+                ApiName = apiName,
+                EngineerName = Environment.UserName,
+                Version = GetApiVersion(),
+                UsedTime = DateTime.Now,
+                ComputerName = Environment.MachineName,
+                SessionId = SessionId,
+                Duration = SessionStopwatch.Elapsed,
+                Status = "Error",
+                Message = exception?.Message ?? "Unknown error"
+            };
+            LogUsage(record);
         }
 
         public string GetCsvFilePath(string apiName)

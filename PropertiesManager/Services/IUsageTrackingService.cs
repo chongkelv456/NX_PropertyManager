@@ -23,5 +23,12 @@ namespace PropertiesManager.Services
         /// </summary>
         /// <param name="apiName">Name of the API</param>
         void LogUsage(string apiName);
+
+        /// <summary>
+        /// Logs API error with exception details
+        /// </summary>
+        /// <param name="apiName">Name of the API</param>
+        /// <param name="exception">Exception that occurred</param>
+        void LogError(string apiName, Exception exception);
     }
 }

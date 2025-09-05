@@ -9,9 +9,6 @@ namespace PropertiesManager
     {        
         public static void Main(string[] args)
         {
-            // Log usage - single line addition
-            UsageTracker.LogUsage("PropertiesManager");
-
             Controller controller = new Controller();
         }
     }
