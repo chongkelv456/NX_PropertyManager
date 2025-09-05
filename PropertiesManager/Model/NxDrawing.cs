@@ -21,19 +21,20 @@ namespace PropertiesManager.Model
         public const string CATEGORY_TITLE = "TITLEBLOCK";
         public const string CATEGORY_TOOL = "Tool";
 
-        const string PART = "PART";
-        const string DRAWING_CODE = "DRAWING CODE";
-        const string MODEL_NAME = "MODEL NAME";
-        const string ITEM_NAME = "ITEM NAME";
-        const string QUANTITY = "QUANTITY";
-        const string MATERIAL = "MATL";
-        const string HRC = "HRC";
-        const string THICKNESS = "Thk";
-        const string LENGTH = "Length/Diameter";
-        const string WIDTH = "Width";
-        const string DESIGNBY = "DesignBy";
-        const string PART_TYPE = "PartType";
-        const string DESIGN_DATE = "Design Date";
+        public const string PART = "PART";
+        public const string DRAWING_CODE = "DRAWING CODE";
+        public const string MODEL_NAME = "MODEL NAME";
+        public const string ITEM_NAME = "ITEM NAME";
+        public const string QUANTITY = "QUANTITY";
+        public const string MATERIAL = "MATL";
+        public const string HRC = "HRC";
+        public const string THICKNESS = "Thk";
+        public const string LENGTH = "Length/Diameter";
+        public  const string WIDTH = "Width";
+        public const string DESIGNBY = "DesignBy";
+        public const string PART_TYPE = "PartType";
+        public const string DESIGN_DATE = "Design Date";
+
         const string IS_STANDARD_PART = "isStandardPart";
         const string STDPART_ITEM = "StdPartItem";
         const string STD_PART = "STD PART";

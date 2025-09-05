@@ -21,6 +21,7 @@ namespace PropertiesManager.View
         private readonly FormValidator _validator;
         private readonly IToolingTypeMapperService _toolingTypeMapper;
         private readonly PartTypeConfigService _partTypeService = new PartTypeConfigService();
+        private readonly RetrieveTitleBlkInfoService _titleBlkService = new RetrieveTitleBlkInfoService();
         private Controller control;
         bool showDebugMessage = false; // Set to true to show debug messages
         bool debugMode = false;
@@ -523,6 +524,31 @@ namespace PropertiesManager.View
         {
             CheckInputAndEnableApply();
             RefreshDrawingCodeIfValid();
+        }
+
+        private void btnRetrieveTitleInfo_Click(object sender, EventArgs e)
+        {
+            var titleInfo = _titleBlkService.Get();
+            // Drawing Informatiob
+            cboPartType.Text = titleInfo.PartType;
+            numericStnNo.Value = titleInfo.StationNumber;
+            cboItemName.Text = titleInfo.ItemName;
+            txtDwgCode.Text = titleInfo.DrawingCode;
+            cboMaterial.Text = titleInfo.Material;
+            cboHRC.Text = titleInfo.HRC;
+            txtThk.Text = titleInfo.Thickness;
+            txtWidth.Text = titleInfo.Width;
+            txtLength.Text = titleInfo.Length;
+            txtQuantity.Text = titleInfo.Quantity;            
+
+            // Project Information
+            txtModel.Text = titleInfo.Model;
+            txtPart.Text = titleInfo.Part;
+            cboDesign.Text = titleInfo.DesignBy;
+            txtCodePrefix.Text = titleInfo.CodePrefix;
+
+            // File Path
+            txtPath.Text = titleInfo.DirectoryPath;
         }
     }
 }

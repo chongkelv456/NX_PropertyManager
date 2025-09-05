@@ -39,6 +39,7 @@ namespace PropertiesManager.Control
             var title_infos = drawing.GetAttributesInfos(
                 NxDrawing.CATEGORY_TITLE, 
                 drawing.GetTitle_KeyValue());
+
             drawing.SetAttributes(title_infos);
 
             var tool_infos = drawing.GetAttributesInfos(NxDrawing.CATEGORY_TOOL, drawing.GetTool_KeyValue());

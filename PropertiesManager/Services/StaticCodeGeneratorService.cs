@@ -76,9 +76,9 @@ namespace PropertiesManager.Services
         /// <summary>
         /// Gets drawing code from tooling type (backward compatible)
         /// </summary>
-        public static string GetDrawingCodeFromType(ToolingStructureType type, int stnNumber = 0)
+        public static string GetDrawingCodeFromType(string drawingCode)
         {
-            return _drawingCodeService.Value.GetDrawingCodeFromType(type, stnNumber);
+            return _drawingCodeService.Value.GetCodePrefixFromDrawingCode(drawingCode);
         }
 
         /// <summary>
@@ -87,6 +87,11 @@ namespace PropertiesManager.Services
         public static string GetCodePrefix(string rawCodePrefix)
         {
             return _drawingCodeService.Value.GetCodePrefix(rawCodePrefix);
+        }
+
+        public static string GetCodePrefixFromDrawingCode(string drawingCode)
+        {
+            return _drawingCodeService.Value.GetCodePrefixFromDrawingCode(drawingCode);
         }
 
         /// <summary>

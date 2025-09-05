@@ -711,6 +711,11 @@ namespace PropertiesManager.Services.Tests
             var realService = new DrawingCodeService();
             return realService.GetCodePrefix(rawCodePrefix);
         }
+
+        public string GetCodePrefixFromDrawingCode(string drawingCode)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     #endregion

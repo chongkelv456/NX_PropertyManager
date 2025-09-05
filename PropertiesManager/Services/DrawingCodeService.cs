@@ -188,5 +188,12 @@ namespace PropertiesManager.Services
                 ? prefixRaw.Substring(0, 6)
                 : prefixRaw.PadRight(6, 'x');
         }
+
+        public string GetCodePrefixFromDrawingCode(string dwgCode)
+        {
+            string[] codeParts = dwgCode.Split('-');            
+
+            return codeParts[0] + "-" + codeParts[1] + "-";
+        }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Main\MyProgram.cs" />
     <Compile Include="Model\Assembly.cs" />
     <Compile Include="Model\Designer.cs" />
+    <Compile Include="Model\TitleBlockInfoModel.cs" />
     <Compile Include="Model\Hardness.cs" />
     <Compile Include="Model\Insert.cs" />
     <Compile Include="Model\Material.cs" />
@@ -99,12 +100,14 @@
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\IDrawingCodeService.cs" />
     <Compile Include="Services\IFileSystemService.cs" />
+    <Compile Include="Services\IRetrieveTitleBlkInfoService.cs" />
     <Compile Include="Services\IRunningNumberService.cs" />
     <Compile Include="Services\IServiceFactory.cs" />
     <Compile Include="Services\IToolingTypeMapperService.cs" />
     <Compile Include="Services\IVersionAnalysisService.cs" />
     <Compile Include="Services\PartTypeConfigService.cs" />
     <Compile Include="Services\ProjectInfoService.cs" />
+    <Compile Include="Services\RetrieveTitleBlkInfoService.cs" />
     <Compile Include="Services\RunningNumberService.cs" />
     <Compile Include="Services\ServiceFactory.cs" />
     <Compile Include="Services\StaticCodeGeneratorService.cs" />

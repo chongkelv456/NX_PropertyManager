@@ -54,5 +54,7 @@ namespace PropertiesManager.Services
         /// <param name="rawCodePrefix">Raw code prefix</param>
         /// <returns>Formatted code prefix</returns>
         string GetCodePrefix(string rawCodePrefix);
+
+        string GetCodePrefixFromDrawingCode(string drawingCode);
     }
 }

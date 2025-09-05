@@ -78,6 +78,7 @@ namespace PropertiesManager.View
             this.btnStdCancel = new System.Windows.Forms.Button();
             this.cboStdItemName = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnRetrieveTitleInfo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -248,6 +249,7 @@ namespace PropertiesManager.View
             this.groupBox2.Controls.Add(this.numericStnNo);
             this.groupBox2.Controls.Add(this.btnLengthPick);
             this.groupBox2.Controls.Add(this.btnWidthPick);
+            this.groupBox2.Controls.Add(this.btnRetrieveTitleInfo);
             this.groupBox2.Controls.Add(this.btnDwgCodeRefresh);
             this.groupBox2.Controls.Add(this.btnThkPick);
             this.groupBox2.Controls.Add(this.txtLength);
@@ -611,6 +613,16 @@ namespace PropertiesManager.View
             this.label15.TabIndex = 0;
             this.label15.Text = "Standard Part Item Name:";
             // 
+            // btnRetrieveTitleInfo
+            // 
+            this.btnRetrieveTitleInfo.Location = new System.Drawing.Point(9, 321);
+            this.btnRetrieveTitleInfo.Name = "btnRetrieveTitleInfo";
+            this.btnRetrieveTitleInfo.Size = new System.Drawing.Size(170, 25);
+            this.btnRetrieveTitleInfo.TabIndex = 14;
+            this.btnRetrieveTitleInfo.Text = "Retrieve Title Info";
+            this.btnRetrieveTitleInfo.UseVisualStyleBackColor = true;
+            this.btnRetrieveTitleInfo.Click += new System.EventHandler(this.btnRetrieveTitleInfo_Click);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -693,5 +705,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnDwgCodeRefresh;
+        private System.Windows.Forms.Button btnRetrieveTitleInfo;
     }
 }
