@@ -88,11 +88,11 @@ namespace PropertiesManager.Control
             try
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                return assembly.GetName().Version?.ToString() ?? "1.0.0.0";
+                return assembly.GetName().Version?.ToString() ?? "1.1.0.0";
             }
             catch
             {
-                return "1.0.0.0";
+                return "1.1.0.0";
             }
         }
 
