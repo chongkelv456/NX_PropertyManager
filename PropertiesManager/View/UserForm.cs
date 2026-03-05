@@ -1,4 +1,10 @@
-﻿using System;
+﻿using NXOpen;
+using PropertiesManager.Constants;
+using PropertiesManager.Control;
+using PropertiesManager.Model;
+using PropertiesManager.Services;
+using PropertiesManager.Validations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NXOpen;
-using PropertiesManager.Control;
-using PropertiesManager.Model;
-using PropertiesManager.Services;
-using PropertiesManager.Constants;
-using PropertiesManager.Validations;
+using System.Windows.Media;
 
 namespace PropertiesManager.View
 {
@@ -25,7 +26,7 @@ namespace PropertiesManager.View
         private Controller control;
         bool showDebugMessage = false; // Set to true to show debug messages
         bool debugMode = false;
-        public string GetPath => txtPath.Text.Trim();
+        public string TextPath { get => txtPath.Text.Trim() + "\\"; set => txtPath.Text = value; }
         public string TextModel { get => txtModel.Text.Trim(); set => txtModel.Text = value; }
         public string TextPart { get => txtPart.Text.Trim(); set => txtPart.Text = value; }
         public string TextCodePrefix { get => txtCodePrefix.Text.Trim(); set => txtCodePrefix.Text = value; }
@@ -117,8 +118,9 @@ namespace PropertiesManager.View
             try
             {
                 ToolingStructureType toolingType = GetSelectedToolingType();
-                string codePrefix = TextCodePrefix;
-                string dirPath = GetPath;
+                DrawingCodeService codeService = new DrawingCodeService();
+                var codePrefix = codeService.GetCodePrefix(TextCodePrefix);                
+                string dirPath = TextPath;
 
                 // Use your CodeGeneratorService
                 return StaticCodeGeneratorService.GenerateDrawingCode(toolingType, dirPath, codePrefix, stationNumber);
@@ -137,7 +139,7 @@ namespace PropertiesManager.View
         /// </summary>
         private void RefreshDrawingCodeIfValid()
         {
-            if (IsCurrentSelectionValid() && !string.IsNullOrEmpty(TextCodePrefix) && !string.IsNullOrEmpty(GetPath))
+            if (IsCurrentSelectionValid() && !string.IsNullOrEmpty(TextCodePrefix) && !string.IsNullOrEmpty(TextPath))
             {
                 try
                 {
@@ -475,7 +477,7 @@ namespace PropertiesManager.View
         {
             var validationData = new FormValidationData
             {
-                Path = GetPath,
+                Path = TextPath,
                 PartType = TextPartType,
                 StationNumber = TextStaNo,
                 ItemName = TextItemName,
@@ -549,6 +551,21 @@ namespace PropertiesManager.View
 
             // File Path
             txtPath.Text = titleInfo.DirectoryPath;
+        }
+
+        private void btnPathRetrieve_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Part workPart = Session.GetSession().Parts.Work;
+                TextPath = FileSystemService.GetCurrentDirectory(workPart);                
+            }
+            catch (Exception ex)
+            {
+                string message = $"Error retrieving path or loading assembly files: {ex.Message}";
+                string title = "Error";
+                NxDrawing.ShowMessageBox(message, title, NXMessageBox.DialogType.Error);
+            }
         }
     }
 }

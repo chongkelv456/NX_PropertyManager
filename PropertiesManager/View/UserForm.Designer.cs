@@ -48,6 +48,7 @@ namespace PropertiesManager.View
             this.numericStnNo = new System.Windows.Forms.NumericUpDown();
             this.btnLengthPick = new System.Windows.Forms.Button();
             this.btnWidthPick = new System.Windows.Forms.Button();
+            this.btnRetrieveTitleInfo = new System.Windows.Forms.Button();
             this.btnDwgCodeRefresh = new System.Windows.Forms.Button();
             this.btnThkPick = new System.Windows.Forms.Button();
             this.txtLength = new System.Windows.Forms.TextBox();
@@ -78,7 +79,7 @@ namespace PropertiesManager.View
             this.btnStdCancel = new System.Windows.Forms.Button();
             this.cboStdItemName = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.btnRetrieveTitleInfo = new System.Windows.Forms.Button();
+            this.btnPathRetrieve = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -314,6 +315,16 @@ namespace PropertiesManager.View
             this.btnWidthPick.UseVisualStyleBackColor = true;
             this.btnWidthPick.Click += new System.EventHandler(this.btnWidthPick_Click);
             // 
+            // btnRetrieveTitleInfo
+            // 
+            this.btnRetrieveTitleInfo.Location = new System.Drawing.Point(9, 321);
+            this.btnRetrieveTitleInfo.Name = "btnRetrieveTitleInfo";
+            this.btnRetrieveTitleInfo.Size = new System.Drawing.Size(170, 25);
+            this.btnRetrieveTitleInfo.TabIndex = 14;
+            this.btnRetrieveTitleInfo.Text = "Retrieve Title Info";
+            this.btnRetrieveTitleInfo.UseVisualStyleBackColor = true;
+            this.btnRetrieveTitleInfo.Click += new System.EventHandler(this.btnRetrieveTitleInfo_Click);
+            // 
             // btnDwgCodeRefresh
             // 
             this.btnDwgCodeRefresh.Enabled = false;
@@ -540,6 +551,7 @@ namespace PropertiesManager.View
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox3.Controls.Add(this.btnPathRetrieve);
             this.groupBox3.Controls.Add(this.txtPath);
             this.groupBox3.Location = new System.Drawing.Point(6, 473);
             this.groupBox3.Name = "groupBox3";
@@ -556,7 +568,7 @@ namespace PropertiesManager.View
             this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPath.Location = new System.Drawing.Point(6, 21);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(688, 22);
+            this.txtPath.Size = new System.Drawing.Size(570, 22);
             this.txtPath.TabIndex = 0;
             this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
@@ -613,15 +625,17 @@ namespace PropertiesManager.View
             this.label15.TabIndex = 0;
             this.label15.Text = "Standard Part Item Name:";
             // 
-            // btnRetrieveTitleInfo
+            // btnPathRetrieve
             // 
-            this.btnRetrieveTitleInfo.Location = new System.Drawing.Point(9, 321);
-            this.btnRetrieveTitleInfo.Name = "btnRetrieveTitleInfo";
-            this.btnRetrieveTitleInfo.Size = new System.Drawing.Size(170, 25);
-            this.btnRetrieveTitleInfo.TabIndex = 14;
-            this.btnRetrieveTitleInfo.Text = "Retrieve Title Info";
-            this.btnRetrieveTitleInfo.UseVisualStyleBackColor = true;
-            this.btnRetrieveTitleInfo.Click += new System.EventHandler(this.btnRetrieveTitleInfo_Click);
+            this.btnPathRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPathRetrieve.Location = new System.Drawing.Point(582, 16);
+            this.btnPathRetrieve.Name = "btnPathRetrieve";
+            this.btnPathRetrieve.Size = new System.Drawing.Size(108, 30);
+            this.btnPathRetrieve.TabIndex = 9;
+            this.btnPathRetrieve.Text = "Retrive Path...";
+            this.btnPathRetrieve.UseVisualStyleBackColor = true;
+            this.btnPathRetrieve.Click += new System.EventHandler(this.btnPathRetrieve_Click);
             // 
             // UserForm
             // 
@@ -706,5 +720,6 @@ namespace PropertiesManager.View
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnDwgCodeRefresh;
         private System.Windows.Forms.Button btnRetrieveTitleInfo;
+        private System.Windows.Forms.Button btnPathRetrieve;
     }
 }

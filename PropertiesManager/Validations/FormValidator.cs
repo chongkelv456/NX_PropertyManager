@@ -164,7 +164,7 @@ namespace PropertiesManager.Validations
 
         }
 
-        private object GetDisplayName(string fieldName)
+        private string GetDisplayName(string fieldName)
         {
             var displayNames = new Dictionary<string, string>
             {

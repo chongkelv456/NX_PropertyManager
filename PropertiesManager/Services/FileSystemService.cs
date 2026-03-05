@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NXOpen;
 
 namespace PropertiesManager.Services
 {
@@ -60,6 +61,14 @@ namespace PropertiesManager.Services
             }
 
             return Directory.Exists(path);
+        }
+
+        public static string GetCurrentDirectory(Part workPart)
+        {
+            var fullPath = workPart.FullPath;
+            var directory = Path.GetDirectoryName(fullPath);
+
+            return directory;
         }
     }
 }

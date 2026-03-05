@@ -17,7 +17,7 @@ namespace PropertiesManager.Services
         public static ProjectInfoModel ReadFromFile()
         {
             string fullPathFileName = Path.Combine(DIRECTORY, PROJ_INFO_FILENAME);
-            if(!File.Exists(fullPathFileName))
+            if (!File.Exists(fullPathFileName))
             {
                 string message = $"File not found: {fullPathFileName}";
                 throw new FileNotFoundException(message);
@@ -64,15 +64,15 @@ namespace PropertiesManager.Services
                 File.WriteAllLines(fullPathFileName, projectInfoToText);
 
                 NxDrawing.ShowMessageBox(
-                    "✅Project info successfully saved.", 
-                    "Success", 
+                    "✅Project info successfully saved.",
+                    "Success",
                     NXOpen.NXMessageBox.DialogType.Information);
             }
             catch (IOException ex)
             {
                 string message = $"Error writing to file: {ex.Message}";
                 string title = "Error writing file";
-                NxDrawing.ShowMessageBox(title, message, NXOpen.NXMessageBox.DialogType.Error);                
+                NxDrawing.ShowMessageBox(title, message, NXOpen.NXMessageBox.DialogType.Error);
             }
         }
     }
